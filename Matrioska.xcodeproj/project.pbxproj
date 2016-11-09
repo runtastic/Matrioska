@@ -150,6 +150,7 @@
 				DE3E8D731DD389F400417AE5 /* Headers */,
 				DE3E8D741DD389F400417AE5 /* Resources */,
 				6D8AB7BEA2A61B2036C1BD09 /* [CP] Copy Pods Resources */,
+				DE3E8D9B1DD38E4100417AE5 /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -312,6 +313,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DE3E8D9B1DD38E4100417AE5 /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -359,6 +374,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -412,6 +428,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -482,6 +499,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23587B9D5CB1FB404F5C7787 /* Pods-MatrioskaTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
@@ -494,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
