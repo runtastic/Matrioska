@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		51A54328766C8548A4F3AE4A /* Pods_MatrioskaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */; };
+		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
+		DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3E8D761DD389F400417AE5 /* Matrioska.framework */; };
+		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE3E8D991DD38CA500417AE5 /* MatrioskaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE3E8D811DD389F400417AE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE3E8D6D1DD389F400417AE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE3E8D751DD389F400417AE5;
+			remoteInfo = Matrioska;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		23587B9D5CB1FB404F5C7787 /* Pods-MatrioskaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.release.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.release.xcconfig"; sourceTree = "<group>"; };
+		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
+		DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.release.xcconfig"; sourceTree = "<group>"; };
+		DE3E8D761DD389F400417AE5 /* Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3E8D7F1DD389F400417AE5 /* MatrioskaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrioskaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3E8D921DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE3E8D931DD38AAA00417AE5 /* Matrioska.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrioska.h; sourceTree = "<group>"; };
+		DE3E8D951DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrioskaTests.swift; sourceTree = "<group>"; };
+		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE3E8D721DD389F400417AE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE3E8D7C1DD389F400417AE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */,
+				51A54328766C8548A4F3AE4A /* Pods_MatrioskaTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E6EE110929620DA6A8B14DD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */,
+				4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */,
+				23587B9D5CB1FB404F5C7787 /* Pods-MatrioskaTests.debug.xcconfig */,
+				DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AED00DD136EC847202BC799E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */,
+				E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE3E8D6C1DD389F400417AE5 = {
+			isa = PBXGroup;
+			children = (
+				DE3E8D9A1DD38D1C00417AE5 /* Source */,
+				DE3E8D911DD38AAA00417AE5 /* Framework */,
+				DE3E8D941DD38AAA00417AE5 /* Tests */,
+				DE3E8D771DD389F400417AE5 /* Products */,
+				5E6EE110929620DA6A8B14DD /* Pods */,
+				AED00DD136EC847202BC799E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DE3E8D771DD389F400417AE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE3E8D761DD389F400417AE5 /* Matrioska.framework */,
+				DE3E8D7F1DD389F400417AE5 /* MatrioskaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DE3E8D911DD38AAA00417AE5 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				DE3E8D921DD38AAA00417AE5 /* Info.plist */,
+				DE3E8D931DD38AAA00417AE5 /* Matrioska.h */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		DE3E8D941DD38AAA00417AE5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DE3E8D951DD38AAA00417AE5 /* Info.plist */,
+				DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		DE3E8D9A1DD38D1C00417AE5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DE3E8D731DD389F400417AE5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DE3E8D751DD389F400417AE5 /* Matrioska */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE3E8D8A1DD389F400417AE5 /* Build configuration list for PBXNativeTarget "Matrioska" */;
+			buildPhases = (
+				1B4341AC361CBA47BD4401C4 /* [CP] Check Pods Manifest.lock */,
+				DE3E8D711DD389F400417AE5 /* Sources */,
+				DE3E8D721DD389F400417AE5 /* Frameworks */,
+				DE3E8D731DD389F400417AE5 /* Headers */,
+				DE3E8D741DD389F400417AE5 /* Resources */,
+				6D8AB7BEA2A61B2036C1BD09 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Matrioska;
+			productName = Matrioska;
+			productReference = DE3E8D761DD389F400417AE5 /* Matrioska.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DE3E8D7E1DD389F400417AE5 /* MatrioskaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE3E8D8D1DD389F400417AE5 /* Build configuration list for PBXNativeTarget "MatrioskaTests" */;
+			buildPhases = (
+				542E689FBE200C7496236C46 /* [CP] Check Pods Manifest.lock */,
+				DE3E8D7B1DD389F400417AE5 /* Sources */,
+				DE3E8D7C1DD389F400417AE5 /* Frameworks */,
+				DE3E8D7D1DD389F400417AE5 /* Resources */,
+				9E24221B2C3AB126135B243D /* [CP] Embed Pods Frameworks */,
+				B6BBCF974C8F5D3028CABDB1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE3E8D821DD389F400417AE5 /* PBXTargetDependency */,
+			);
+			name = MatrioskaTests;
+			productName = MatrioskaTests;
+			productReference = DE3E8D7F1DD389F400417AE5 /* MatrioskaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE3E8D6D1DD389F400417AE5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = runtastic;
+				TargetAttributes = {
+					DE3E8D751DD389F400417AE5 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					DE3E8D7E1DD389F400417AE5 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DE3E8D701DD389F400417AE5 /* Build configuration list for PBXProject "Matrioska" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DE3E8D6C1DD389F400417AE5;
+			productRefGroup = DE3E8D771DD389F400417AE5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE3E8D751DD389F400417AE5 /* Matrioska */,
+				DE3E8D7E1DD389F400417AE5 /* MatrioskaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE3E8D741DD389F400417AE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE3E8D7D1DD389F400417AE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B4341AC361CBA47BD4401C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		542E689FBE200C7496236C46 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6D8AB7BEA2A61B2036C1BD09 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E24221B2C3AB126135B243D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6BBCF974C8F5D3028CABDB1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE3E8D711DD389F400417AE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE3E8D7B1DD389F400417AE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3E8D991DD38CA500417AE5 /* MatrioskaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE3E8D821DD389F400417AE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE3E8D751DD389F400417AE5 /* Matrioska */;
+			targetProxy = DE3E8D811DD389F400417AE5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DE3E8D881DD389F400417AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DE3E8D891DD389F400417AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DE3E8D8B1DD389F400417AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.Matrioska;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DE3E8D8C1DD389F400417AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Framework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.Matrioska;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		DE3E8D8E1DD389F400417AE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23587B9D5CB1FB404F5C7787 /* Pods-MatrioskaTests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DE3E8D8F1DD389F400417AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE3E8D701DD389F400417AE5 /* Build configuration list for PBXProject "Matrioska" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3E8D881DD389F400417AE5 /* Debug */,
+				DE3E8D891DD389F400417AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE3E8D8A1DD389F400417AE5 /* Build configuration list for PBXNativeTarget "Matrioska" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3E8D8B1DD389F400417AE5 /* Debug */,
+				DE3E8D8C1DD389F400417AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE3E8D8D1DD389F400417AE5 /* Build configuration list for PBXNativeTarget "MatrioskaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3E8D8E1DD389F400417AE5 /* Debug */,
+				DE3E8D8F1DD389F400417AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE3E8D6D1DD389F400417AE5 /* Project object */;
+}
