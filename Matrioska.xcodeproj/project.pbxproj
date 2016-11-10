@@ -11,7 +11,8 @@
 		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
 		DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3E8D761DD389F400417AE5 /* Matrioska.framework */; };
 		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE3E8D991DD38CA500417AE5 /* MatrioskaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */; };
+		DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
+		DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D9C1DD46A2600417AE5 /* Component.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,9 @@
 		DE3E8D921DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3E8D931DD38AAA00417AE5 /* Matrioska.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrioska.h; sourceTree = "<group>"; };
 		DE3E8D951DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrioskaTests.swift; sourceTree = "<group>"; };
+		DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTests.swift; sourceTree = "<group>"; };
+		DE3E8D9C1DD46A2600417AE5 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,6 +86,7 @@
 		DE3E8D6C1DD389F400417AE5 = {
 			isa = PBXGroup;
 			children = (
+				DEECB3B21DD47C4A00F7DFB1 /* README.md */,
 				DE3E8D9A1DD38D1C00417AE5 /* Source */,
 				DE3E8D911DD38AAA00417AE5 /* Framework */,
 				DE3E8D941DD38AAA00417AE5 /* Tests */,
@@ -114,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				DE3E8D951DD38AAA00417AE5 /* Info.plist */,
-				DE3E8D961DD38AAA00417AE5 /* MatrioskaTests.swift */,
+				DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -122,6 +126,7 @@
 		DE3E8D9A1DD38D1C00417AE5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DE3E8D9C1DD46A2600417AE5 /* Component.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				TargetAttributes = {
 					DE3E8D751DD389F400417AE5 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					DE3E8D7E1DD389F400417AE5 = {
@@ -334,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE3E8D991DD38CA500417AE5 /* MatrioskaTests.swift in Sources */,
+				DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -472,6 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.Matrioska;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -480,6 +489,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
