@@ -15,9 +15,9 @@ class ComponentTests: QuickSpec {
     override func spec() {
         
         describe("View component") {
-            it("should build a child ViewController") {
+            it("should build a viewController") {
                 let component = Component.view(builder: { _ in UIViewController() }, meta: nil)
-                expect(component.childViewController()).toNot(beNil())
+                expect(component.viewController()).toNot(beNil())
             }
             
             it("should pass metadata to the builder") {
@@ -25,18 +25,18 @@ class ComponentTests: QuickSpec {
                 _ = Component.view(builder: { (meta) in
                     string = meta as? String
                     return UIViewController()
-                }, meta: "meta").childViewController()
+                }, meta: "meta").viewController()
                 
                 expect(string) == "meta"
             }
         }
         
         describe("Wrapper component") {
-            it("should build a child ViewController") {
+            it("should build a viewController") {
                 let component = Component.wrapper(builder: { _ in UIViewController() },
                                                   child: randComponent(),
                                                   meta: nil)
-                expect(component.childViewController()).toNot(beNil())
+                expect(component.viewController()).toNot(beNil())
             }
             
             it("should pass the child to the builder") {
@@ -48,7 +48,8 @@ class ComponentTests: QuickSpec {
                 
                 _ =  Component.wrapper(builder: builder,
                                        child: randComponent(),
-                                       meta: nil).childViewController()
+                                       meta: nil).viewController()
+                
                 expect(component).toNot(beNil())
             }
             
@@ -61,18 +62,18 @@ class ComponentTests: QuickSpec {
                 
                 _ =  Component.wrapper(builder: builder,
                                        child: randComponent(),
-                                       meta: "meta").childViewController()
+                                       meta: "meta").viewController()
                 
                 expect(string) == "meta"
             }
         }
         
         describe("Cluster component") {
-            it("should build a child ViewController") {
+            it("should build a viewController") {
                 let component = Component.cluster(builder: { _ in UIViewController() },
                                                   children: [randComponent()],
                                                   meta: nil)
-                expect(component.childViewController()).toNot(beNil())
+                expect(component.viewController()).toNot(beNil())
             }
             
             it("should pass the children to the builder") {
@@ -84,7 +85,8 @@ class ComponentTests: QuickSpec {
                 
                 _ =  Component.cluster(builder: builder,
                                        children: [randComponent()],
-                                       meta: nil).childViewController()
+                                       meta: nil).viewController()
+                
                 expect(components).toNot(beNil())
             }
             
@@ -97,7 +99,7 @@ class ComponentTests: QuickSpec {
                 
                 _ =  Component.cluster(builder: builder,
                                        children: [randComponent()],
-                                       meta: "meta").childViewController()
+                                       meta: "meta").viewController()
                 
                 expect(string) == "meta"
             }

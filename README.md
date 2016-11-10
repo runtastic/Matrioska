@@ -10,7 +10,6 @@
 The vision of Matrioska is to let you build and prototype your app easily, reusing views and layouts, dynamically define the content of your app.
 With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.
-Matrioska is open source (see LICENSE) and we don’t keep an internal mirror of this repository.  
 
 To build your UI you can use nested `Component`s. A `Component` can be 3 different things:
 - **View**: Any `UIViewController` that can use AutouLayout to specify its `intrinsicContentSize`
@@ -38,24 +37,43 @@ github “runtastic/Matrioska”
 
 ## Usage
 
-Create a model:
+Create components:
 
 ```swift
-// TODO
+// Create a cluster by extending an existing implementation
+extension UITabBarController {
+    convenience init(children: [Component], meta: Any?) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewControllers = children.flatMap { $0.viewController() }
+        // handle meta
+    }
+}
+
+// Any UIViewController can be used as a View
+// we can define a convenience init or just use an inline closure to build the ViewController
+class MyViewController: UIViewController {
+    init(meta: Any?) {
+        super.init(nibName: nil, bundle: nil)
+        guard let meta = meta as? [String: Any] else { return }
+        self.title = meta["title"] as? String
+    }
+}
 ```
 
-From json…. TODO… schema…
+Then create models that can be easily used to create the entire tree of views:
 
-Create a component:
+```
+let component = Component.cluster(builder: UITabBarController.init, children: [
+    Component.view(builder: MyViewController.init, meta: ["title": "tab1"]),
+    Component.view(builder: { _ in UIViewController() }, meta: nil),
+    ], meta: nil)
 
-```swift
-// TODO
+window.rootViewController = component.viewController()
 ```
 
-Register components in factories:
 
 ```swift
-// TODO
+// TODO: json, schema, factories, etc....
 ```
 
 #### Layout
@@ -65,4 +83,4 @@ To make sure the a `Component`’s `UIViewController`has a valid `intrinsicConte
 
 ## Roadmap
 
-> TODO
+// TODO: ...
