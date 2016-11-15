@@ -29,6 +29,13 @@ class ComponentTests: QuickSpec {
                 
                 expect(string) == "meta"
             }
+            
+            it("should have the correct metadata") {
+                let component = Component.view(builder: { _ in UIViewController() },
+                                               meta: "meta")
+                
+                expect(component.meta as? String) == "meta"
+            }
         }
         
         describe("Wrapper component") {
@@ -66,6 +73,14 @@ class ComponentTests: QuickSpec {
                 
                 expect(string) == "meta"
             }
+            
+            it("should have the correct metadata") {
+                let component =  Component.wrapper(builder: { _ in UIViewController() },
+                                       child: randComponent(),
+                                       meta: "meta")
+                
+                expect(component.meta as? String) == "meta"
+            }
         }
         
         describe("Cluster component") {
@@ -102,6 +117,14 @@ class ComponentTests: QuickSpec {
                                        meta: "meta").viewController()
                 
                 expect(string) == "meta"
+            }
+            
+            it("should have the correct metadata") {
+                let component =  Component.cluster(builder: { _ in UIViewController() },
+                                                   children: [randComponent()],
+                                                   meta: "meta")
+                
+                expect(component.meta as? String) == "meta"
             }
         }
     }

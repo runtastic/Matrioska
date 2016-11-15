@@ -36,6 +36,17 @@ public indirect enum Component {
     /// Since a cluster is itself a view it can also contain other clusters.
     case cluster(builder: ClusterBuilder, children: [Component], meta: Any?)
 
+    var meta: Any? {
+        switch self {
+        case let .view(_, meta):
+            return meta
+        case let .wrapper(_, _, meta):
+            return meta
+        case let .cluster(_, _, meta):
+            return meta
+        }
+    }
+    
     /// Create a ViewController represented by the `Component`
     ///
     /// - Returns: An optional UIViewController.
