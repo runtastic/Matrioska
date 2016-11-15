@@ -12,6 +12,8 @@
 		DE2D785B1DDB0F1A00CD6E95 /* TabBarCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */; };
 		DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */; };
 		DE2D78631DDB3F7F00CD6E95 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */; };
+		DE2D78651DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */; };
+		DE2D78681DDB43FF00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */; };
 		DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3E8D761DD389F400417AE5 /* Matrioska.framework */; };
 		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
@@ -38,6 +40,8 @@
 		DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCluster.swift; sourceTree = "<group>"; };
 		DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarClusterTests.swift; sourceTree = "<group>"; };
 		DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
+		DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
+		DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollViewTests.swift; sourceTree = "<group>"; };
 		DE3E8D761DD389F400417AE5 /* Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3E8D7F1DD389F400417AE5 /* MatrioskaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrioskaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3E8D921DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				DE3E8D951DD38AAA00417AE5 /* Info.plist */,
 				DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */,
 				DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */,
+				DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				DE3E8D9C1DD46A2600417AE5 /* Component.swift */,
 				DE828C211DDB0C52003443A2 /* ClusterLayout.swift */,
 				DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */,
+				DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */,
+				DE2D78651DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift in Sources */,
 				DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */,
 				DE2D785B1DDB0F1A00CD6E95 /* TabBarCluster.swift in Sources */,
 			);
@@ -371,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE2D78681DDB43FF00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */,
 				DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */,
 				DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */,
 			);
