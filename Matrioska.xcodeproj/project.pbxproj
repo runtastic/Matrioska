@@ -18,6 +18,7 @@
 		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
 		DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D9C1DD46A2600417AE5 /* Component.swift */; };
+		DE6CA3C31DDC630900E3A570 /* IntrinsicSizeAwareScrollViewTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6CA3C21DDC630900E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */; };
 		DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE828C211DDB0C52003443A2 /* ClusterLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		DE3E8D951DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTests.swift; sourceTree = "<group>"; };
 		DE3E8D9C1DD46A2600417AE5 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		DE6CA3C21DDC630900E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntrinsicSizeAwareScrollViewTest.xib; sourceTree = "<group>"; };
 		DE828C211DDB0C52003443A2 /* ClusterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterLayout.swift; sourceTree = "<group>"; };
 		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */,
+				DE6CA3C21DDC630900E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE2D78631DDB3F7F00CD6E95 /* checkmark@2x.png in Resources */,
+				DE6CA3C31DDC630900E3A570 /* IntrinsicSizeAwareScrollViewTest.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,11 +17,14 @@ import SnapKit
 class IntrinsicSizeAwareScrollViewTests: QuickSpec {
     
     override func spec() {
+        
+        let size = CGSize(width: 300, height: 200)
+        
         describe("IntrinsicSizeAwareScrollView") {
             it("should have an intrinsicContentSize equal to its contentSize") {
                 let scrollView = IntrinsicSizeAwareScrollView()
-                scrollView.contentSize = CGSize(width: 300, height: 200)
-                expect(scrollView.intrinsicContentSize) == CGSize(width: 300, height: 200)
+                scrollView.contentSize = size
+                expect(scrollView.intrinsicContentSize) == size
             }
             
             it("should adapt its intrinsicContentSize when the contentSize changes") {
@@ -31,7 +34,7 @@ class IntrinsicSizeAwareScrollViewTests: QuickSpec {
                 vc.view.backgroundColor = .yellow
                 
                 scrollView.snp.makeConstraints { (make) in
-                    make.leading.top.trailing.equalTo(vc.view)
+                    make.leading.top.equalTo(vc.view)
                 }
                 
                 let view = UIView()
@@ -45,43 +48,24 @@ class IntrinsicSizeAwareScrollViewTests: QuickSpec {
                 }
                 
                 expect(vc).to(haveValidSnapshot())
-                expect(scrollView.intrinsicContentSize) == CGSize(width: 300, height: 200)
+                expect(scrollView.intrinsicContentSize) == size
             }
             
-            it("should stop observing contentSize changes when it is deallocated") {
-                var removed: Bool? = nil
-                
-                let fakeObserverManager = FakeObserverManager(observerRemovedCallback: {
-                    removed = true
-                })
-                
-                do {
-                    let _ = IntrinsicSizeAwareScrollView(observerManager: fakeObserverManager)
+            context("when instantiated by Interface Builder") {
+                it("should adapt its intrinsicContentSize when the contentSize changes") {
+                    let bundle = Bundle(for: IntrinsicSizeAwareScrollViewTests.self)
+                    // This need has almost the same setup as the previous test.
+                    // However it contains some palceholder constraints, removed at build time,
+                    // to avoid IB warnings.
+                    let nib = UINib(nibName: "IntrinsicSizeAwareScrollViewTest",
+                                     bundle: bundle)
+                    let view = nib.instantiate(withOwner: nil, options: nil).first as? UIView
+                    expect(view).to(haveValidSnapshot())
+                    
+                    let scrollView = view?.subviews.first as? UIScrollView
+                    expect(scrollView?.intrinsicContentSize) == size
                 }
-                
-                expect(removed).to(beTrue())
             }
         }
-    }
-}
-
-final class FakeObserverManager: ObserverManager {
-    
-    private let observerRemovedCallback: (Void) -> Void
-    
-    init(observerRemovedCallback: @escaping (Void) -> Void) {
-        self.observerRemovedCallback = observerRemovedCallback
-    }
-
-    func addObserver(_ observer: NSObject,
-                     to receiver: NSObject,
-                     forKeyPath keyPath: String,
-                     options: NSKeyValueObservingOptions,
-                     context: UnsafeMutableRawPointer?) {
-        
-    }
-    
-    func removeObserver(_ observer: NSObject, from receiver: NSObject, forKeyPath keyPath: String) {
-        observerRemovedCallback()
     }
 }
