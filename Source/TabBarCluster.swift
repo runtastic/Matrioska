@@ -41,7 +41,14 @@ extension ClusterLayout {
             self.bundle = bundle
         }
         
-        init(name: String, iconName: String, bundle: Bundle = .main) {
+        /// Creates a `TabConfig` object
+        ///
+        /// - Parameters:
+        ///   - name: The tab name
+        ///   - iconName: The tab icon
+        ///   - bundle: An optional bundle where to search for the icon.
+        ///     By default the main bundle is used
+        public init(name: String, iconName: String, bundle: Bundle = .main) {
             self.name = name
             self.iconName = iconName
             self.bundle = bundle
