@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Matrioska  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Matrioska  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Matrioska Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://hopefully.soon.com"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Matrioska Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Matrioska  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ClusterLayout.html">ClusterLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ClusterLayout/StackConfig.html">– StackConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ClusterLayout/TabConfig.html">– TabConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Component.html">Component</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#matrioska' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='matrioska'>Matrioska</h1>
+
+<blockquote>
+<p>Matrioska let you create your layout and define the content of your app in a simple way.  </p>
+</blockquote>
+
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a>
+
+<ul>
+<li><a href="#layout">Layout</a></li>
+</ul></li>
+<li><a href="#roadmap">Roadmap</a></li>
+</ul>
+
+<p>The vision of Matrioska is to let you build and prototype your app easily, reusing views and layouts, dynamically define the content of your app.
+With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
+With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.</p>
+
+<p>To build your UI you can use nested <code>Component</code>s. A <code>Component</code> can be 3 different things:
+- <strong>View</strong>: Any <code>UIViewController</code> that can use AutouLayout to specify its <code>intrinsicContentSize</code>
+- <strong>Cluster</strong>: Views with children (other <code>Component</code>s). A cluster is responsible of laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
+- <strong>Wrapper</strong>: A View with only one child (a <code>Component</code>). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.</p>
+
+<p>The goal is to provide a tiny but powerful foundation to build your app on top of it.
+Matrioska will contian a limited set of standard components and we will consider to add more on a case by case basis.<br>
+It’s really easy to extend Matrioska to add new components that fits your needs (TODO hamburger example).</p>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+
+<p>Using <a href="http://cocoapods.org/">CocoaPods</a>:</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+<span class="n">pod</span> <span class="err">‘</span><span class="no">Matrioska</span><span class="err">’</span>
+</code></pre>
+
+<p>Using <a href="https://github.com/Carthage/Carthage">Carthage</a>:</p>
+<pre class="highlight plaintext"><code>github “runtastic/Matrioska”
+</code></pre>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+
+<p>Create components:</p>
+<pre class="highlight swift"><code><span class="c1">// Create a cluster by extending an existing implementation</span>
+<span class="kd">extension</span> <span class="kt">UITabBarController</span> <span class="p">{</span>
+    <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">children</span><span class="p">:</span> <span class="p">[</span><span class="kt">Component</span><span class="p">],</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">nibName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">viewControllers</span> <span class="o">=</span> <span class="n">children</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="nf">viewController</span><span class="p">()</span> <span class="p">}</span>
+        <span class="c1">// handle meta</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Any UIViewController can be used as a View</span>
+<span class="c1">// we can define a convenience init or just use an inline closure to build the ViewController</span>
+<span class="kd">class</span> <span class="kt">MyViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">nibName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">meta</span> <span class="o">=</span> <span class="n">meta</span> <span class="k">as?</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span> <span class="k">as?</span> <span class="kt">String</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Then create models that can be easily used to create the entire tree of views:</p>
+<pre class="highlight plaintext"><code>let component = Component.cluster(builder: UITabBarController.init, children: [
+    Component.view(builder: MyViewController.init, meta: ["title": "tab1"]),
+    Component.view(builder: { _ in UIViewController() }, meta: nil),
+    ], meta: nil)
+
+window.rootViewController = component.viewController()
+</code></pre>
+<pre class="highlight swift"><code><span class="c1">// TODO: json, schema, factories, etc....</span>
+</code></pre>
+<a href='#layout' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='layout'>Layout</h4>
+
+<p>View are responsible to define their <code>intrinsicContentSize</code> using AutouLayout, cluster can decide to respect or not their dimensions, both vertical and horizontal or also only one of the two.
+To make sure the a <code>Component</code>’s <code>UIViewController</code>has a valid <code>intrinsicContentSize</code> you need to add appropriate constraints to the view. <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html">To know more about this read the documentation about “Views with Intrinsic Content Size”</a>.</p>
+<a href='#roadmap' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='roadmap'>Roadmap</h2>
+
+<p>// TODO: &hellip;</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://github.com/runtastic/Matrioska" target="_blank" rel="external">Runtastic GmbH</a>. All rights reserved. (Last updated: 2016-11-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
