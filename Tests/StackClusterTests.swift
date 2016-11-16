@@ -140,8 +140,22 @@ class StackClusterTests: QuickSpec {
                 }
             }
             
-            it("should nest...") {
-                // TODO: tests
+            it("should be nestable") {
+                let meta = ClusterLayout.StackConfig(preserveParentWidth: true)
+                let horizontalMeta = ClusterLayout.StackConfig(axis: .horizontal)
+                let size = CGSize(width: 100, height: 100)
+                let fixedSizeChildren = [1, 2, 3, 4].map {
+                    labelComponent(meta: String($0), color: .red, labelSize: size)
+                }
+
+                let nest = [
+                    ClusterLayout.stack(children: children, meta: meta),
+                    ClusterLayout.stack(children: fixedSizeChildren, meta: horizontalMeta),
+                    ClusterLayout.stack(children: children, meta: nil),
+                ]
+                
+                let vc = stack(with: nest)
+                expect(vc).to(haveValidSnapshot())
             }
         }
     }
@@ -166,6 +180,7 @@ private func labelComponent(meta: Any?,
         let label = UILabel()
         label.text = meta as? String
         label.numberOfLines = 0
+        label.textAlignment = .center
         vc.view.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.edges.equalTo(vc.view)
