@@ -74,6 +74,14 @@ extension ClusterLayout {
         }
     }
     
+    
+    /// A stack cluster component.
+    /// It arranges its children views in a vertical or horizontal stack, configured with the meta.
+    ///
+    /// - Parameters:
+    ///   - children: The children components
+    ///   - meta: Should represent `StackConfig` object to configure the stack view
+    /// - Returns: A stack component
     public static func stack(children: [Component], meta: Any?) -> Component {
         return Component.cluster(builder: stackBuilder,
                                  children: children,
