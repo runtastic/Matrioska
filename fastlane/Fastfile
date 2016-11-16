@@ -25,7 +25,8 @@ platform :ios do
   desc "Generates the documentation via jazzy"
   lane :generate_documentation do
     jazzy(config: '.jazzy.yaml')
-    git_commit(path: '../Docs',message: "Update the generated documentation")
+    git_commit(path: 'Docs',message: "Update the generated documentation")
+    push_to_git_remote
   end
 
   desc "Runs all the tests"
