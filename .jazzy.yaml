@@ -3,6 +3,6 @@ author: Runtastic GmbH
 github_url: https://hopefully.soon.com
 min_acl: public
 output: Docs
-skip_undocumented: true
+skip_undocumented: false
 clean: true
 #exclude: [Source/BloomFilterTypeExtensions.swift]
