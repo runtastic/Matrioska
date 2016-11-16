@@ -24,10 +24,10 @@ public indirect enum Component {
     public typealias ClusterBuilder = (_ children: [Component], _ meta: Any?) -> UIViewController?
 
     /// Represents any `UIViewController`.
-    /// The view should use AutouLayout to specify its `intrinsicContentSize`.
+    /// The view should use AutoLayout to specify its `intrinsicContentSize`.
     case view(builder: ViewBuilder, meta: Any?)
     /// Represents a view with only one child (a `Component`).
-    /// The view should use AutouLayout to specify its `intrinsicContentSize`.
+    /// The view should use AutoLayout to specify its `intrinsicContentSize`.
     /// You can see it as a special cluster or as a special view.
     /// It’s responsible to display its child’s view.
     case wrapper(builder: WrapperBuilder, child: Component, meta: Any?)

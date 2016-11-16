@@ -12,12 +12,12 @@ With Matrioska you can go as far as specifing the content and layout of your vie
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.
 
 To build your UI you can use nested `Component`s. A `Component` can be 3 different things:
-- **View**: Any `UIViewController` that can use AutouLayout to specify its `intrinsicContentSize`
+- **View**: Any `UIViewController` that can use AutoLayout to specify its `intrinsicContentSize`
 - **Cluster**: Views with children (other `Component`s). A cluster is responsible of laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
 - **Wrapper**: A View with only one child (a `Component`). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.
 
-The goal is to provide a tiny but powerful foundation to build your app on top of it.
-Matrioska will contian a limited set of standard components and we will consider to add more on a case by case basis.  
+The goal is to provide a tiny, but powerful foundation to build your app on top of it.
+Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.  
 It’s really easy to extend Matrioska to add new components that fits your needs (TODO hamburger example).
 
 ## Installation
@@ -78,7 +78,7 @@ window.rootViewController = component.viewController()
 
 #### Layout
 
-View are responsible to define their `intrinsicContentSize` using AutouLayout, cluster can decide to respect or not their dimensions, both vertical and horizontal or also only one of the two.
+View are responsible to define their `intrinsicContentSize` using AutoLayout, cluster can decide to respect or respect not their dimensions, both vertical and horizontal or also only one of the two.
 To make sure the a `Component`’s `UIViewController`has a valid `intrinsicContentSize` you need to add appropriate constraints to the view. [To know more about this read the documentation about “Views with Intrinsic Content Size”](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html).
 
 ## Roadmap
