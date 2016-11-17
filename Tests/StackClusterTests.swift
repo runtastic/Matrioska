@@ -161,7 +161,7 @@ class StackClusterTests: QuickSpec {
     }
 }
 
-// MARK: Heleprs
+// MARK: Helpers
 
 private func stack(with children: [Component], meta: Any? = nil) -> StackViewController? {
     let stack = ClusterLayout.stack(children: children, meta: meta)
