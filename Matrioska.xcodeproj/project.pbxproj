@@ -9,20 +9,22 @@
 /* Begin PBXBuildFile section */
 		51A54328766C8548A4F3AE4A /* Pods_MatrioskaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */; };
 		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
+		DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */; };
+		DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */; };
+		DE067DCD1DDE017700641D1A /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCB1DDE017700641D1A /* StackViewController.swift */; };
 		DE2D785B1DDB0F1A00CD6E95 /* TabBarCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */; };
 		DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */; };
 		DE2D78631DDB3F7F00CD6E95 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */; };
-		DE2D78651DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */; };
 		DE2D78681DDB43FF00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */; };
 		DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3E8D761DD389F400417AE5 /* Matrioska.framework */; };
 		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
 		DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D9C1DD46A2600417AE5 /* Component.swift */; };
-		DE6CA3C61DDC6DFD00E3A570 /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3C41DDC6DF900E3A570 /* StackViewController.swift */; };
 		DE6CA3C91DDC71A100E3A570 /* StackCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */; };
 		DE6CA3CB1DDC77E800E3A570 /* StackClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */; };
 		DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3CD1DDC7F2D00E3A570 /* ScrollMatcher.swift */; };
 		DE6CA3D01DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6CA3CF1DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */; };
+		DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */; };
 		DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE828C211DDB0C52003443A2 /* ClusterLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,10 +45,12 @@
 		4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.release.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.release.xcconfig"; sourceTree = "<group>"; };
 		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
 		DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.release.xcconfig"; sourceTree = "<group>"; };
+		DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMetaTests.swift; sourceTree = "<group>"; };
+		DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
+		DE067DCB1DDE017700641D1A /* StackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCluster.swift; sourceTree = "<group>"; };
 		DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarClusterTests.swift; sourceTree = "<group>"; };
 		DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
-		DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
 		DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollViewTests.swift; sourceTree = "<group>"; };
 		DE3E8D761DD389F400417AE5 /* Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3E8D7F1DD389F400417AE5 /* MatrioskaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatrioskaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,11 +59,11 @@
 		DE3E8D951DD38AAA00417AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTests.swift; sourceTree = "<group>"; };
 		DE3E8D9C1DD46A2600417AE5 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		DE6CA3C41DDC6DF900E3A570 /* StackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackCluster.swift; sourceTree = "<group>"; };
 		DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackClusterTests.swift; sourceTree = "<group>"; };
 		DE6CA3CD1DDC7F2D00E3A570 /* ScrollMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMatcher.swift; sourceTree = "<group>"; };
 		DE6CA3CF1DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntrinsicSizeAwareScrollViewTest.xib; sourceTree = "<group>"; };
+		DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMeta.swift; sourceTree = "<group>"; };
 		DE828C211DDB0C52003443A2 /* ClusterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterLayout.swift; sourceTree = "<group>"; };
 		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +118,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DE067DC91DDE017700641D1A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */,
+				DE067DCB1DDE017700641D1A /* StackViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DE2D78611DDB3F7F00CD6E95 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +177,7 @@
 				DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */,
 				DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */,
 				DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */,
+				DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -172,11 +186,11 @@
 			isa = PBXGroup;
 			children = (
 				DE3E8D9C1DD46A2600417AE5 /* Component.swift */,
+				DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */,
 				DE828C211DDB0C52003443A2 /* ClusterLayout.swift */,
-				DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */,
-				DE2D78641DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift */,
-				DE6CA3C41DDC6DF900E3A570 /* StackViewController.swift */,
 				DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */,
+				DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */,
+				DE067DC91DDE017700641D1A /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -401,10 +415,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */,
+				DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */,
 				DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */,
 				DE6CA3C91DDC71A100E3A570 /* StackCluster.swift in Sources */,
-				DE2D78651DDB42E800CD6E95 /* IntrinsicSizeAwareScrollView.swift in Sources */,
-				DE6CA3C61DDC6DFD00E3A570 /* StackViewController.swift in Sources */,
+				DE067DCD1DDE017700641D1A /* StackViewController.swift in Sources */,
 				DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */,
 				DE2D785B1DDB0F1A00CD6E95 /* TabBarCluster.swift in Sources */,
 			);
@@ -418,6 +433,7 @@
 				DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */,
 				DE6CA3CB1DDC77E800E3A570 /* StackClusterTests.swift in Sources */,
 				DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */,
+				DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */,
 				DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

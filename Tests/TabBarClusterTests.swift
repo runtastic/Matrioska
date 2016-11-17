@@ -35,7 +35,6 @@ class TabBarClusterTests: QuickSpec {
             }
             
             it("should configure the tabBar") {
-
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 3
                 expect(vc).to(haveValidSnapshot())
@@ -43,28 +42,40 @@ class TabBarClusterTests: QuickSpec {
             
             context("when meta represents the selected index") {
                 
+                typealias TabBarConfig = ClusterLayout.TabBarConfig
+
                 it("should consider it and select the proper tab") {
-                    let vc = ClusterLayout.tabBar(children: children, meta: 1).viewController()
+                    let meta = TabBarConfig(selectedIndex: 1)
+                    let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expectTabCount(vc) == 3
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("should not consider it if the index is out of bouds") {
-                    let vc = ClusterLayout.tabBar(children: children, meta: 3).viewController()
+                    let meta = TabBarConfig(selectedIndex: 3)
+                    let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expectTabCount(vc) == 3
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("should not be considered if is less than 0") {
-                    let vc = ClusterLayout.tabBar(children: children, meta: -1).viewController()
+                    let meta = TabBarConfig(selectedIndex: -1)
+                    let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expectTabCount(vc) == 3
+                    expect(vc).to(haveValidSnapshot())
+                }
+                
+                it("should load config from a dictionary") {
+                    let meta = Meta(["selectedIndex": 1])
+                    let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expect(vc).to(haveValidSnapshot())
                 }
             }
             
             context("when meta doesn't represents the selected index") {
                 it("should not be considered") {
-                    let vc = ClusterLayout.tabBar(children: children, meta: "blah").viewController()
+                    let meta = Meta(["foo": "bar"])
+                    let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expectTabCount(vc) == 3
                     expect(vc).to(haveValidSnapshot())
                 }
@@ -97,7 +108,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should use config defined as dictionaries") {
                     let bundle = Bundle(for: TabBarClusterTests.self)
                     let children: [Component] = [
-                        simpleComponent(meta: ["name": "test", "iconName": "checkmark"]),
+                        simpleComponent(meta: Meta(["name": "test", "iconName": "checkmark"])),
                         validComponent,
                         ]
                     let vc = ClusterLayout.tabBar(children: children,
@@ -109,7 +120,7 @@ class TabBarClusterTests: QuickSpec {
                 
                 it("should not use config defined as dictionaries when missing the name") {
                     let children: [Component] = [
-                        simpleComponent(meta: ["iconName": "_"]),
+                        simpleComponent(meta: Meta(["iconName": "_"])),
                         validComponent,
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
@@ -119,7 +130,7 @@ class TabBarClusterTests: QuickSpec {
                 
                 it("should not use config defined as dictionaries when missing the iconName") {
                     let children: [Component] = [
-                        simpleComponent(meta: ["name": "_"]),
+                        simpleComponent(meta: Meta(["name": "_"])),
                         validComponent,
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
@@ -140,7 +151,7 @@ private func expectTabCount(_ viewController: UIViewController?,
     return expect(tabBarController?.viewControllers?.count ?? -1, file: file, line: line)
 }
 
-private func simpleComponent(meta: Any?, color: UIColor? = nil) -> Component {
+private func simpleComponent(meta: ComponentMeta?, color: UIColor? = nil) -> Component {
     let builder: Component.ViewBuilder = { meta in
         let vc = UIViewController()
         vc.view.backgroundColor = color

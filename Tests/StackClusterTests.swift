@@ -20,9 +20,9 @@ class StackClusterTests: QuickSpec {
         describe("Stack component") {
             
             let children = [
-                labelComponent(meta: "first", color: .red),
-                labelComponent(meta: "second", color: .blue),
-                labelComponent(meta: "third\ntwo lines", color: .orange),
+                labelComponent(title: "first", color: .red),
+                labelComponent(title: "second", color: .blue),
+                labelComponent(title: "third\ntwo lines", color: .orange),
                 ]
             
             it("should display its child and respect their intrinsic contentSize") {
@@ -32,9 +32,9 @@ class StackClusterTests: QuickSpec {
             
             it("should not display childs that don't have a view") {
                 let children = [
-                    labelComponent(meta: "first", color: .red),
+                    labelComponent(title: "first", color: .red),
                     Component.view(builder: { _ in nil }, meta: nil),
-                    labelComponent(meta: "second", color: .orange),
+                    labelComponent(title: "second", color: .orange),
                     Component.view(builder: { _ in nil }, meta: nil),
                     ]
                 let vc = stack(with: children)
@@ -45,10 +45,10 @@ class StackClusterTests: QuickSpec {
             context("when it doesn't have a valid configuration") {
                 it("should use the default configuration") {
                     let children = [
-                        labelComponent(meta: "first", color: .yellow),
-                        labelComponent(meta: "second", color: .green),
+                        labelComponent(title: "first", color: .yellow),
+                        labelComponent(title: "second", color: .green),
                         ]
-                    let vc = stack(with: children, meta: ["foo": "bar"])
+                    let vc = stack(with: children, meta: Meta(["foo": "bar"]))
                     expect(vc).to(haveValidSnapshot())
                     let defaultConfig = ClusterLayout.StackConfig()
                     expect(vc?.title).to(beNil())
@@ -90,7 +90,7 @@ class StackClusterTests: QuickSpec {
                         "axis": UILayoutConstraintAxis.vertical.rawValue,
                         "preserveParentWidth": true,
                     ]
-                    let vc = stack(with: children, meta: config)
+                    let vc = stack(with: children, meta: Meta(config))
                     expect(vc?.title) == "Foo"
                     expect(vc).to(haveValidSnapshot())
                     expect(vc?.stackView.spacing) == 150
@@ -101,10 +101,10 @@ class StackClusterTests: QuickSpec {
             context("when the content overflows") {
                 let size = CGSize(width: 300, height: 500)
                 let children = [
-                    labelComponent(meta: "1", color: .red, labelSize: size),
-                    labelComponent(meta: "2", color: .red, labelSize: size),
-                    labelComponent(meta: "3", color: .red, labelSize: size),
-                    labelComponent(meta: "4", color: .red, labelSize: size),
+                    labelComponent(title: "1", color: .red, labelSize: size),
+                    labelComponent(title: "2", color: .red, labelSize: size),
+                    labelComponent(title: "3", color: .red, labelSize: size),
+                    labelComponent(title: "4", color: .red, labelSize: size),
                     ]
 
                 it("should be able to scroll horizontally") {
@@ -130,7 +130,7 @@ class StackClusterTests: QuickSpec {
             context("when the content doesn't overflows") {
                 it("should not be able to scroll") {
                     let children = [
-                        labelComponent(meta: "first", color: .red),
+                        labelComponent(title: "first", color: .red),
                         ]
                     let vc = stack(with: children)
                     expect(vc).to(haveValidSnapshot())
@@ -145,7 +145,7 @@ class StackClusterTests: QuickSpec {
                 let horizontalMeta = ClusterLayout.StackConfig(axis: .horizontal)
                 let size = CGSize(width: 100, height: 100)
                 let fixedSizeChildren = [1, 2, 3, 4].map {
-                    labelComponent(meta: String($0), color: .red, labelSize: size)
+                    labelComponent(title: String($0), color: .red, labelSize: size)
                 }
 
                 let nest = [
@@ -158,19 +158,26 @@ class StackClusterTests: QuickSpec {
                 expect(vc).to(haveValidSnapshot())
             }
         }
+        
+        describe("StackViewController") {
+            it("should throw an assertion when initialized with interface builder") {
+                let faultyInit = { _ = StackViewController(coder: NSCoder()) }
+                expect(faultyInit()).to(throwAssertion())
+            }
+        }
     }
 }
 
 // MARK: Helpers
 
-private func stack(with children: [Component], meta: Any? = nil) -> StackViewController? {
+private func stack(with children: [Component], meta: ComponentMeta? = nil) -> StackViewController? {
     let stack = ClusterLayout.stack(children: children, meta: meta)
     let vc = stack.viewController() as? StackViewController
     vc?.view.backgroundColor = .white
     return vc
 }
 
-private func labelComponent(meta: Any?,
+private func labelComponent(title: String?,
                             color: UIColor? = nil,
                             labelSize: CGSize? = nil) -> Component {
     
@@ -178,7 +185,7 @@ private func labelComponent(meta: Any?,
         let vc = UIViewController()
         vc.view.backgroundColor = color
         let label = UILabel()
-        label.text = meta as? String
+        label.text = meta?["title"] as? String
         label.numberOfLines = 0
         label.textAlignment = .center
         vc.view.addSubview(label)
@@ -191,6 +198,8 @@ private func labelComponent(meta: Any?,
         return vc
     }
     
-    return Component.view(builder: builder,
-                          meta: meta)
+    return Component.view(
+        builder: builder,
+        meta: title.map { Meta(["title": $0]) }
+    )
 }

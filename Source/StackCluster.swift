@@ -11,7 +11,7 @@ import Foundation
 extension ClusterLayout {
     
     /// Stack component configuration.
-    public struct StackConfig {
+    public struct StackConfig: MaterializableComponentMeta {
         /// The name of the stack view
         public let name: String?
         /// The spacing of the components inside the stack. Default 10. Optional.
@@ -24,22 +24,8 @@ extension ClusterLayout {
         /// or their own intrinsicContentSize. Default false. Optional.
         public let preserveParentWidth: Bool
         
-        // necessary because init(meta:) is a convenience init and can't do this.
-        private init(stackConfig: StackConfig) {
-            self = stackConfig
-        }
-        
-        fileprivate init?(meta: Any?) {
-            
-            if let meta = meta as? StackConfig {
-                self.init(stackConfig: meta)
-                return
-            }
-            
-            guard let meta = meta as? [String: Any] else {
-                return nil
-            }
-
+        // TODO: docu
+        public init?(meta: ComponentMeta) {
             let name = meta["name"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
             let preserveParentWidth = meta["preserveParentWidth"] as? Bool
@@ -74,7 +60,6 @@ extension ClusterLayout {
         }
     }
     
-    
     /// A stack cluster component.
     /// It arranges its children views in a vertical or horizontal stack, configured with the meta.
     ///
@@ -82,14 +67,15 @@ extension ClusterLayout {
     ///   - children: The children components
     ///   - meta: Should represent `StackConfig` object to configure the stack view
     /// - Returns: A stack component
-    public static func stack(children: [Component], meta: Any?) -> Component {
+    public static func stack(children: [Component], meta: ComponentMeta?) -> Component {
         return Component.cluster(builder: stackBuilder,
                                  children: children,
                                  meta: meta)
     }
     
-    private static func stackBuilder(_ children: [Component], _ meta: Any?) -> UIViewController? {
-        let stackViewController = StackViewController(configuration: StackConfig(meta: meta))
+    private static func stackBuilder(_ children: [Component],
+                                     _ meta: ComponentMeta?) -> UIViewController? {
+        let stackViewController = StackViewController(configuration: StackConfig.metarialize(meta))
         stackViewController.add(children: children)
         return stackViewController
     }

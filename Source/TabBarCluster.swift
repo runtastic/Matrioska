@@ -10,8 +10,8 @@ import Foundation
 
 extension ClusterLayout {
     
-    /// TabBar component configuration.
-    public struct TabConfig {
+    /// Tab configuration.
+    public struct TabConfig: MaterializableComponentMeta {
         /// The tab name
         public let name: String
         /// The tab icon
@@ -19,16 +19,8 @@ extension ClusterLayout {
         /// Used to locate the icon
         fileprivate let bundle: Bundle
         
-        fileprivate init?(meta: Any?, bundle: Bundle = .main) {
-            
-            if let meta = meta as? TabConfig {
-                self = meta
-                return
-            }
-            
-            guard let meta = meta as? [String: Any] else {
-                return nil
-            }
+        // TODO: docu
+        public init?(meta: ComponentMeta) {
             guard let name = meta["name"] as? String else {
                 return nil
             }
@@ -36,9 +28,7 @@ extension ClusterLayout {
                 return nil
             }
             
-            self.name = name
-            self.iconName = iconName
-            self.bundle = bundle
+            self.init(name: name, iconName: iconName)
         }
         
         /// Creates a `TabConfig` object
@@ -55,16 +45,38 @@ extension ClusterLayout {
         }
     }
     
+    /// TabBar component configuration.
+    public struct TabBarConfig: MaterializableComponentMeta {
+        /// The selected index of the tabBar
+        public let selectedIndex: Int
+        
+        // TODO: docu
+        public init?(meta: ComponentMeta) {
+            guard let selectedIndex = meta["selectedIndex"] as? Int else {
+                return nil
+            }
+            
+            self.selectedIndex = selectedIndex
+        }
+        
+        /// Initialize a TabBar config
+        ///
+        /// - Parameter selectedIndex: The selected index of the tabBar
+        public init(selectedIndex: Int) {
+            self.selectedIndex = selectedIndex
+        }
+    }
+    
     /// A tabBar cluster component. Will use its children metas to configure the tabBar.
     ///
     /// - Parameters:
     ///   - children: Each children should have a meta representing `TabConfig`
-    ///   - meta: An optional integer to represent the selected index.
+    ///   - meta: An optional TabBarConfig to configure the tabBar component.
     ///   - bundle: An optional bundle to retreive icon defined in TabBarConfig.
     ///             Overrides TabBarConfig's own bundle.
     /// - Returns: A tabBar cluster component
     public static func tabBar(children: [Component],
-                              meta: Any?,
+                              meta: ComponentMeta?,
                               bundle: Bundle? = nil) -> Component {
         
         return Component.cluster(builder: tabBarBuilder(bundle),
@@ -78,14 +90,14 @@ extension ClusterLayout {
         
         typealias Tab = (meta: TabConfig, viewController: UIViewController)
 
-        return { (children: [Component], meta: Any?) -> UIViewController? in
+        return { (children: [Component], meta: ComponentMeta?) -> UIViewController? in
             
             let tabs: [Tab] = children.flatMap { (child) in
                 guard let vc = child.viewController() else {
                     return nil
                 }
                 
-                guard let config = TabConfig(meta: child.meta) else {
+                guard let config = TabConfig.metarialize(child.meta) else {
                     return nil
                 }
                 
@@ -105,7 +117,8 @@ extension ClusterLayout {
                 }
             }
             
-            if let selectedIndex = meta as? Int, selectedIndex < tabs.count {
+            let meta = TabBarConfig.metarialize(meta)
+            if let selectedIndex = meta?.selectedIndex, selectedIndex < tabs.count {
                 tabBarController.selectedIndex = selectedIndex
             }
             
