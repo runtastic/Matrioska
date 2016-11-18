@@ -15,6 +15,8 @@ class ComponentTests: QuickSpec {
     
     override func spec() {
         
+        typealias DictMeta = Dictionary<String, String>
+        
         describe("View component") {
             it("should build a viewController") {
                 let component = Component.view(builder: { _ in UIViewController() }, meta: nil)
@@ -22,20 +24,20 @@ class ComponentTests: QuickSpec {
             }
             
             it("should pass metadata to the builder") {
-                var value: FakeMeta? = nil
+                var value: ComponentMeta? = nil
                 _ = Component.view(builder: { (meta) in
-                    value = meta as? FakeMeta
+                    value = meta
                     return UIViewController()
-                }, meta: FakeMeta("meta")).viewController()
+                }, meta: ["foo": "bar"]).viewController()
                 
-                expect(value) == FakeMeta("meta")
+                expect(value as? DictMeta) == ["foo": "bar"]
             }
             
             it("should have the correct metadata") {
                 let component = Component.view(builder: { _ in UIViewController() },
-                                               meta: FakeMeta("meta"))
+                                               meta: ["foo": "bar"])
                 
-                expect(component.meta as? FakeMeta) == FakeMeta("meta")
+                expect(component.meta as? DictMeta) == ["foo": "bar"]
             }
         }
         
@@ -62,25 +64,25 @@ class ComponentTests: QuickSpec {
             }
             
             it("should pass metadata to the builder") {
-                var value: FakeMeta? = nil
+                var value: ComponentMeta? = nil
                 let builder: Component.WrapperBuilder = { (_, meta) in
-                    value = meta as? FakeMeta
+                    value = meta
                     return UIViewController()
                 }
                 
                 _ =  Component.wrapper(builder: builder,
                                        child: randComponent(),
-                                       meta: FakeMeta("meta")).viewController()
+                                       meta: ["foo": "bar"]).viewController()
                 
-                expect(value) == FakeMeta("meta")
+                expect(value as? DictMeta) == ["foo": "bar"]
             }
             
             it("should have the correct metadata") {
                 let component =  Component.wrapper(builder: { _ in UIViewController() },
                                        child: randComponent(),
-                                       meta: FakeMeta("meta"))
+                                       meta: ["foo": "bar"])
                 
-                expect(component.meta as? FakeMeta) == FakeMeta("meta")
+                expect(component.meta as? DictMeta) == ["foo": "bar"]
             }
         }
         
@@ -107,25 +109,25 @@ class ComponentTests: QuickSpec {
             }
             
             it("should pass metadata to the builder") {
-                var value: FakeMeta? = nil
+                var value: ComponentMeta? = nil
                 let builder: Component.ClusterBuilder = { (_, meta) in
-                    value = meta as? FakeMeta
+                    value = meta
                     return UIViewController()
                 }
                 
                 _ =  Component.cluster(builder: builder,
                                        children: [randComponent()],
-                                       meta: FakeMeta("meta")).viewController()
+                                       meta: ["foo": "bar"]).viewController()
                 
-                expect(value) == FakeMeta("meta")
+                expect(value as? DictMeta) == ["foo": "bar"]
             }
             
             it("should have the correct metadata") {
                 let component =  Component.cluster(builder: { _ in UIViewController() },
                                                    children: [randComponent()],
-                                                   meta: FakeMeta("meta"))
+                                                   meta: ["foo": "bar"])
                 
-                expect(component.meta as? FakeMeta) == FakeMeta("meta")
+                expect(component.meta as? DictMeta) == ["foo": "bar"]
             }
         }
     }
@@ -133,16 +135,4 @@ class ComponentTests: QuickSpec {
 
 private func randComponent() -> Component {
     return  Component.view(builder: { _ in UIViewController() }, meta: nil)
-}
-
-private struct FakeMeta: ComponentMeta, Equatable {
-    let string: String
-
-    init(_ string: String) {
-        self.string = string
-    }
-    
-    static func == (lhs: FakeMeta, rhs: FakeMeta) -> Bool {
-        return lhs.string == rhs.string
-    }
 }
