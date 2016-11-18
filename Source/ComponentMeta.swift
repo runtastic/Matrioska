@@ -8,26 +8,34 @@
 
 import Foundation
 
-/// <#Description#>
+/// A protocol to create meta object that provides metadata for a Component
 public protocol ComponentMeta {
     
-    /// <#Description#>
+    /// `ComponentMeta` should implement a subscript function
+    /// to allow to retreive meta using a keyed subscript.
+    /// A default implementation is provided and use reflection
+    /// to retreive the values of the object's properties.
     ///
-    /// - Parameter key: <#key description#>
+    /// - Parameter key: The key of the meta to retreive
     subscript(key: String) -> Any? { get }
 }
 
-/// <#Description#>
+/// A protocol to create `ComponentMeta` that also support json/dictionary for materialization.
+/// Adopting this protocol `Component`s are able to materialzie a meta
+/// using `MaterializableComponentMeta.metarialize(_ )`.
 public protocol MaterializableComponentMeta: ComponentMeta {
-    // TODO: docu
+    // An initializer that takes a meta to retreive the necessary metadata to build the meta object.
+    // `MaterializableComponentMeta.metarialize(_ )` will then use this initializer if necessary
+    // to create the meta object.
     init?(meta: ComponentMeta)
 }
 
 extension ComponentMeta {
 
-    /// <#Description#>
+    /// The default implementation of the subscript uses reflection to mirror the object
+    /// if the key represent a property, its value will be returned
     ///
-    /// - Parameter key: <#key description#>
+    /// - Parameter key: the key to retreive, must be the name of a property.
     public subscript(key: String) -> Any? {
         let mirror = Mirror(reflecting: self)
         let candidate = mirror.children.first { (child) -> Bool in
@@ -39,9 +47,13 @@ extension ComponentMeta {
 
 extension MaterializableComponentMeta {
     
-    /// <#Description#>
+    /// Materialize a meta into the meta object if possible (meta not nil)
+    /// and if needed (meta represents already a valid meta object of type `Self`)
     ///
-    /// - Returns: <#return value description#>
+    /// - Parameter meta: A representation of the meta object to materialize (e.g. a dictionary)
+    ///   or an already materialized meta object.
+    /// - Returns: A materialized meta object if the input represents correctly
+    ///   the object to be materialized.
     public static func metarialize(_ meta: ComponentMeta?) -> Self? {
         guard let meta = meta else {
             return nil
@@ -55,37 +67,39 @@ extension MaterializableComponentMeta {
     }
 }
 
+/// A dictionary wrapper to use dictionaries as `ComponentMeta`
 public struct Meta: ComponentMeta {
     private let dictionary: [String: Any]
     
-    /// <#Description#>
+    /// Initialize a `Meta` that takes a dictionary and forwards the keyed subscript to it
     ///
-    /// - Parameter dictionary: <#dictionary description#>
+    /// - Parameter dictionary: A dictionary representing the meta.
     public init(_ dictionary: [String: Any]) {
         self.dictionary = dictionary
     }
     
-    /// <#Description#>
+    /// Forwards the keyed subscript to its internal dictionary
     ///
-    /// - Parameter key: <#key description#>
+    /// - Parameter key: The key of the meta to retreive
     public subscript(key: String) -> Any? {
         return dictionary[key]
     }
 }
 
+/// Aggregates multiple metas togheter
 public struct ZipMeta: ComponentMeta {
     let metas: [ComponentMeta]
     
-    /// <#Description#>
+    /// Initialize a zip meta from multiple `ComponentMeta`
     ///
-    /// - Parameter metas: <#metas description#>
+    /// - Parameter metas: A list of `ComponentMeta`s
     public init(_ metas: ComponentMeta...) {
         self.metas = metas
     }
     
-    /// <#Description#>
+    /// Forward the subscript to the zipped metas in the order they where provided
     ///
-    /// - Parameter key: <#key description#>
+    /// - Parameter key: The key of the meta to retreive
     public subscript(key: String) -> Any? {
         for meta in metas {
             if let result = meta[key] {
