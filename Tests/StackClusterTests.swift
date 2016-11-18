@@ -48,7 +48,7 @@ class StackClusterTests: QuickSpec {
                         labelComponent(title: "first", color: .yellow),
                         labelComponent(title: "second", color: .green),
                         ]
-                    let vc = stack(with: children, meta: Meta(["foo": "bar"]))
+                    let vc = stack(with: children, meta: ["foo": "bar"])
                     expect(vc).to(haveValidSnapshot())
                     let defaultConfig = ClusterLayout.StackConfig()
                     expect(vc?.title).to(beNil())
@@ -90,7 +90,8 @@ class StackClusterTests: QuickSpec {
                         "axis": UILayoutConstraintAxis.vertical.rawValue,
                         "preserveParentWidth": true,
                     ]
-                    let vc = stack(with: children, meta: Meta(config))
+                    
+                    let vc = stack(with: children, meta: config)
                     expect(vc?.title) == "Foo"
                     expect(vc).to(haveValidSnapshot())
                     expect(vc?.stackView.spacing) == 150
@@ -200,6 +201,6 @@ private func labelComponent(title: String?,
     
     return Component.view(
         builder: builder,
-        meta: title.map { Meta(["title": $0]) }
+        meta: title.map { ["title": $0] }
     )
 }

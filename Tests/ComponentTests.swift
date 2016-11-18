@@ -12,6 +12,7 @@ import Nimble
 @testable import Matrioska
 
 class ComponentTests: QuickSpec {
+    
     override func spec() {
         
         describe("View component") {

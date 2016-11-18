@@ -11,7 +11,7 @@ import Quick
 import Nimble
 import Nimble_Snapshots
 import FBSnapshotTestCase
-@testable import Matrioska
+import Matrioska
 
 class ComponentMetaTests: QuickSpec {
     
@@ -44,7 +44,7 @@ class ComponentMetaTests: QuickSpec {
                 }
                 
                 it("shold materialize the meta if the content is correct") {
-                    let metaRepresentation = Meta(["property1": "foo"])
+                    let metaRepresentation = ["property1": "foo"]
                     let meta = DummyMeta.metarialize(metaRepresentation)
                     expect(meta?["property1"] as? String) == "foo"
                     expect(meta?["property2"] as? String) == "materialized"
@@ -55,17 +55,17 @@ class ComponentMetaTests: QuickSpec {
         
         describe("Meta") {
             it("should get the values from the provided dictionary") {
-                let meta = Meta(["foo1": "bar1", "foo2": "bar2"])
-                expect(meta["foo1"] as? String) == "bar1"
-                expect(meta["foo2"] as? String) == "bar2"
+                let meta = ["foo1": "bar1", "foo2": "bar2"]
+                expect(meta["foo1"]) == "bar1"
+                expect(meta["foo2"]) == "bar2"
             }
         }
         
         describe("ZipMeta") {
             it("should join multiple metas and allow you to retreive their content") {
-                let meta1 = Meta(["foo1": "bar1"])
-                let meta2 = Meta(["foo2": "bar2"])
-                let meta3 = Meta(["foo3": "bar3"])
+                let meta1 = ["foo1": "bar1"]
+                let meta2 = ["foo2": "bar2"]
+                let meta3 = ["foo3": "bar3"]
                 
                 let zip = ZipMeta(meta1, meta2, meta3)
                 expect(zip["foo1"] as? String) == "bar1"
@@ -74,17 +74,17 @@ class ComponentMetaTests: QuickSpec {
             }
             
             it("should respect the order of the metas if the keys are overllapping") {
-                let meta1 = Meta(["foo": "bar1"])
-                let meta2 = Meta(["foo": "bar2"])
-                let meta3 = Meta(["foo": "bar3"])
+                let meta1 = ["foo": "bar1"]
+                let meta2 = ["foo": "bar2"]
+                let meta3 = ["foo": "bar3"]
                 
                 let zip = ZipMeta(meta1, meta2, meta3)
                 expect(zip["foo"] as? String) == "bar1"
             }
             
             it("should return nil when key is not matched in any meta") {
-                let meta1 = Meta(["foo1": "bar1"])
-                let meta2 = Meta(["foo2": "bar2"])
+                let meta1 = ["foo1": "bar1"]
+                let meta2 = ["foo2": "bar2"]
 
                 let zip = ZipMeta(meta1, meta2)
                 expect(zip["foo"] as? String).to(beNil())

@@ -20,6 +20,21 @@ public protocol ComponentMeta {
     subscript(key: String) -> Any? { get }
 }
 
+extension ComponentMeta {
+
+    /// The default implementation of the subscript uses reflection to mirror the object
+    /// if the key represent a property, its value will be returned
+    ///
+    /// - Parameter key: the key of the value to retreive, must be the name of a property.
+    public subscript(key: String) -> Any? {
+        let mirror = Mirror(reflecting: self)
+        let candidate = mirror.children.first { (child) -> Bool in
+            child.label == key
+        }
+        return candidate?.value
+    }
+}
+
 /// A protocol to create `ComponentMeta` that also support json/dictionary for materialization.
 /// Adopting this protocol `Component`s are able to materialzie a meta
 /// using `MaterializableComponentMeta.metarialize(_ )`.
@@ -28,21 +43,6 @@ public protocol MaterializableComponentMeta: ComponentMeta {
     // `MaterializableComponentMeta.metarialize(_ )` will then use this initializer if necessary
     // to create the meta object.
     init?(meta: ComponentMeta)
-}
-
-extension ComponentMeta {
-
-    /// The default implementation of the subscript uses reflection to mirror the object
-    /// if the key represent a property, its value will be returned
-    ///
-    /// - Parameter key: the key to retreive, must be the name of a property.
-    public subscript(key: String) -> Any? {
-        let mirror = Mirror(reflecting: self)
-        let candidate = mirror.children.first { (child) -> Bool in
-            child.label == key
-        }
-        return candidate?.value
-    }
 }
 
 extension MaterializableComponentMeta {
@@ -67,22 +67,16 @@ extension MaterializableComponentMeta {
     }
 }
 
-/// A dictionary wrapper to use dictionaries as `ComponentMeta`
-public struct Meta: ComponentMeta {
-    private let dictionary: [String: Any]
+extension Dictionary: ComponentMeta {
     
-    /// Initialize a `Meta` that takes a dictionary and forwards the keyed subscript to it
+    /// Forwards the subscript to Dictionary's implementation
     ///
-    /// - Parameter dictionary: A dictionary representing the meta.
-    public init(_ dictionary: [String: Any]) {
-        self.dictionary = dictionary
-    }
-    
-    /// Forwards the keyed subscript to its internal dictionary
-    ///
-    /// - Parameter key: The key of the meta to retreive
+    /// - Parameter key: the key of the value to retreive
     public subscript(key: String) -> Any? {
-        return dictionary[key]
+        if let key = key as? Key {
+            return self[key]
+        }
+        return nil
     }
 }
 

@@ -12,16 +12,16 @@
 		DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */; };
 		DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */; };
 		DE067DCD1DDE017700641D1A /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCB1DDE017700641D1A /* StackViewController.swift */; };
+		DE23D2971DDF63C400CDF333 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
+		DE23D2981DDF63C400CDF333 /* TabBarClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */; };
+		DE23D2991DDF63C400CDF333 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */; };
+		DE23D29A1DDF63C400CDF333 /* StackClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */; };
 		DE2D785B1DDB0F1A00CD6E95 /* TabBarCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */; };
-		DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */; };
 		DE2D78631DDB3F7F00CD6E95 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */; };
-		DE2D78681DDB43FF00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */; };
 		DE3E8D801DD389F400417AE5 /* Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3E8D761DD389F400417AE5 /* Matrioska.framework */; };
 		DE3E8D981DD38BC000417AE5 /* Matrioska.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3E8D931DD38AAA00417AE5 /* Matrioska.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */; };
 		DE3E8D9D1DD46A2600417AE5 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E8D9C1DD46A2600417AE5 /* Component.swift */; };
 		DE6CA3C91DDC71A100E3A570 /* StackCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */; };
-		DE6CA3CB1DDC77E800E3A570 /* StackClusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */; };
 		DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3CD1DDC7F2D00E3A570 /* ScrollMatcher.swift */; };
 		DE6CA3D01DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6CA3CF1DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */; };
 		DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */; };
@@ -45,11 +45,11 @@
 		4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.release.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.release.xcconfig"; sourceTree = "<group>"; };
 		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
 		DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.release.xcconfig"; sourceTree = "<group>"; };
-		DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMetaTests.swift; sourceTree = "<group>"; };
+		DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ComponentMetaTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
 		DE067DCB1DDE017700641D1A /* StackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCluster.swift; sourceTree = "<group>"; };
-		DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarClusterTests.swift; sourceTree = "<group>"; };
+		DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TabBarClusterTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE2D78621DDB3F7F00CD6E95 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
 		DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollViewTests.swift; sourceTree = "<group>"; };
 		DE3E8D761DD389F400417AE5 /* Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +60,7 @@
 		DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTests.swift; sourceTree = "<group>"; };
 		DE3E8D9C1DD46A2600417AE5 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackCluster.swift; sourceTree = "<group>"; };
-		DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackClusterTests.swift; sourceTree = "<group>"; };
+		DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StackClusterTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE6CA3CD1DDC7F2D00E3A570 /* ScrollMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMatcher.swift; sourceTree = "<group>"; };
 		DE6CA3CF1DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntrinsicSizeAwareScrollViewTest.xib; sourceTree = "<group>"; };
 		DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMeta.swift; sourceTree = "<group>"; };
@@ -429,12 +429,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE2D78681DDB43FF00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */,
+				DE23D2981DDF63C400CDF333 /* TabBarClusterTests.swift in Sources */,
+				DE23D2971DDF63C400CDF333 /* ComponentTests.swift in Sources */,
 				DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */,
-				DE6CA3CB1DDC77E800E3A570 /* StackClusterTests.swift in Sources */,
-				DE2D785E1DDB17AE00CD6E95 /* TabBarClusterTests.swift in Sources */,
+				DE23D29A1DDF63C400CDF333 /* StackClusterTests.swift in Sources */,
 				DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */,
-				DE3E8D991DD38CA500417AE5 /* ComponentTests.swift in Sources */,
+				DE23D2991DDF63C400CDF333 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -539,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
