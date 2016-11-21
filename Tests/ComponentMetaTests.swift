@@ -53,11 +53,16 @@ class ComponentMetaTests: QuickSpec {
             }
         }
         
-        describe("Meta") {
+        describe("Dictioanry") {
             it("should get the values from the provided dictionary") {
                 let meta = ["foo1": "bar1", "foo2": "bar2"]
                 expect(meta["foo1"]) == "bar1"
                 expect(meta["foo2"]) == "bar2"
+            }
+            
+            it("should return always nil if the key is not the same type of the dictionary Key") {
+                let meta: [Int: String] = [1: "bar1"]
+                expect(meta["foo"]).to(beNil())
             }
         }
         
