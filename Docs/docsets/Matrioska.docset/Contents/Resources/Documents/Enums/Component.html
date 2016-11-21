@@ -14,7 +14,7 @@
     <a title="Component Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Matrioska Docs</a> (100% documented)</p>
+        <p><a href="../index.html">Matrioska Docs</a> (90% documented)</p>
         <p class="header-right"><a href="https://hopefully.soon.com"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -41,7 +41,37 @@
                 <a href="../Enums/ClusterLayout/TabConfig.html">– TabConfig</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ClusterLayout/TabBarConfig.html">– TabBarConfig</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Component.html">Component</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ComponentMeta.html">ComponentMeta</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MaterializableComponentMeta.html">MaterializableComponentMeta</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ZipMeta.html">ZipMeta</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Subscripts.html">Subscripts</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Subscripts.html#/s:iE9MatrioskaVs10Dictionary9subscriptFSSGSqP__">subscript(_:)</a>
               </li>
             </ul>
           </li>
@@ -67,9 +97,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO9Matrioska9Component4viewFMS0_FT7builderFGSqP__GSqCSo16UIViewController_4metaGSqP___S0_"></a>
+                    <a name="/s:FO9Matrioska9Component4viewFMS0_FT7builderFGSqPS_13ComponentMeta__GSqCSo16UIViewController_4metaGSqPS1____S0_"></a>
                     <a name="//apple_ref/swift/Element/view" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9Matrioska9Component4viewFMS0_FT7builderFGSqP__GSqCSo16UIViewController_4metaGSqP___S0_">view</a>
+                    <a class="token" href="#/s:FO9Matrioska9Component4viewFMS0_FT7builderFGSqPS_13ComponentMeta__GSqCSo16UIViewController_4metaGSqPS1____S0_">view</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -78,14 +108,14 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Represents any <code>UIViewController</code>.
-The view should use AutouLayout to specify its <code>intrinsicContentSize</code>.</p>
+The view should use AutoLayout to specify its <code>intrinsicContentSize</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">view</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component11ViewBuilder">ViewBuilder</a></span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">view</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component11ViewBuilder">ViewBuilder</a></span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ComponentMeta.html">ComponentMeta</a></span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -96,33 +126,6 @@ The view should use AutouLayout to specify its <code>intrinsicContentSize</code>
             </div>
             <div class="task-group">
               <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:O9Matrioska9Component11ViewBuilder"></a>
-                    <a name="//apple_ref/swift/Alias/ViewBuilder" class="dashAnchor"></a>
-                    <a class="token" href="#/s:O9Matrioska9Component11ViewBuilder">ViewBuilder</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A closure to build a ViewController. Can receive metadata for additional configurations</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ViewBuilder</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -145,7 +148,34 @@ Can receive metadata for additional configurations</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WrapperBuilder</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">child</span><span class="p">:</span> <span class="kt">Component</span><span class="p">,</span> <span class="n">_</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WrapperBuilder</span> <span class="o">=</span> <span class="p">(</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:O9Matrioska9Component11ViewBuilder"></a>
+                    <a name="//apple_ref/swift/Alias/ViewBuilder" class="dashAnchor"></a>
+                    <a class="token" href="#/s:O9Matrioska9Component11ViewBuilder">ViewBuilder</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure to build a ViewController. Can receive metadata for additional configurations</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ViewBuilder</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ComponentMeta.html">ComponentMeta</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -174,7 +204,7 @@ Can receive metadata for additional configurations</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ClusterBuilder</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span><span class="kt">Component</span><span class="p">],</span> <span class="n">_</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ClusterBuilder</span> <span class="o">=</span> <span class="p">(</span></code></pre>
 
                         </div>
                       </div>
@@ -227,9 +257,9 @@ The receiver is responsible to handle eventual fallbacks
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO9Matrioska9Component7wrapperFMS0_FT7builderFTS0_GSqP___GSqCSo16UIViewController_5childS0_4metaGSqP___S0_"></a>
+                    <a name="/s:FO9Matrioska9Component7wrapperFMS0_FT7builderFTS0_GSqPS_13ComponentMeta___GSqCSo16UIViewController_5childS0_4metaGSqPS1____S0_"></a>
                     <a name="//apple_ref/swift/Element/wrapper" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9Matrioska9Component7wrapperFMS0_FT7builderFTS0_GSqP___GSqCSo16UIViewController_5childS0_4metaGSqP___S0_">wrapper</a>
+                    <a class="token" href="#/s:FO9Matrioska9Component7wrapperFMS0_FT7builderFTS0_GSqPS_13ComponentMeta___GSqCSo16UIViewController_5childS0_4metaGSqPS1____S0_">wrapper</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -238,7 +268,7 @@ The receiver is responsible to handle eventual fallbacks
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Represents a view with only one child (a <code>Component</code>).
-The view should use AutouLayout to specify its <code>intrinsicContentSize</code>.
+The view should use AutoLayout to specify its <code>intrinsicContentSize</code>.
 You can see it as a special cluster or as a special view.
 It’s responsible to display its child’s view.</p>
 
@@ -247,7 +277,7 @@ It’s responsible to display its child’s view.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">wrapper</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component14WrapperBuilder">WrapperBuilder</a></span><span class="p">,</span> <span class="nv">child</span><span class="p">:</span> <span class="kt">Component</span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">wrapper</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component14WrapperBuilder">WrapperBuilder</a></span><span class="p">,</span> <span class="nv">child</span><span class="p">:</span> <span class="kt">Component</span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ComponentMeta.html">ComponentMeta</a></span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -261,9 +291,9 @@ It’s responsible to display its child’s view.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO9Matrioska9Component7clusterFMS0_FT7builderFTGSaS0__GSqP___GSqCSo16UIViewController_8childrenGSaS0__4metaGSqP___S0_"></a>
+                    <a name="/s:FO9Matrioska9Component7clusterFMS0_FT7builderFTGSaS0__GSqPS_13ComponentMeta___GSqCSo16UIViewController_8childrenGSaS0__4metaGSqPS1____S0_"></a>
                     <a name="//apple_ref/swift/Element/cluster" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9Matrioska9Component7clusterFMS0_FT7builderFTGSaS0__GSqP___GSqCSo16UIViewController_8childrenGSaS0__4metaGSqP___S0_">cluster</a>
+                    <a class="token" href="#/s:FO9Matrioska9Component7clusterFMS0_FT7builderFTGSaS0__GSqPS_13ComponentMeta___GSqCSo16UIViewController_8childrenGSaS0__4metaGSqPS1____S0_">cluster</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -280,7 +310,7 @@ Since a cluster is itself a view it can also contain other clusters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">cluster</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component14ClusterBuilder">ClusterBuilder</a></span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span><span class="kt">Component</span><span class="p">],</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">cluster</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt"><a href="../Enums/Component.html#/s:O9Matrioska9Component14ClusterBuilder">ClusterBuilder</a></span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span><span class="kt">Component</span><span class="p">],</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ComponentMeta.html">ComponentMeta</a></span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -292,7 +322,7 @@ Since a cluster is itself a view it can also contain other clusters.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://github.com/runtastic/Matrioska" target="_blank" rel="external">Runtastic GmbH</a>. All rights reserved. (Last updated: 2016-11-16)</p>
+          <p>&copy; 2016 <a class="link" href="https://github.com/runtastic/Matrioska" target="_blank" rel="external">Runtastic GmbH</a>. All rights reserved. (Last updated: 2016-11-21)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

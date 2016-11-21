@@ -1,6 +1,33 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/mpow/repos/Matrioska/Source/ComponentMeta.swift",
+      "line": 45,
+      "symbol": "MaterializableComponentMeta.init(meta:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mpow/repos/Matrioska/Source/StackCluster.swift",
+      "line": 28,
+      "symbol": "ClusterLayout.StackConfig.init(meta:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mpow/repos/Matrioska/Source/TabBarCluster.swift",
+      "line": 23,
+      "symbol": "ClusterLayout.TabConfig.init(meta:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mpow/repos/Matrioska/Source/TabBarCluster.swift",
+      "line": 54,
+      "symbol": "ClusterLayout.TabBarConfig.init(meta:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
-  "source_directory": "/Users/matchi/runtastic/UIComponents/Matrioska"
+  "source_directory": "/Users/mpow/repos/Matrioska"
 }
