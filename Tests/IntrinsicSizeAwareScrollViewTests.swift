@@ -60,6 +60,8 @@ class IntrinsicSizeAwareScrollViewTests: QuickSpec {
                     let nib = UINib(nibName: "IntrinsicSizeAwareScrollViewTest",
                                      bundle: bundle)
                     let view = nib.instantiate(withOwner: nil, options: nil).first as? UIView
+                    view?.frame = UIScreen.main.bounds
+                    
                     expect(view).to(haveValidSnapshot())
                     
                     let scrollView = view?.subviews.first as? UIScrollView
