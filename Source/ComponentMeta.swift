@@ -39,9 +39,14 @@ extension ComponentMeta {
 /// Adopting this protocol `Component`s are able to materialzie a meta
 /// using `MaterializableComponentMeta.metarialize(_ )`.
 public protocol MaterializableComponentMeta: ComponentMeta {
-    // An initializer that takes a meta to retreive the necessary metadata to build the meta object.
-    // `MaterializableComponentMeta.metarialize(_ )` will then use this initializer if necessary
-    // to create the meta object.
+    
+    /// An initializer that takes a meta to retreive the necessary metadata
+    /// to build the `ComponentMeta`.
+    /// `MaterializableComponentMeta.metarialize(_ )` will then use this initializer, if necessary,
+    /// to create the meta object.
+    ///
+    /// - Parameter meta: An object that conform to `ComponentMeta`
+    ///   and contains the desired metadata. A `Dictionary` can also be used.
     init?(meta: ComponentMeta)
 }
 

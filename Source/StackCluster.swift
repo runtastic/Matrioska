@@ -23,8 +23,12 @@ extension ClusterLayout {
         /// Defines if the arranged subviews should preserve the parent width
         /// or their own intrinsicContentSize. Default false. Optional.
         public let preserveParentWidth: Bool
-        
-        // TODO: docu
+                
+        /// Initialize a stack configuration from a `ComponentMeta`
+        /// Used to materialzie `StackConfig` if the meta contains the values needed.
+        /// The default values will be used where `meta` doesn't have a valid ones.
+        ///
+        /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
             let name = meta["name"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue

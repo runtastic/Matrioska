@@ -19,7 +19,10 @@ extension ClusterLayout {
         /// Used to locate the icon
         fileprivate let bundle: Bundle
         
-        // TODO: docu
+        /// Initialize a tab configuration from a `ComponentMeta`
+        /// Used to materialzie `TabConfig` if the meta contains the values needed.
+        ///
+        /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
             guard let name = meta["name"] as? String else {
                 return nil
@@ -47,10 +50,13 @@ extension ClusterLayout {
     
     /// TabBar component configuration.
     public struct TabBarConfig: MaterializableComponentMeta {
-        /// The selected index of the tabBar
+        /// The selected index of the tabBar. Not optional
         public let selectedIndex: Int
         
-        // TODO: docu
+        /// Initialize a tab bar configuration from a `ComponentMeta`
+        /// Used to materialzie `TabBarConfig` if the meta contains the values needed.
+        ///
+        /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
             guard let selectedIndex = meta["selectedIndex"] as? Int else {
                 return nil
