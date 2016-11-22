@@ -20,14 +20,14 @@ class TabBarClusterTests: QuickSpec {
         describe("Tab bar component") {
             
             let children: [Component] = [
-                simpleComponent(meta: TabConfig(name: "test1"), color: .red),
-                simpleComponent(meta: TabConfig(name: "test2"), color: .blue),
-                simpleComponent(meta: TabConfig(name: "test3"), color: .orange),
+                simpleComponent(meta: TabConfig(title: "test1"), color: .red),
+                simpleComponent(meta: TabConfig(title: "test2"), color: .blue),
+                simpleComponent(meta: TabConfig(title: "test3"), color: .orange),
                 ]
             
             it("should display its children") {
                 let children: [Component] = [
-                    simpleComponent(meta: TabConfig(name: "test1"), color: .purple),
+                    simpleComponent(meta: TabConfig(title: "test1"), color: .purple),
                 ]
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 1
@@ -83,8 +83,8 @@ class TabBarClusterTests: QuickSpec {
             
             it("should ignore children without view") {
                 let children: [Component] = [
-                    Component.view(builder: { _ in nil }, meta: TabConfig(name: "_")),
-                    simpleComponent(meta: TabConfig(name: "test1"), color: .red),
+                    Component.view(builder: { _ in nil }, meta: TabConfig(title: "_")),
+                    simpleComponent(meta: TabConfig(title: "test1"), color: .red),
                     ]
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 1
@@ -93,7 +93,7 @@ class TabBarClusterTests: QuickSpec {
             
             context("children config") {
                 
-                let validComponent = simpleComponent(meta: TabConfig(name: "foo"), color: .green)
+                let validComponent = simpleComponent(meta: TabConfig(title: "foo"), color: .green)
                 
                 it("should ignore children without config") {
                     let children: [Component] = [
@@ -108,7 +108,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should use config defined as dictionaries") {
                     let bundle = Bundle(for: TabBarClusterTests.self)
                     let children: [Component] = [
-                        simpleComponent(meta: ["name": "test", "iconName": "checkmark"]),
+                        simpleComponent(meta: ["title": "test", "iconName": "checkmark"]),
                         validComponent,
                         ]
                     let vc = ClusterLayout.tabBar(children: children,
@@ -118,7 +118,7 @@ class TabBarClusterTests: QuickSpec {
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("should not use config defined as dictionaries when missing the name") {
+                it("should not use config defined as dictionaries when missing the title") {
                     let children: [Component] = [
                         simpleComponent(meta: ["iconName": "_"]),
                         validComponent,
@@ -130,7 +130,7 @@ class TabBarClusterTests: QuickSpec {
                 
                 it("should not use config defined as dictionaries when missing the iconName") {
                     let children: [Component] = [
-                        simpleComponent(meta: ["name": "_"]),
+                        simpleComponent(meta: ["title": "_"]),
                         validComponent,
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
@@ -165,8 +165,8 @@ private func simpleComponent(meta: ComponentMeta?, color: UIColor? = nil) -> Com
 private typealias TabConfig = ClusterLayout.TabConfig
 
 private extension TabConfig {
-    init(name: String) {
-        self = TabConfig(name: name,
+    init(title: String) {
+        self = TabConfig(title: title,
                          iconName: "checkmark",
                          bundle: Bundle(for: TabBarClusterTests.self))
     }

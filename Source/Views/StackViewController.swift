@@ -26,7 +26,7 @@ final class StackViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
 
-        title = configuration.name
+        title = configuration.title
         stackView.distribution = .equalSpacing
         stackView.axis = configuration.axis
         stackView.spacing = configuration.spacing

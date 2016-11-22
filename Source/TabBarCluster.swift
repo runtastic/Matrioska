@@ -12,8 +12,8 @@ extension ClusterLayout {
     
     /// Tab configuration.
     public struct TabConfig: MaterializableComponentMeta {
-        /// The tab name
-        public let name: String
+        /// The tab title
+        public let title: String
         /// The tab icon
         public let iconName: String
         /// Used to locate the icon
@@ -24,25 +24,25 @@ extension ClusterLayout {
         ///
         /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
-            guard let name = meta["name"] as? String else {
+            guard let title = meta["title"] as? String else {
                 return nil
             }
             guard let iconName = meta["iconName"] as? String else {
                 return nil
             }
             
-            self.init(name: name, iconName: iconName)
+            self.init(title: title, iconName: iconName)
         }
         
         /// Creates a `TabConfig` object
         ///
         /// - Parameters:
-        ///   - name: The tab name
+        ///   - title: The tab title
         ///   - iconName: The tab icon
         ///   - bundle: An optional bundle where to search for the icon.
         ///     By default the main bundle is used
-        public init(name: String, iconName: String, bundle: Bundle = .main) {
-            self.name = name
+        public init(title: String, iconName: String, bundle: Bundle = .main) {
+            self.title = title
             self.iconName = iconName
             self.bundle = bundle
         }
@@ -116,7 +116,7 @@ extension ClusterLayout {
             if let items = tabBarController.tabBar.items {
                 for (item, tab) in zip(items, tabs) {
                     let meta = tab.meta
-                    tab.viewController.title = meta.name
+                    tab.viewController.title = meta.title
                     item.image = UIImage(named: meta.iconName,
                                          in: bundle ?? meta.bundle,
                                          compatibleWith: nil)

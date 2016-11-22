@@ -12,8 +12,8 @@ extension ClusterLayout {
     
     /// Stack component configuration.
     public struct StackConfig: MaterializableComponentMeta {
-        /// The name of the stack view
-        public let name: String?
+        /// The title of the stack view
+        public let title: String?
         /// The spacing of the components inside the stack. Default 10. Optional.
         public let spacing: CGFloat
         /// The axis of the stack view, by default is vertical. Optional.
@@ -30,14 +30,14 @@ extension ClusterLayout {
         ///
         /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
-            let name = meta["name"] as? String
+            let title = meta["title"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
             let preserveParentWidth = meta["preserveParentWidth"] as? Bool
             let axisRawValue = meta["axis"] as? Int
             let axis = axisRawValue.flatMap { UILayoutConstraintAxis(rawValue: $0) }
             
             self.init(
-                name: name,
+                title: title,
                 spacing: spacing.map(CGFloat.init),
                 axis: axis,
                 preserveParentWidth: preserveParentWidth
@@ -47,17 +47,16 @@ extension ClusterLayout {
         /// Creates a new stack configuration
         ///
         /// - Parameters:
-        ///   - name: The name of the stack view, nil by default. Optional.
+        ///   - title: The title of the stack view, nil by default. Optional.
         ///   - spacing: The spacing of the components inside the stack. Default 10. Optional.
         ///   - axis: The axis of the stack view, by default is vertical. Optional.
         ///   - preserveParentWidth: Defines the arranged subviews should preserve the parent width
         ///     or their own intrinsicContentSize. Default false. Optional.
-        public init(name: String? = nil,
-             spacing: CGFloat? = nil,
-             axis: UILayoutConstraintAxis? = nil,
-             preserveParentWidth: Bool? = nil) {
-            
-            self.name = name
+        public init(title: String? = nil,
+                    spacing: CGFloat? = nil,
+                    axis: UILayoutConstraintAxis? = nil,
+                    preserveParentWidth: Bool? = nil) {
+            self.title = title
             self.spacing = spacing ?? 10
             self.axis = axis ?? .vertical
             self.preserveParentWidth = preserveParentWidth ?? false

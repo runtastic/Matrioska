@@ -52,7 +52,7 @@ class StackClusterTests: QuickSpec {
                     expect(vc).to(haveValidSnapshot())
                     let defaultConfig = ClusterLayout.StackConfig()
                     expect(vc?.title).to(beNil())
-                    expect(defaultConfig.name).to(beNil())
+                    expect(defaultConfig.title).to(beNil())
                     expect(vc?.stackView.spacing) == defaultConfig.spacing
                     expect(vc?.stackView.axis) == defaultConfig.axis
                 }
@@ -71,8 +71,8 @@ class StackClusterTests: QuickSpec {
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("should respect the name config") {
-                    let config = ClusterLayout.StackConfig(name: "Wow")
+                it("should respect the title config") {
+                    let config = ClusterLayout.StackConfig(title: "Wow")
                     let vc = stack(with: [], meta: config)
                     expect(vc?.title) == "Wow"
                 }
@@ -85,7 +85,7 @@ class StackClusterTests: QuickSpec {
                 
                 it("should load config from a dictionary") {
                     let config: [String: Any] = [
-                        "name": "Foo",
+                        "title": "Foo",
                         "spacing": 150.0,
                         "axis": UILayoutConstraintAxis.vertical.rawValue,
                         "preserveParentWidth": true,
