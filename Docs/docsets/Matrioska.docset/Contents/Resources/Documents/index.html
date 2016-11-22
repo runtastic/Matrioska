@@ -91,6 +91,8 @@
 <li><a href="#usage">Usage</a>
 
 <ul>
+<li><a href="#standard-components">Standard Components</a></li>
+<li><a href="#creating-components">Creating Components</a></li>
 <li><a href="#layout">Layout</a></li>
 </ul></li>
 <li><a href="#roadmap">Roadmap</a></li>
@@ -119,8 +121,12 @@ It’s really easy to extend Matrioska to add new components that fits your need
 <pre class="highlight plaintext"><code>github “runtastic/Matrioska”
 </code></pre>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+<a href='#standard-components' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='standard-components'>Standard Components</h3>
 
-<p>Create components:</p>
+<p>Matrioska already defines some standard <code>Component</code>s.</p>
+<a href='#creating-components' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating-components'>Creating Components</h3>
+
+<p>Create custom components:</p>
 <pre class="highlight swift"><code><span class="c1">// Create a cluster by extending an existing implementation</span>
 <span class="kd">extension</span> <span class="kt">UITabBarController</span> <span class="p">{</span>
     <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">children</span><span class="p">:</span> <span class="p">[</span><span class="kt">Component</span><span class="p">],</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="p">{</span>
@@ -151,9 +157,9 @@ window.rootViewController = component.viewController()
 </code></pre>
 <pre class="highlight swift"><code><span class="c1">// TODO: json, schema, factories, etc....</span>
 </code></pre>
-<a href='#layout' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='layout'>Layout</h4>
+<a href='#layout' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='layout'>Layout</h3>
 
-<p>View are responsible to define their <code>intrinsicContentSize</code> using AutoLayout, cluster can decide to respect or respect not their dimensions, both vertical and horizontal or also only one of the two.
+<p>Views are responsible to define their <code>intrinsicContentSize</code> using AutoLayout, cluster can decide to respect or respect not their dimensions, both vertical and horizontal or also only one of the two.
 To make sure the a <code>Component</code>’s <code>UIViewController</code>has a valid <code>intrinsicContentSize</code> you need to add appropriate constraints to the view. <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html">To know more about this read the documentation about “Views with Intrinsic Content Size”</a>.</p>
 <a href='#roadmap' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='roadmap'>Roadmap</h2>
 
