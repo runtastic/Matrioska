@@ -20,6 +20,18 @@ public protocol ComponentMeta {
     subscript(key: String) -> Any? { get }
 }
 
+/// A protocol used to clear Optionals when their static type is `Any`
+/// to avoid Optional<Optional<T>>
+fileprivate protocol OptionalProtocol {
+    var wrappedValue: Any? { get }
+}
+
+extension Optional: OptionalProtocol {
+    fileprivate var wrappedValue: Any? {
+        return self
+    }
+}
+
 extension ComponentMeta {
 
     /// The default implementation of the subscript uses reflection to mirror the object
@@ -28,10 +40,17 @@ extension ComponentMeta {
     /// - Parameter key: the key of the value to retreive, must be the name of a property.
     public subscript(key: String) -> Any? {
         let mirror = Mirror(reflecting: self)
-        let candidate = mirror.children.first { (child) -> Bool in
-            child.label == key
+        if let value = mirror.children.first(where: { $0.label == key })?.value {
+            // if the value is Optional (static type is Any)
+            // we have to let the compiler know and return an Optional<Any>
+            // otherwise since the return value is `Any?` we will get a `Optional<Optional<T>>`
+            if let optional = value as? OptionalProtocol {
+                return optional.wrappedValue
+            }
+            return value
         }
-        return candidate?.value
+        
+        return nil
     }
 }
 

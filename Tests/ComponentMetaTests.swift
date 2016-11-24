@@ -18,11 +18,25 @@ class ComponentMetaTests: QuickSpec {
     override func spec() {
         describe("ComponentMeta") {
             
-            it("shold by default return the value of its properties") {
-                let meta = DummyMeta(value: "foo")
-                expect(meta["property1"] as? String) == "foo"
-                expect(meta["property2"] as? String) == "notMaterialized"
-                expect(meta["property3"] as? String) == "notMaterialized"
+            context("when it doesn't provides a custom subscript") {
+                it("should by default return the value of its properties") {
+                    let meta = DummyMeta(value: "foo")
+                    expect(meta["property1"] as? String) == "foo"
+                    expect(meta["property1"] is String).to(beTrue())
+                    expect(meta["property2"] as? String) == "notMaterialized"
+                    expect(meta["property3"] as? String) == "notMaterialized"
+                }
+                
+                it("should return nil for optional properties of ComponentMeta") {
+                    // Mirror might return a Optional<Optional<T>>
+                    let meta = DoubleOptionalRisk(title: nil)
+                    expect(meta["title"]).to(beNil())
+                }
+                
+                it("should return nil if the property is not found") {
+                    let meta = DummyMeta(value: "foo")
+                    expect(meta["foo"]).to(beNil())
+                }
             }
             
             context("when it provides a custom subscript") {
@@ -100,8 +114,8 @@ class ComponentMetaTests: QuickSpec {
 
 public class DummyMeta: MaterializableComponentMeta {
     public let property1: String?
-    internal let property2: String?
-    fileprivate let property3: String?
+    internal let property2: String
+    fileprivate let property3: String
     
     public required init?(meta: ComponentMeta) {
         self.property1 = meta["property1"] as? String
@@ -120,4 +134,8 @@ struct AnyMeta: ComponentMeta {
     subscript(key: String) -> Any? {
         return key
     }
+}
+
+struct DoubleOptionalRisk: ComponentMeta {
+    let title: String?
 }
