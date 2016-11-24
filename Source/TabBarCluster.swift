@@ -103,7 +103,7 @@ extension ClusterLayout {
                     return nil
                 }
                 
-                guard let config = TabConfig.metarialize(child.meta) else {
+                guard let config = TabConfig.materialize(child.meta) else {
                     return nil
                 }
                 
@@ -123,7 +123,7 @@ extension ClusterLayout {
                 }
             }
             
-            let meta = TabBarConfig.metarialize(meta)
+            let meta = TabBarConfig.materialize(meta)
             if let selectedIndex = meta?.selectedIndex, selectedIndex < tabs.count {
                 tabBarController.selectedIndex = selectedIndex
             }

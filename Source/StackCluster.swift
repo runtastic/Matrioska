@@ -78,7 +78,7 @@ extension ClusterLayout {
     
     private static func stackBuilder(_ children: [Component],
                                      _ meta: ComponentMeta?) -> UIViewController? {
-        let stackViewController = StackViewController(configuration: StackConfig.metarialize(meta))
+        let stackViewController = StackViewController(configuration: StackConfig.materialize(meta))
         stackViewController.add(children: children)
         return stackViewController
     }

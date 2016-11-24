@@ -35,17 +35,17 @@ class ComponentMetaTests: QuickSpec {
             context("when is Materializable") {
                 it("shold not materialize the meta if it's already materialized") {
                     let meta: ComponentMeta = DummyMeta(value: "test")
-                    expect(DummyMeta.metarialize(meta)).to(be(meta))
+                    expect(DummyMeta.materialize(meta)).to(be(meta))
                 }
                 
                 it("shold not materialize the meta if is nil") {
                     let meta: ComponentMeta? = nil
-                    expect(DummyMeta.metarialize(meta)).to(beNil())
+                    expect(DummyMeta.materialize(meta)).to(beNil())
                 }
                 
                 it("shold materialize the meta if the content is correct") {
                     let metaRepresentation = ["property1": "foo"]
-                    let meta = DummyMeta.metarialize(metaRepresentation)
+                    let meta = DummyMeta.materialize(metaRepresentation)
                     expect(meta?["property1"] as? String) == "foo"
                     expect(meta?["property2"] as? String) == "materialized"
                     expect(meta?["property3"] as? String) == "materialized"

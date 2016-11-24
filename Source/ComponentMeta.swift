@@ -37,12 +37,12 @@ extension ComponentMeta {
 
 /// A protocol to create `ComponentMeta` that also support json/dictionary for materialization.
 /// Adopting this protocol `Component`s are able to materialzie a meta
-/// using `MaterializableComponentMeta.metarialize(_ )`.
+/// using `MaterializableComponentMeta.materialize(_ )`.
 public protocol MaterializableComponentMeta: ComponentMeta {
     
     /// An initializer that takes a meta to retreive the necessary metadata
     /// to build the `ComponentMeta`.
-    /// `MaterializableComponentMeta.metarialize(_ )` will then use this initializer, if necessary,
+    /// `MaterializableComponentMeta.materialize(_ )` will then use this initializer, if necessary,
     /// to create the meta object.
     ///
     /// - Parameter meta: An object that conform to `ComponentMeta`
@@ -59,7 +59,7 @@ extension MaterializableComponentMeta {
     ///   or an already materialized meta object.
     /// - Returns: A materialized meta object if the input represents correctly
     ///   the object to be materialized.
-    public static func metarialize(_ meta: ComponentMeta?) -> Self? {
+    public static func materialize(_ meta: ComponentMeta?) -> Self? {
         guard let meta = meta else {
             return nil
         }

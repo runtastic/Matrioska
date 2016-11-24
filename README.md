@@ -89,10 +89,10 @@ public struct MyConfig: MaterializableComponentMeta {
 After defining `MyConfig` we can materialize it from other `ComponentMeta`s if possible:
 
 ```swift
-MyConfig.metarialize([“title”: “foo”]) // MyConfig(title: "foo")
-MyConfig.metarialize([“foo”: “foo”]) // nil
-MyConfig.metarialize(nil) // nil
-MyConfig.metarialize(anotherMyConfigInstance) // anotherMyConfigInstance
+MyConfig.materialize([“title”: “foo”]) // MyConfig(title: "foo")
+MyConfig.materialize([“foo”: “foo”]) // nil
+MyConfig.materialize(nil) // nil
+MyConfig.materialize(anotherMyConfigInstance) // anotherMyConfigInstance
 ```
 
 ### Creating Components
