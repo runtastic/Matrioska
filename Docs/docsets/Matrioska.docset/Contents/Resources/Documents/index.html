@@ -92,6 +92,9 @@
 
 <ul>
 <li><a href="#standard-components">Standard Components</a></li>
+<li><a href="#meta">Meta</a></li>
+<li><a href="#componentmeta">ComponentMeta</a></li>
+<li><a href="#materializablecomponentmeta">MaterializableComponentMeta</a></li>
 <li><a href="#creating-components">Creating Components</a></li>
 <li><a href="#layout">Layout</a></li>
 </ul></li>
@@ -102,10 +105,13 @@
 With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.</p>
 
-<p>To build your UI you can use nested <code>Component</code>s. A <code>Component</code> can be 3 different things:
-- <strong>View</strong>: Any <code>UIViewController</code> that can use AutoLayout to specify its <code>intrinsicContentSize</code>
-- <strong>Cluster</strong>: Views with children (other <code>Component</code>s). A cluster is responsible of laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
-- <strong>Wrapper</strong>: A View with only one child (a <code>Component</code>). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.</p>
+<p>To build your UI you can use nested <code>Component</code>s. A <code>Component</code> can be 3 different things:</p>
+
+<ul>
+<li><strong>View</strong>: Any <code>UIViewController</code> that can use AutoLayout to specify its <code>intrinsicContentSize</code></li>
+<li><strong>Cluster</strong>: Views with children (other <code>Component</code>s). A cluster is responsible of laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.</li>
+<li><strong>Wrapper</strong>: A View with only one child (a <code>Component</code>). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.</li>
+</ul>
 
 <p>The goal is to provide a tiny, but powerful foundation to build your app on top of it.
 Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.<br>
@@ -123,7 +129,62 @@ It’s really easy to extend Matrioska to add new components that fits your need
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
 <a href='#standard-components' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='standard-components'>Standard Components</h3>
 
-<p>Matrioska already defines some standard <code>Component</code>s.</p>
+<p>Matrioska defines some standard <code>Component</code>s that can be used to create your layout:</p>
+
+<table><thead>
+<tr>
+<th>id</th>
+<th>usage</th>
+<th>config</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tabbar</td>
+<td><code>ClusterLayout.tabBar(children, meta)</code></td>
+<td><code>TabBarConfig</code> and <code>TabConfig</code> (children)</td>
+</tr>
+<tr>
+<td>stack</td>
+<td><code>ClusterLayout.stack(children, meta)</code></td>
+<td><code>StackConfig</code></td>
+</tr>
+</tbody></table>
+
+<p>See the documentation for more informations.</p>
+<a href='#meta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='meta'>Meta</h3>
+
+<p>Every <code>Component</code> may handle additional metadata. The <code>Component</code>’s meta is optional and the <code>Component</code> is responsible to handle it correctlty. Metadata can be anything from configuration or additional information, for example a view controller title.</p>
+<a href='#componentmeta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='componentmeta'>ComponentMeta</h4>
+
+<p>Every meta have to conform to <code>ComponentMeta</code> a simple protocol that provides a keyed (String) subscript.<br>
+<code>ComponentMeta</code> provides a default implementation of a subscript that uses reflection (<code>Swift.Mirror</code>) to mirror the object and use its properties names and values. Object that conform to this protocol can eventually override this behavior.<br>
+<code>ZipMeta</code> for example is a simple meta wrapper that aggregates multiple metas together, see its documentation and implementation for more info.
+<code>Dictionary</code> also conforms to <code>ComponentMeta</code>, this is a convenient way to provide meta but is especially useful to materialize a <code>ComponentMeta</code> coming from a json/dictionary.</p>
+<a href='#materializablecomponentmeta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='materializablecomponentmeta'>MaterializableComponentMeta</h4>
+
+<p>When creating a new <code>Component</code> you should document which kind of meta it expects. A good way to do this is to also create an object that represents the <code>Component</code>’s meta (e.g. see <code>StackConfig</code>) and make it conform to <code>ComponentMeta</code>.<br>
+<code>MaterializableComponentMeta</code> however provides some more convenience methods that let you load your components from a json or materialize a meta from a dictionary.<br>
+Other than <code>ComponentMeta</code>’s requirements you also need to provide a <code>init?(meta: ComponentMeta)</code>, then you can materialize any compatible meta into your own <code>MaterializableComponentMeta</code>.  </p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MyConfig</span><span class="p">:</span> <span class="kt">MaterializableComponentMeta</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">meta</span><span class="p">:</span> <span class="kt">ComponentMeta</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">title</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s">"title"</span><span class="p">]</span> <span class="k">as?</span> <span class="kt">String</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">nil</span>
+        <span class="p">}</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>After defining <code>MyConfig</code> we can materialize it from other <code>ComponentMeta</code>s if possible:</p>
+<pre class="highlight swift"><code><span class="kt">MyConfig</span><span class="o">.</span><span class="nf">materialize</span><span class="p">([</span><span class="err">“</span><span class="n">title</span><span class="err">”</span><span class="p">:</span> <span class="err">“</span><span class="n">foo</span><span class="err">”</span><span class="p">])</span> <span class="c1">// MyConfig(title: "foo")</span>
+<span class="kt">MyConfig</span><span class="o">.</span><span class="nf">materialize</span><span class="p">([</span><span class="err">“</span><span class="n">foo</span><span class="err">”</span><span class="p">:</span> <span class="err">“</span><span class="n">foo</span><span class="err">”</span><span class="p">])</span> <span class="c1">// nil</span>
+<span class="kt">MyConfig</span><span class="o">.</span><span class="nf">materialize</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span> <span class="c1">// nil</span>
+<span class="kt">MyConfig</span><span class="o">.</span><span class="nf">materialize</span><span class="p">(</span><span class="n">anotherMyConfigInstance</span><span class="p">)</span> <span class="c1">// anotherMyConfigInstance</span>
+</code></pre>
 <a href='#creating-components' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='creating-components'>Creating Components</h3>
 
 <p>Create custom components:</p>
@@ -148,12 +209,12 @@ It’s really easy to extend Matrioska to add new components that fits your need
 </code></pre>
 
 <p>Then create models that can be easily used to create the entire tree of views:</p>
-<pre class="highlight plaintext"><code>let component = Component.cluster(builder: UITabBarController.init, children: [
-    Component.view(builder: MyViewController.init, meta: ["title": "tab1"]),
-    Component.view(builder: { _ in UIViewController() }, meta: nil),
-    ], meta: nil)
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">component</span> <span class="o">=</span> <span class="kt">Component</span><span class="o">.</span><span class="nf">cluster</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt">UITabBarController</span><span class="o">.</span><span class="kd">init</span><span class="p">,</span> <span class="nv">children</span><span class="p">:</span> <span class="p">[</span>
+    <span class="kt">Component</span><span class="o">.</span><span class="nf">view</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="kt">MyViewController</span><span class="o">.</span><span class="kd">init</span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"tab1"</span><span class="p">]),</span>
+    <span class="kt">Component</span><span class="o">.</span><span class="nf">view</span><span class="p">(</span><span class="nv">builder</span><span class="p">:</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="kt">UIViewController</span><span class="p">()</span> <span class="p">},</span> <span class="nv">meta</span><span class="p">:</span> <span class="kc">nil</span><span class="p">),</span>
+    <span class="p">],</span> <span class="nv">meta</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
 
-window.rootViewController = component.viewController()
+<span class="n">window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="nf">viewController</span><span class="p">()</span>
 </code></pre>
 <pre class="highlight swift"><code><span class="c1">// TODO: json, schema, factories, etc....</span>
 </code></pre>
@@ -168,7 +229,7 @@ To make sure the a <code>Component</code>’s <code>UIViewController</code>has a
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://github.com/runtastic/Matrioska" target="_blank" rel="external">Runtastic GmbH</a>. All rights reserved. (Last updated: 2016-11-22)</p>
+          <p>&copy; 2016 <a class="link" href="https://github.com/runtastic/Matrioska" target="_blank" rel="external">Runtastic GmbH</a>. All rights reserved. (Last updated: 2016-11-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
