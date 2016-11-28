@@ -38,7 +38,7 @@ extension ClusterLayout {
             
             self.init(
                 title: title,
-                spacing: spacing.map(CGFloat.init),
+                spacing: spacing.map { CGFloat($0) },
                 axis: axis,
                 preserveParentWidth: preserveParentWidth
             )
