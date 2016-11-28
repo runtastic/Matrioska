@@ -92,8 +92,8 @@ fileprivate extension StackViewController {
                 continue
             }
             addChildViewController(viewController)
-            viewController.didMove(toParentViewController: self)
             stackView.addArrangedSubview(viewController.view)
+            viewController.didMove(toParentViewController: self)
         }
     }
 }

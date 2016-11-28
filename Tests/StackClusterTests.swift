@@ -158,6 +158,66 @@ class StackClusterTests: QuickSpec {
                 let vc = stack(with: nest)
                 expect(vc).to(haveValidSnapshot())
             }
+            
+            context("when presenting children view controllers") {
+                it("should call viewWillAppear before appearing") {
+                    var done: Bool? = nil
+                    let vc = AppearanceSpyViewController()
+                    vc.willAppear = { (view) in
+                        done = true
+                    }
+                    
+                    let stack = stackViewController(with: vc)
+                    stack?.beginAppearanceTransition(true, animated: false)
+                    expect(done).to(beTrue())
+                    stack?.endAppearanceTransition()
+                }
+                
+                it("should call viewDidAppear after appearing") {
+                    var done: Bool? = nil
+                    let vc = AppearanceSpyViewController()
+                    vc.didAppear = { (view) in
+                        done = true
+                    }
+                    
+                    let stack = stackViewController(with: vc)
+                    stack?.beginAppearanceTransition(true, animated: false)
+                    stack?.endAppearanceTransition()
+                    expect(done).to(beTrue())
+                }
+                
+                it("should call viewWillDisappear before disappearing") {
+                    var done: Bool? = nil
+                    let vc = AppearanceSpyViewController()
+                    vc.willDisappear = { (view) in
+                        done = true
+                    }
+                    
+                    let stack = stackViewController(with: vc)
+                    stack?.beginAppearanceTransition(true, animated: false)
+                    stack?.endAppearanceTransition()
+                    
+                    stack?.beginAppearanceTransition(false, animated: false)
+                    expect(done).to(beTrue())
+                    stack?.endAppearanceTransition()
+                }
+                
+                it("should call viewDidDisappear after disappearing") {
+                    var done: Bool? = nil
+                    let vc = AppearanceSpyViewController()
+                    vc.didDisappear = { (view) in
+                        done = true
+                    }
+                    
+                    let stack = stackViewController(with: vc)
+                    stack?.beginAppearanceTransition(true, animated: false)
+                    stack?.endAppearanceTransition()
+                    
+                    stack?.beginAppearanceTransition(false, animated: false)
+                    stack?.endAppearanceTransition()
+                    expect(done).to(beTrue())
+                }
+            }
         }
         
         describe("StackViewController") {
@@ -176,6 +236,11 @@ private func stack(with children: [Component], meta: ComponentMeta? = nil) -> St
     let vc = stack.viewController() as? StackViewController
     vc?.view.backgroundColor = .white
     return vc
+}
+
+func stackViewController(with child: UIViewController) -> UIViewController? {
+    let component = Component.view(builder: { _ in child }, meta: nil)
+    return ClusterLayout.stack(children: [component], meta: nil).viewController()
 }
 
 private func labelComponent(title: String?,
