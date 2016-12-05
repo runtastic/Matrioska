@@ -13,6 +13,7 @@ import UIKit
 final class IntrinsicSizeAwareScrollView: UIScrollView {
     
     private let keyPath = #keyPath(UIScrollView.contentSize)
+    private var kvoContext = UInt8()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,12 +34,11 @@ final class IntrinsicSizeAwareScrollView: UIScrollView {
                                change: [NSKeyValueChangeKey : Any]?,
                                context: UnsafeMutableRawPointer?) {
         
-        if self.keyPath == keyPath {
-            if let new = change?[.newKey] as? NSValue,
-                let old = change?[.oldKey] as? NSValue,
-                new != old {
-                invalidateIntrinsicContentSize()
-            }
+        if &kvoContext == context,
+            let new = change?[.newKey] as? NSValue,
+            let old = change?[.oldKey] as? NSValue,
+            new.cgSizeValue != old.cgSizeValue {
+            invalidateIntrinsicContentSize()
         }
     }
     
@@ -47,6 +47,6 @@ final class IntrinsicSizeAwareScrollView: UIScrollView {
     }
     
     private func addContentSizeObserver() {
-        addObserver(self, forKeyPath: keyPath, options: [.new, .old], context: nil)
+        addObserver(self, forKeyPath: keyPath, options: [.new, .old], context: &kvoContext)
     }
 }
