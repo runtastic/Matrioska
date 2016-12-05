@@ -20,7 +20,7 @@ final class StackViewController: UIViewController {
     
     typealias Configuration = ClusterLayout.StackConfig
     
-    required init(configuration: Configuration? = nil) {
+    init(configuration: Configuration? = nil) {
         let configuration = configuration ?? Configuration()
         self.preserveParentWidth = configuration.preserveParentWidth
         
@@ -59,5 +59,11 @@ final class StackViewController: UIViewController {
                 make.width.equalTo(view)
             }
         }
+    }
+    
+    func add(child childViewController: UIViewController) {
+        addChildViewController(childViewController)
+        stackView.addArrangedSubview(childViewController.view)
+        childViewController.didMove(toParentViewController: self)
     }
 }

@@ -9,7 +9,10 @@
 import Foundation
 
 /// The standard library clusters
-/// 1. TabBar: A tabBar cluster component
+/// 1. `TabBarCluster`: A tabBar cluster component
+/// 2. `StackCluster`: A stack cluster component
+///
+/// See the documentation of the clusters for more informations and configuration options.
 public enum ClusterLayout {
     /* empty ATM, extended in other files... at some point there will be something here */
 }

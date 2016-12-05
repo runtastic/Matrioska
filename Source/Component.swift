@@ -22,6 +22,8 @@ public indirect enum Component {
         _ meta: ComponentMeta?
         ) -> UIViewController?
     /// A closure to build a Cluster ViewController.
+    /// The builder can return nil in case the `Component` shouldn't be shown.
+    /// For example a `Component` that lacks proper metadata might not be displayable.
     /// The view is responsible to display and layout its children components.
     /// Can receive metadata for additional configurations
     public typealias ClusterBuilder = (
@@ -56,7 +58,9 @@ public indirect enum Component {
     /// Create a ViewController represented by the `Component`
     ///
     /// - Returns: An optional UIViewController.
-    /// The receiver is responsible to handle eventual fallbacks
+    /// The receiver is responsible to handle eventual fallbacks.
+    /// The builder can return nil in case the `Component` shouldn't be shown.
+    /// For example a `Component` that lacks proper metadata might not be displayable.
     public func viewController() -> UIViewController? {
         switch self {
         case let .view(builder, meta):

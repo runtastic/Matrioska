@@ -145,7 +145,7 @@ class StackClusterTests: QuickSpec {
                 let meta = ClusterLayout.StackConfig(preserveParentWidth: true)
                 let horizontalMeta = ClusterLayout.StackConfig(axis: .horizontal)
                 let size = CGSize(width: 100, height: 100)
-                let fixedSizeChildren = [1, 2, 3, 4].map {
+                let fixedSizeChildren = (1...4).map {
                     labelComponent(title: String($0), color: .red, labelSize: size)
                 }
 

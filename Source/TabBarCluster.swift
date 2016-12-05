@@ -76,7 +76,7 @@ extension ClusterLayout {
     /// A tabBar cluster component. Will use its children metas to configure the tabBar.
     ///
     /// - Parameters:
-    ///   - children: Each children should have a meta representing `TabConfig`
+    ///   - children: Each child should have a meta representing `TabConfig`
     ///   - meta: An optional TabBarConfig to configure the tabBar component.
     ///   - bundle: An optional bundle to retreive icon defined in TabBarConfig.
     ///             Overrides TabBarConfig's own bundle.
