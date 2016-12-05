@@ -12,7 +12,7 @@ import UIKit
 /// A `UIScrollView` subclass that adapts its `intrinsicContentSize` to its `contentSize`
 final class IntrinsicSizeAwareScrollView: UIScrollView {
     
-    private let keyPath = NSStringFromSelector(#selector(getter: contentSize))
+    private let keyPath = #keyPath(UIScrollView.contentSize)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
