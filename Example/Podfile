@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'MatrioskaExample' do
+  pod 'SnapKit'
+  pod 'Matrioska', :path => '../Matrioska.podspec'
+end

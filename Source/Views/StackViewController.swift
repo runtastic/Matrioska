@@ -58,6 +58,8 @@ final class StackViewController: UIViewController {
             make.edges.equalTo(scrollView)
             if preserveParentWidth {
                 make.width.equalTo(view)
+            } else if stackView.axis == .vertical {
+                make.width.lessThanOrEqualTo(view)
             }
         }
     }

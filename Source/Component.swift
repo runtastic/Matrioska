@@ -44,7 +44,8 @@ public indirect enum Component {
     /// Since a cluster is itself a view it can also contain other clusters.
     case cluster(builder: ClusterBuilder, children: [Component], meta: ComponentMeta?)
 
-    var meta: ComponentMeta? {
+    /// The meta of the component
+    public var meta: ComponentMeta? {
         switch self {
         case let .view(_, meta):
             return meta

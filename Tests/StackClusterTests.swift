@@ -119,7 +119,6 @@ class StackClusterTests: QuickSpec {
                     let meta = ClusterLayout.StackConfig(axis: .horizontal)
                     let vc = stack(with: children, meta: meta)
                     vc?.loadViewIfNeeded()
-
                     let scrollView = vc?.stackView.superview as? UIScrollView
 
                     expect(vc).to(haveValidSnapshot())

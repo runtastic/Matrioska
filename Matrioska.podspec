@@ -15,8 +15,8 @@ Dynamically build UI like if you were playing with dolls 🎎
   s.source           = { :git => 'https://github.com/runtastic/Matrioska.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'Source/**/*'
-
+  s.dependency 'SnapKit', '~> 3.0'
 end

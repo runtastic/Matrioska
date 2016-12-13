@@ -1,0 +1,27 @@
+{
+  "name": "Matrioska",
+  "version": "0.1.0",
+  "summary": "Dynamically build UI like if you were playing with dolls 🎎",
+  "description": "Dynamically build UI like if you were playing with dolls 🎎",
+  "homepage": "https://github.com/runtastic/Matrioska",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Alex Manzella": "alex.manzella@runtastic.com"
+  },
+  "source": {
+    "git": "https://github.com/runtastic/Matrioska.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "Source/**/*",
+  "dependencies": {
+    "SnapKit": [
+      "~> 3.0"
+    ]
+  }
+}

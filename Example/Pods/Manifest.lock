@@ -1,0 +1,20 @@
+PODS:
+  - Matrioska (0.1.0):
+    - SnapKit (~> 3.0)
+  - SnapKit (3.0.2)
+
+DEPENDENCIES:
+  - Matrioska (from `../Matrioska.podspec`)
+  - SnapKit
+
+EXTERNAL SOURCES:
+  Matrioska:
+    :path: "../Matrioska.podspec"
+
+SPEC CHECKSUMS:
+  Matrioska: 872321eb578deb7af60323aa61126ee13e0d3fbd
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+
+PODFILE CHECKSUM: b63a58336b9471a5dbe1ffe7ea7d0b94f6dbf667
+
+COCOAPODS: 1.1.1

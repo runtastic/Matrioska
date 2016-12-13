@@ -1,0 +1,6 @@
+framework module Matrioska {
+  umbrella header "Matrioska-umbrella.h"
+
+  export *
+  module * { export * }
+}
