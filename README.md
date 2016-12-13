@@ -12,6 +12,8 @@
   - [Layout](#layout)
 - [Roadmap](#roadmap)
 
+> NOTE: Matrioska is under active development, until `1.0.0` APIs might and will change a lot. The project is work in progress, see [Roadmap](#roadmap) or open issues.
+
 The vision of Matrioska is to let you build and prototype your app easily, reusing views and layouts, dynamically define the content of your app.
 With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.
@@ -131,11 +133,6 @@ let component = Component.cluster(builder: UITabBarController.init, children: [
 window.rootViewController = component.viewController()
 ```
 
-
-```swift
-// TODO: json, schema, factories, etc....
-```
-
 ### Layout
 
 Views are responsible to define their `intrinsicContentSize` using AutoLayout, cluster can decide to respect or respect not their dimensions, both vertical and horizontal or also only one of the two.
@@ -143,4 +140,7 @@ To make sure the a `Component`’s `UIViewController`has a valid `intrinsicConte
 
 ## Roadmap
 
-// TODO: ...
+- Load Components from JSON
+	- Serialization
+	- Component Factories
+- Rulesets to define the visibility of a Component
