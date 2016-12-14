@@ -23,7 +23,9 @@ extension ClusterLayout {
         /// Defines if the arranged subviews should preserve the parent width
         /// or their own intrinsicContentSize. Default false.
         public let preserveParentWidth: Bool
-                
+        /// The backgroundColor of the stackView, Default is white.
+        public let backgroundColor: UIColor
+
         /// Initialize a stack configuration from a `ComponentMeta`
         /// Used to materialzie `StackConfig` if the meta contains the values needed.
         /// The default values will be used where `meta` doesn't have a valid ones.
@@ -35,12 +37,15 @@ extension ClusterLayout {
             let preserveParentWidth = meta["preserveParentWidth"] as? Bool
             let axisRawValue = meta["axis"] as? Int
             let axis = axisRawValue.flatMap { UILayoutConstraintAxis(rawValue: $0) }
-            
+            let hexString = meta["backgroundColor"] as? String
+            let backgroundColor = hexString.flatMap { UIColor(hexString: $0) }
+
             self.init(
                 title: title,
                 spacing: spacing.map { CGFloat($0) },
                 axis: axis,
-                preserveParentWidth: preserveParentWidth
+                preserveParentWidth: preserveParentWidth,
+                backgroundColor: backgroundColor
             )
         }
         
@@ -52,17 +57,20 @@ extension ClusterLayout {
         ///   - axis: The axis of the stack view, by default is vertical.
         ///   - preserveParentWidth: Defines the arranged subviews should preserve the parent width
         ///     or their own intrinsicContentSize. Default false.
+        ///   - backgroundColor: The backgroundColor of the stackView, Default is white.
         public init(title: String? = nil,
                     spacing: CGFloat? = nil,
                     axis: UILayoutConstraintAxis? = nil,
-                    preserveParentWidth: Bool? = nil) {
+                    preserveParentWidth: Bool? = nil,
+                    backgroundColor: UIColor? = nil) {
             self.title = title
             self.spacing = spacing ?? 10
             self.axis = axis ?? .vertical
             self.preserveParentWidth = preserveParentWidth ?? false
+            self.backgroundColor = backgroundColor ?? .white
         }
     }
-    
+
     /// A stack cluster component.
     /// It arranges its children views in a vertical or horizontal stack, configured with the meta.
     ///

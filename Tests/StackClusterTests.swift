@@ -82,13 +82,20 @@ class StackClusterTests: QuickSpec {
                     let vc = stack(with: children, meta: config)
                     expect(vc).to(haveValidSnapshot())
                 }
-                
+
+                it("should respect the backgroundColor config") {
+                    let config = ClusterLayout.StackConfig(backgroundColor: UIColor.lightGray)
+                    let vc = stack(with: children, meta: config)
+                    expect(vc).to(haveValidSnapshot())
+                }
+
                 it("should load config from a dictionary") {
                     let config: [String: Any] = [
                         "title": "Foo",
                         "spacing": 150.0,
                         "axis": UILayoutConstraintAxis.vertical.rawValue,
                         "preserveParentWidth": true,
+                        "backgroundColor": "0xEEEEEE"
                     ]
                     
                     let vc = stack(with: children, meta: config)
@@ -111,6 +118,8 @@ class StackClusterTests: QuickSpec {
                 it("should be able to scroll horizontally") {
                     let meta = ClusterLayout.StackConfig(axis: .horizontal)
                     let vc = stack(with: children, meta: meta)
+                    vc?.loadViewIfNeeded()
+
                     let scrollView = vc?.stackView.superview as? UIScrollView
 
                     expect(vc).to(haveValidSnapshot())
@@ -120,6 +129,7 @@ class StackClusterTests: QuickSpec {
                 
                 it("should be able to scroll vertically") {
                     let vc = stack(with: children)
+                    vc?.loadViewIfNeeded()
                     let scrollView = vc?.stackView.superview as? UIScrollView
 
                     expect(vc).to(haveValidSnapshot())
@@ -233,9 +243,7 @@ class StackClusterTests: QuickSpec {
 
 private func stack(with children: [Component], meta: ComponentMeta? = nil) -> StackViewController? {
     let stack = ClusterLayout.stack(children: children, meta: meta)
-    let vc = stack.viewController() as? StackViewController
-    vc?.view.backgroundColor = .white
-    return vc
+    return stack.viewController() as? StackViewController
 }
 
 func stackViewController(with child: UIViewController) -> UIViewController? {

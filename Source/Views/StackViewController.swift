@@ -13,7 +13,6 @@ import SnapKit
 final class StackViewController: UIViewController {
     
     private let preserveParentWidth: Bool
-    
     private let scrollView = IntrinsicSizeAwareScrollView()
     
     let stackView = UIStackView()
@@ -34,6 +33,8 @@ final class StackViewController: UIViewController {
         if !preserveParentWidth {
             stackView.alignment = .leading
         }
+
+        scrollView.backgroundColor = configuration.backgroundColor
     }
     
     required init?(coder aDecoder: NSCoder) {

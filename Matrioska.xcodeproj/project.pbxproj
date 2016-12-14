@@ -27,6 +27,8 @@
 		DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */; };
 		DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE828C211DDB0C52003443A2 /* ClusterLayout.swift */; };
 		DE85E5AF1DEC842700DFF34A /* AppearanceSpyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85E5AE1DEC842700DFF34A /* AppearanceSpyViewController.swift */; };
+		DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */; };
+		DEA64C8D1E01810500687658 /* UIColorHEXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		DE6CA3D61DDCAF6500E3A570 /* ComponentMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ComponentMeta.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE828C211DDB0C52003443A2 /* ClusterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterLayout.swift; sourceTree = "<group>"; };
 		DE85E5AE1DEC842700DFF34A /* AppearanceSpyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceSpyViewController.swift; sourceTree = "<group>"; };
+		DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HEX.swift"; sourceTree = "<group>"; };
+		DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHEXTests.swift; sourceTree = "<group>"; };
 		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,6 +184,7 @@
 				DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */,
 				DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */,
 				DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */,
+				DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				DE828C211DDB0C52003443A2 /* ClusterLayout.swift */,
 				DE6CA3C71DDC718D00E3A570 /* StackCluster.swift */,
 				DE2D785A1DDB0F1A00CD6E95 /* TabBarCluster.swift */,
+				DEA64C891E017D7300687658 /* Helpers */,
 				DE067DC91DDE017700641D1A /* Views */,
 			);
 			path = Source;
@@ -203,6 +209,14 @@
 				DE6CA3CD1DDC7F2D00E3A570 /* ScrollMatcher.swift */,
 				DE6CA3CF1DDC8ED600E3A570 /* IntrinsicSizeAwareScrollViewTest.xib */,
 				DE85E5AE1DEC842700DFF34A /* AppearanceSpyViewController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DEA64C891E017D7300687658 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -419,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */,
+				DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */,
 				DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */,
 				DE828C221DDB0C52003443A2 /* ClusterLayout.swift in Sources */,
 				DE6CA3C91DDC71A100E3A570 /* StackCluster.swift in Sources */,
@@ -437,6 +452,7 @@
 				DE23D2971DDF63C400CDF333 /* ComponentTests.swift in Sources */,
 				DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */,
 				DE23D29A1DDF63C400CDF333 /* StackClusterTests.swift in Sources */,
+				DEA64C8D1E01810500687658 /* UIColorHEXTests.swift in Sources */,
 				DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */,
 				DE23D2991DDF63C400CDF333 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */,
 			);
