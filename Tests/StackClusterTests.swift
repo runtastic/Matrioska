@@ -135,6 +135,40 @@ class StackClusterTests: QuickSpec {
                     expect(scrollView).to(scroll(.vertical))
                     expect(scrollView).toNot(scroll(.horizontal))
                 }
+
+                context("when a horizontal stack is contained in a vertical stack") {
+
+                    let nestedStack: () -> StackViewController? = {
+                        let horizontal = ClusterLayout.StackConfig(axis: .horizontal)
+                        let vertical = ClusterLayout.StackConfig(axis: .vertical)
+
+                        return stack(
+                            with: [ClusterLayout.stack(children: children, meta: horizontal)],
+                            meta: vertical
+                        )
+                    }
+
+                    it("should not cause the parent stack to overflow horizontally") {
+                        let vc = nestedStack()
+                        vc?.loadViewIfNeeded()
+
+                        let scrollView = vc?.stackView.superview as? UIScrollView
+
+                        expect(vc).to(haveValidSnapshot())
+                        expect(scrollView).toNot(scroll(.horizontal))
+                    }
+
+                    it("should be able to scroll horizontally") {
+                        let vc = nestedStack()
+                        vc?.loadViewIfNeeded()
+
+                        let horizontalStack = vc?.childViewControllers.first as? StackViewController
+                        let scrollView2 = horizontalStack?.stackView.superview as? UIScrollView
+
+                        expect(vc).to(haveValidSnapshot())
+                        expect(scrollView2).to(scroll(.horizontal))
+                    }
+                }
             }
             
             context("when the content doesn't overflows") {
