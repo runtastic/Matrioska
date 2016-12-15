@@ -31,8 +31,8 @@ With this power you can easily change the structure of your app, do A/B testing,
 To build your UI you can use nested `Component`s. A `Component` can be 3 different things:
 
 - **View**: Any `UIViewController` that can use AutoLayout to specify its `intrinsicContentSize`
-- **Cluster**: Views with children (other `Component`s). A cluster is responsible of laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
-- **Wrapper**: A View with only one child (a `Component`). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.
+- **Cluster**: Views with children (other `Component`s). A cluster is responsible for laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
+- **Wrapper**: A View with only one child (a `Component`). You can see it as a special cluster or as a special view. It’s responsible for displaying its child’s view.
 
 The goal is to provide a tiny but powerful foundation to build your app on top of.
 Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.  
@@ -68,13 +68,13 @@ See the documentation for more informations.
 
 ### Meta
 
-Every `Component` may handle additional metadata. The `Component`’s meta is optional and the `Component` is responsible to handle it correctly. Metadata can be anything from configuration or additional information, for example a view controller title.
+Every `Component` may handle additional metadata. The `Component`’s meta is optional and the `Component` is responsible for handling it correctly. Metadata can be anything from configuration or additional information, for example a view controller title.
 
 #### ComponentMeta
 
-Every meta have to conform to `ComponentMeta`, a simple protocol that provides a keyed (String) subscript.  
+Every meta has to conform to `ComponentMeta`, a simple protocol that provides a keyed (String) subscript.  
 `ComponentMeta` provides a default implementation of a subscript that uses reflection (`Swift.Mirror`) to mirror the object and use its properties names and values. Objects that conform to this protocol can eventually override this behavior.  
-`ZipMeta` for example is a simple meta wrapper that aggregates multiple metas together, see its documentation and implementation for more info.
+`ZipMeta`, for example, is a simple meta wrapper that aggregates multiple metas together; see its documentation and implementation for more info.
 `Dictionary` also conforms to `ComponentMeta`, this is a convenient way to provide meta but is especially useful to materialize a `ComponentMeta` coming from a json/dictionary.
 
 #### MaterializableComponentMeta
@@ -145,8 +145,8 @@ window.rootViewController = component.viewController()
 
 ### Layout
 
-Views are responsible to define their `intrinsicContentSize` using AutoLayout, cluster can decide whether to respect their dimensions or not, both vertical and horizontal or also only one of the two.
-To make sure the a `Component`’s `UIViewController`has a valid `intrinsicContentSize` you need to add appropriate constraints to the view. [To know more about this read the documentation about “Views with Intrinsic Content Size”](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html).
+Views are responsible for defining their `intrinsicContentSize` using AutoLayout, clusters can decide whether to respect their dimensions or not, both vertical and horizontal or also only one of the two.
+To make sure that a `Component`’s `UIViewController`has a valid `intrinsicContentSize` you need to add appropriate constraints to the view. [To know more about this read the documentation about “Views with Intrinsic Content Size”](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html).
 
 ## Roadmap
 
