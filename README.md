@@ -11,6 +11,7 @@
   - [Creating Components](#creating-components)
   - [Layout](#layout)
 - [Roadmap](#roadmap)
+- [License](#license)
 
 > NOTE: Matrioska is under active development, until `1.0.0` APIs might and will change a lot. The project is work in progress, see [Roadmap](#roadmap) or open issues.
 
@@ -144,3 +145,8 @@ To make sure the a `Component`’s `UIViewController`has a valid `intrinsicConte
 	- Serialization
 	- Component Factories
 - Rulesets to define the visibility of a Component
+
+## License
+
+Matrioska is released under the MIT License.  
+At Runtastic we don't keep an internal mirror of this repo and all development on Matrioska is done in the open.
