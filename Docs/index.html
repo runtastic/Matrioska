@@ -90,8 +90,17 @@
             
             <a href='#matrioska' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='matrioska'>Matrioska</h1>
 
+<p><a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/lang-Swift-yellow.svg?style=flat" alt="Language: Swift"></a>
+<a href="https://travis-ci.org/runtastic/Matrioska"><img src="https://travis-ci.org/runtastic/Matrioska.svg?branch=master" alt="Build Status"></a>
+<a href="http://cocoapods.org/pods/Matrioska"><img src="https://img.shields.io/cocoapods/v/Matrioska.svg?style=flat" alt="Version"></a>
+<a href="http://cocoadocs.org/docsets/Matrioska"><img src="https://img.shields.io/cocoapods/metrics/doc-percent/Matrioska.svg" alt="DocCov"></a>
+<a href="https://codecov.io/gh/runtastic/Matrioska"><img src="https://codecov.io/gh/runtastic/Matrioska/branch/master/graph/badge.svg" alt="codecov"></a>
+<a href="http://cocoapods.org/pods/Matrioska"><img src="https://img.shields.io/cocoapods/l/Matrioska.svg?style=flat" alt="License"></a>
+<a href="http://cocoapods.org/pods/Matrioska"><img src="https://img.shields.io/cocoapods/p/Matrioska.svg?style=flat" alt="Platform"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
+
 <blockquote>
-<p>Matrioska let you create your layout and define the content of your app in a simple way.  </p>
+<p>Matrioska lets you create your layout and define the content of your app in a simple way.  </p>
 </blockquote>
 
 <ul>
@@ -107,13 +116,14 @@
 <li><a href="#layout">Layout</a></li>
 </ul></li>
 <li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#license">License</a></li>
 </ul>
 
 <blockquote>
 <p>NOTE: Matrioska is under active development, until <code>1.0.0</code> APIs might and will change a lot. The project is work in progress, see <a href="#roadmap">Roadmap</a> or open issues.</p>
 </blockquote>
 
-<p>The vision of Matrioska is to let you build and prototype your app easily, reusing views and layouts, dynamically define the content of your app.
+<p>The vision of Matrioska is to let you build and prototype your app easily, reusing views and layouts as well as dynamically define the content of your app.
 With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.</p>
 
@@ -125,9 +135,9 @@ With this power you can easily change the structure of your app, do A/B testing,
 <li><strong>Wrapper</strong>: A View with only one child (a <code>Component</code>). You can see it as a special cluster or as a special view. It’s responsible to display its child’s view.</li>
 </ul>
 
-<p>The goal is to provide a tiny, but powerful foundation to build your app on top of it.
+<p>The goal is to provide a tiny but powerful foundation to build your app on top of.
 Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.<br>
-It’s really easy to extend Matrioska to add new components that fits your needs (TODO hamburger example).</p>
+It’s really easy to extend Matrioska to add new components that fits your needs.</p>
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 
 <p>Using <a href="http://cocoapods.org/">CocoaPods</a>:</p>
@@ -165,17 +175,17 @@ It’s really easy to extend Matrioska to add new components that fits your need
 <p>See the documentation for more informations.</p>
 <a href='#meta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='meta'>Meta</h3>
 
-<p>Every <code>Component</code> may handle additional metadata. The <code>Component</code>’s meta is optional and the <code>Component</code> is responsible to handle it correctlty. Metadata can be anything from configuration or additional information, for example a view controller title.</p>
+<p>Every <code>Component</code> may handle additional metadata. The <code>Component</code>’s meta is optional and the <code>Component</code> is responsible to handle it correctly. Metadata can be anything from configuration or additional information, for example a view controller title.</p>
 <a href='#componentmeta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='componentmeta'>ComponentMeta</h4>
 
-<p>Every meta have to conform to <code>ComponentMeta</code> a simple protocol that provides a keyed (String) subscript.<br>
-<code>ComponentMeta</code> provides a default implementation of a subscript that uses reflection (<code>Swift.Mirror</code>) to mirror the object and use its properties names and values. Object that conform to this protocol can eventually override this behavior.<br>
+<p>Every meta have to conform to <code>ComponentMeta</code>, a simple protocol that provides a keyed (String) subscript.<br>
+<code>ComponentMeta</code> provides a default implementation of a subscript that uses reflection (<code>Swift.Mirror</code>) to mirror the object and use its properties names and values. Objects that conform to this protocol can eventually override this behavior.<br>
 <code>ZipMeta</code> for example is a simple meta wrapper that aggregates multiple metas together, see its documentation and implementation for more info.
 <code>Dictionary</code> also conforms to <code>ComponentMeta</code>, this is a convenient way to provide meta but is especially useful to materialize a <code>ComponentMeta</code> coming from a json/dictionary.</p>
 <a href='#materializablecomponentmeta' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='materializablecomponentmeta'>MaterializableComponentMeta</h4>
 
 <p>When creating a new <code>Component</code> you should document which kind of meta it expects. A good way to do this is to also create an object that represents the <code>Component</code>’s meta (e.g. see <code>StackConfig</code>) and make it conform to <code>ComponentMeta</code>.<br>
-<code>MaterializableComponentMeta</code> however provides some more convenience methods that let you load your components from a json or materialize a meta from a dictionary.<br>
+<code>MaterializableComponentMeta</code> however provides some convenience methods that let you load your components from a json or materialize a meta from a dictionary.<br>
 Other than <code>ComponentMeta</code>’s requirements you also need to provide a <code>init?(meta: ComponentMeta)</code>, then you can materialize any compatible meta into your own <code>MaterializableComponentMeta</code>.  </p>
 
 <p>Example:</p>
@@ -230,7 +240,7 @@ Other than <code>ComponentMeta</code>’s requirements you also need to provide 
 </code></pre>
 <a href='#layout' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='layout'>Layout</h3>
 
-<p>Views are responsible to define their <code>intrinsicContentSize</code> using AutoLayout, cluster can decide to respect or respect not their dimensions, both vertical and horizontal or also only one of the two.
+<p>Views are responsible to define their <code>intrinsicContentSize</code> using AutoLayout, cluster can decide whether to respect their dimensions or not, both vertical and horizontal or also only one of the two.
 To make sure the a <code>Component</code>’s <code>UIViewController</code>has a valid <code>intrinsicContentSize</code> you need to add appropriate constraints to the view. <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html">To know more about this read the documentation about “Views with Intrinsic Content Size”</a>.</p>
 <a href='#roadmap' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='roadmap'>Roadmap</h2>
 
@@ -243,6 +253,10 @@ To make sure the a <code>Component</code>’s <code>UIViewController</code>has a
 </ul></li>
 <li>Rulesets to define the visibility of a Component</li>
 </ul>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>Matrioska is released under the MIT License.<br>
+At Runtastic we don&rsquo;t keep an internal mirror of this repo and all development on Matrioska is done in the open.</p>
 
           </section>
         </section>
