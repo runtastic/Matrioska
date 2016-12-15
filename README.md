@@ -1,5 +1,14 @@
 # Matrioska
 
+[![Language: Swift](https://img.shields.io/badge/lang-Swift-yellow.svg?style=flat)](https://developer.apple.com/swift/)
+[![Build Status](https://travis-ci.org/runtastic/Matrioska.svg?branch=master)](https://travis-ci.org/runtastic/Matrioska)
+[![Version](https://img.shields.io/cocoapods/v/Matrioska.svg?style=flat)](http://cocoapods.org/pods/Matrioska)
+[![DocCov](https://img.shields.io/cocoapods/metrics/doc-percent/Matrioska.svg)](http://cocoadocs.org/docsets/Matrioska)
+[![codecov](https://codecov.io/gh/runtastic/Matrioska/branch/master/graph/badge.svg)](https://codecov.io/gh/runtastic/Matrioska)
+[![License](https://img.shields.io/cocoapods/l/Matrioska.svg?style=flat)](http://cocoapods.org/pods/Matrioska)
+[![Platform](https://img.shields.io/cocoapods/p/Matrioska.svg?style=flat)](http://cocoapods.org/pods/Matrioska)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 > Matrioska let you create your layout and define the content of your app in a simple way.  
 
 - [Installation](#installation)
