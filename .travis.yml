@@ -1,0 +1,27 @@
+language: objective-c
+
+env:
+  global:
+    - WORKSPACE=Matrioska.xcworkspace
+    - COVERAGE=NO
+
+podfile: Podfile
+
+osx_image: xcode8.1
+
+matrix:
+  include:
+    - env: DESTINATION="OS=10.1,name=iPhone 7" SCHEME=Matrioska SDK="iphonesimulator10.1" COVERAGE=YES
+      before_install:
+        #- gem install danger --no-ri --no-doc
+        #- gem install danger-swiftlint --no-ri --no-doc
+      before_script:
+        #- danger
+        #- pod lib lint --quick
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -J 'Matrioska'
+
+script:
+  - set -o pipefail
+  - travis_retry xcodebuild -workspace $WORKSPACE -scheme $SCHEME -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ENABLE_TESTABILITY=YES -enableCodeCoverage $COVERAGE test | xcpretty;
+
