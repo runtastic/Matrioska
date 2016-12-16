@@ -150,10 +150,11 @@ To make sure that a `Component`’s `UIViewController`has a valid `intrinsicCont
 
 ## Roadmap
 
-- Load Components from JSON
+- Load Components from JSON [#3](https://github.com/runtastic/Matrioska/issues/3)
 	- Serialization
 	- Component Factories
-- Rulesets to define the visibility of a Component
+- Rulesets to define the visibility of a Component [#4](https://github.com/runtastic/Matrioska/issues/4)
+- Deep Linking [#5](https://github.com/runtastic/Matrioska/issues/5)
 
 ## License
 
