@@ -13,6 +13,8 @@ opt_in_rules:
   - overridden_super_call
   - redundant_nil_coalesing
 #  - switch_case_on_newline # broken
+
+line_length: 500 # goal: 110 
   
 included:
   - Source

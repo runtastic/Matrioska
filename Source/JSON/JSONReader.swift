@@ -8,32 +8,37 @@
 
 import Foundation
 
-public typealias JSONObject = [String: AnyObject]
+/// A JSONObject type
+public typealias JSONObject = [String: Any]
 
-public class JSONReader {
-    class func getJSON(from data: Data) -> JSONObject? {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data,
-                                                        options: JSONSerialization.ReadingOptions()) as? JSONObject
-            return json
-        } catch {
-            NSLog("Error > JSON-File couldn't be parsed")
-            return nil
-        }
+/// A JSONReader used to convert to JSONObject
+public final class JSONReader {
+    
+    /// Serializes from a given JSON Data into JSONObject
+    ///
+    /// - Parameter data: the Data object used in serialization
+    /// - Returns: an optional serialized JSONObject
+    /// - Throws: throws an error in case of failure or invalid JSON data
+    public class func jsonObject(from data: Data) throws -> JSONObject? {
+        let json = try JSONSerialization.jsonObject(with: data) as? JSONObject
+        
+        return json
     }
 
-    public class func jsonObject(from jsonFilename: String, bundle: Bundle = Bundle.main) -> JSONObject? {
+    /// Serializes from a given JSON file into JSONObject
+    ///
+    /// - Parameters:
+    ///   - jsonFilename: the file name
+    ///   - bundle: the bundle where the file is located
+    /// - Returns: an optional serialized JSONObject
+    /// - Throws: throws an error in case of failure or invalid JSON data
+    public class func jsonObject(from jsonFilename: String, bundle: Bundle = .main) throws -> JSONObject? {
         guard let filePath = bundle.path(forResource: jsonFilename, ofType: "json") else {
             return nil
         }
         
-        do {
-            let data = try NSData(contentsOfFile: filePath,
-                                  options: NSData.ReadingOptions.uncached)
-            return getJSON(from: data as Data)
-        } catch {
-            NSLog("Error > JSON-File couldn't be read")
-            return nil
-        }
+        let url = URL(fileURLWithPath: filePath)
+        
+        return try jsonObject(from: Data(contentsOf: url, options: .uncached))
     }
 }

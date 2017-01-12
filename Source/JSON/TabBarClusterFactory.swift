@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A concrete ComponentFactory which produces a tabBar cluster component
 public class TabBarClusterFactory: ComponentFactory {
     public func produce(children: [Component],
                  meta: ComponentMeta?) -> Component? {

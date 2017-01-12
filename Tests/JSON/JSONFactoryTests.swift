@@ -18,7 +18,7 @@ class JSONFactoryTests: QuickSpec {
     
     override func spec() {
         
-        let jsonObject = JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
+        let jsonObject = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         let json = structure(from: jsonObject)
         
         let tabBarFactory = TabBarClusterFactory()
@@ -64,7 +64,7 @@ class JSONFactoryTests: QuickSpec {
             
             it("throws an assertion when the JSON object does not have type or id") {
                 let jsonFactory = JSONFactory()
-                let object = ["foo" : NSString()]
+                let object = ["foo" : "bar"]
                 let faultyProduce = { _ = jsonFactory.produce(from: object) }
                 
                 expect(faultyProduce()).to(throwAssertion())

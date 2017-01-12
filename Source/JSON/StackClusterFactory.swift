@@ -8,13 +8,14 @@
 
 import Foundation
 
-class StackClusterFactory: ComponentFactory {
-    func produce(children: [Component],
+/// A concrete ComponentFactory which produces a stack cluster component
+public class StackClusterFactory: ComponentFactory {
+    public func produce(children: [Component],
                  meta: ComponentMeta?) -> Component? {
         return ClusterLayout.stack(children: children, meta: meta)
     }
     
-    func typeName() -> String {
+    public func typeName() -> String {
         return "stack"
     }
 }

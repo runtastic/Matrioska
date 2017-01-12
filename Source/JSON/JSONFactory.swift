@@ -9,7 +9,7 @@
 import Foundation
 
 /// A factory that wraps ComponentFactory objects and uses them to produce Components
-public class JSONFactory {
+public final class JSONFactory {
     
     let typeKey = "type"
     let idKey = "id"
