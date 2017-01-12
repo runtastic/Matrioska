@@ -1,5 +1,5 @@
 //
-//  TabBarClusterJsonFactory.swift
+//  TabBarClusterFactory.swift
 //  Matrioska
 //
 //  Created by Mathias Aichinger on 11/01/2017.

@@ -1,5 +1,5 @@
 //
-//  StackCluster.swift
+//  StackClusterFactory.swift
 //  Matrioska
 //
 //  Created by Mathias Aichinger on 11/01/2017.

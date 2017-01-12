@@ -127,9 +127,9 @@
 			children = (
 				21E40AD71E26543700205C06 /* ComponentFactory.swift */,
 				21E40AD91E2657A100205C06 /* JSONFactory.swift */,
-				21E40ADB1E268A9E00205C06 /* TabBarClusterFactory.swift */,
-				21E40ADD1E268F6300205C06 /* StackClusterFactory.swift */,
 				ED9180F61E276F0C00F73FDB /* JSONReader.swift */,
+				21E40ADD1E268F6300205C06 /* StackClusterFactory.swift */,
+				21E40ADB1E268A9E00205C06 /* TabBarClusterFactory.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";

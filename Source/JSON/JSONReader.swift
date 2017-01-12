@@ -1,5 +1,5 @@
 //
-//  JsonReader.swift
+//  JSONReader.swift
 //  Matrioska
 //
 //  Created by Andreas Thenn on 12/01/2017.
