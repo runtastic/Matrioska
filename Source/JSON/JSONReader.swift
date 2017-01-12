@@ -11,14 +11,13 @@ import Foundation
 public typealias JSONObject = [String: AnyObject]
 
 public class JSONReader {
-
     class func getJSON(from data: Data) -> JSONObject? {
         do {
             let json = try JSONSerialization.jsonObject(with: data,
                                                         options: JSONSerialization.ReadingOptions()) as? JSONObject
             return json
         } catch {
-            assert(false, "JSON-File couldn't be parsed")
+            NSLog("Error > JSON-File couldn't be parsed")
             return nil
         }
     }
@@ -27,12 +26,13 @@ public class JSONReader {
         guard let filePath = bundle.path(forResource: jsonFilename, ofType: "json") else {
             return nil
         }
+        
         do {
             let data = try NSData(contentsOfFile: filePath,
                                   options: NSData.ReadingOptions.uncached)
             return getJSON(from: data as Data)
         } catch {
-            assert(false, "JSON-File couldn't be read")
+            NSLog("Error > JSON-File couldn't be read")
             return nil
         }
     }

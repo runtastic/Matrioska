@@ -8,14 +8,14 @@
 
 import Foundation
 
-class JsonParser {
+class JSONFactory {
     var factories: [String: ComponentFactory] = [:]
     
     func registerFactory(factory: ComponentFactory) {
         factories[factory.typeName()] = factory
     }
     
-    func parseJson(json: String) -> Component? {
+    func parseJson(filename: String) -> Component? {
         return nil
     }
 }

@@ -1,0 +1,69 @@
+{
+    "structure": {
+        "id": "tabbar",
+        "type": "tabbar",
+        "meta": {
+            "default_tab_id": "main_tab"
+        },
+        "children": [
+                     {
+                     "id": "history_tab",
+                     "type": "stack",
+                     "meta": {
+                     "requires_navigation": "true",
+                     "tab_config": {
+                     "title": {
+                     "key": "history_title",
+                     "type": "localized_string"
+                     },
+                     "icon_name": "history_tab_icon"
+                     }
+                     },
+                     "children": [
+                                  {
+                                  "id": "history.table_view",
+                                  "type": "table_view"
+                                  }
+                                  ]
+                     },
+                     {
+                     "id": "main_tab",
+                     "type": "stack",
+                     "meta": {
+                     "requires_navigation": "true",
+                     "tab_config": {
+                     "title": {
+                     "key": "main_tab_title",
+                     "type": "localized_string"
+                     },
+                     "iconName": "main_tab_icon"
+                     }
+                     },
+                     "children": [
+                                  {
+                                  "id": "test_label",
+                                  "type": "label"
+                                  },
+                                  {
+                                  "id": "main.test_feature",
+                                  "type": "stack",
+                                  "meta": {
+                                  "requires_navigation": "true",
+                                  "orientation": "horizontal"
+                                  }
+                                  },
+                                  {
+                                  "id": "main.start_button",
+                                  "type": "button",
+                                  "meta": {
+                                  "title": {
+                                  "key": "start_button_title",
+                                  "type": "localized_string"
+                                  }
+                                  }
+                                  }
+                                  ]
+                     }
+                     ]
+    }
+}
