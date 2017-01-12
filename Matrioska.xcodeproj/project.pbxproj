@@ -33,6 +33,7 @@
 		DE85E5AF1DEC842700DFF34A /* AppearanceSpyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85E5AE1DEC842700DFF34A /* AppearanceSpyViewController.swift */; };
 		DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */; };
 		DEA64C8D1E01810500687658 /* UIColorHEXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */; };
+		ED9180F71E276F0C00F73FDB /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9180F61E276F0C00F73FDB /* JSONReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHEXTests.swift; sourceTree = "<group>"; };
 		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED9180F61E276F0C00F73FDB /* JSONReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				21E40AD91E2657A100205C06 /* JsonParser.swift */,
 				21E40ADB1E268A9E00205C06 /* TabBarClusterFactory.swift */,
 				21E40ADD1E268F6300205C06 /* StackClusterFactory.swift */,
+				ED9180F61E276F0C00F73FDB /* JSONReader.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			files = (
 				21E40AD81E26543700205C06 /* ComponentFactory.swift in Sources */,
 				21E40ADE1E268F6300205C06 /* StackClusterFactory.swift in Sources */,
+				ED9180F71E276F0C00F73FDB /* JSONReader.swift in Sources */,
 				DE6CA3D71DDCAF6500E3A570 /* ComponentMeta.swift in Sources */,
 				DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */,
 				DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */,
