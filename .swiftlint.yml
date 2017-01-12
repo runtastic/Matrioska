@@ -23,5 +23,3 @@ excluded:
   - Example
 
 reporter: "xcode"
-
-line_length: 150
