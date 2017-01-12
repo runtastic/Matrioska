@@ -8,13 +8,13 @@
 
 import Foundation
 
-class TabBarClusterFactory: ComponentFactory {
-    func produce(children: [Component],
+public class TabBarClusterFactory: ComponentFactory {
+    public func produce(children: [Component],
                  meta: ComponentMeta?) -> Component? {
         return ClusterLayout.tabBar(children: children, meta: meta)
     }
     
-    func typeName() -> String {
+    public func typeName() -> String {
         return "tabbar"
     }
 }

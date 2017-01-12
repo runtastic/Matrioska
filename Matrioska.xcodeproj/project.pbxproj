@@ -16,6 +16,7 @@
 		21E40ADE1E268F6300205C06 /* StackClusterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E40ADD1E268F6300205C06 /* StackClusterFactory.swift */; };
 		51A54328766C8548A4F3AE4A /* Pods_MatrioskaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */; };
 		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
+		8BCFF89D1E27C31B0053AD98 /* JSONFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF89C1E27C31B0053AD98 /* JSONFactoryTests.swift */; };
 		DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */; };
 		DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */; };
 		DE067DCD1DDE017700641D1A /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE067DCB1DDE017700641D1A /* StackViewController.swift */; };
@@ -61,6 +62,7 @@
 		2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Matrioska.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6E46DFDCFD89ADB9C4762B /* Pods-Matrioska.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.release.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.release.xcconfig"; sourceTree = "<group>"; };
 		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
+		8BCFF89C1E27C31B0053AD98 /* JSONFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFactoryTests.swift; sourceTree = "<group>"; };
 		DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ComponentMetaTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2198B0881E277C27005F2E57 /* JSONReaderTests.swift */,
+				8BCFF89C1E27C31B0053AD98 /* JSONFactoryTests.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				2198B0891E277C27005F2E57 /* JSONReaderTests.swift in Sources */,
 				DEA64C8D1E01810500687658 /* UIColorHEXTests.swift in Sources */,
 				DE067DC81DDE005400641D1A /* ComponentMetaTests.swift in Sources */,
+				8BCFF89D1E27C31B0053AD98 /* JSONFactoryTests.swift in Sources */,
 				DE23D2991DDF63C400CDF333 /* IntrinsicSizeAwareScrollViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
