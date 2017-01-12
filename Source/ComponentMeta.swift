@@ -54,30 +54,30 @@ extension ComponentMeta {
     }
 }
 
-/// A protocol to create `ComponentMeta` that also support json/dictionary for materialization.
-/// Adopting this protocol `Component`s are able to materialzie a meta
-/// using `MaterializableComponentMeta.materialize(_ )`.
-public protocol MaterializableComponentMeta: ComponentMeta {
+/// A type that can be expressed by a `ComponentMeta` type.
+/// Adopting this protocol, `Component`s are able to materialize a ComponentMeta object
+/// into this type using `ExpressibleByComponentMeta.materialize(_ )`.
+public protocol ExpressibleByComponentMeta: ComponentMeta {
     
-    /// An initializer that takes a meta to retreive the necessary metadata
-    /// to build the `ComponentMeta`.
-    /// `MaterializableComponentMeta.materialize(_ )` will then use this initializer, if necessary,
-    /// to create the meta object.
+    /// An initializer that takes a ComponentMeta to retreive the necessary metadata
+    /// in order to build this object.
+    /// `ExpressibleByComponentMeta.materialize(_ )` will then use this initializer, if necessary,
+    /// to create this object.
     ///
-    /// - Parameter meta: An object that conform to `ComponentMeta`
+    /// - Parameter meta: An object that conforms to `ComponentMeta`
     ///   and contains the desired metadata. A `Dictionary` can also be used.
     init?(meta: ComponentMeta)
 }
 
-extension MaterializableComponentMeta {
+extension ExpressibleByComponentMeta {
     
-    /// Materialize a meta into the meta object if possible (meta not nil)
-    /// and if needed (meta represents already a valid meta object of type `Self`)
+    /// Materializes a ComponentMeta into this type
     ///
     /// - Parameter meta: A representation of the meta object to materialize (e.g. a dictionary)
     ///   or an already materialized meta object.
-    /// - Returns: A materialized meta object if the input represents correctly
-    ///   the object to be materialized.
+    /// - Returns: A materialized ExpressibleByComponentMeta object if the input represents correctly
+    ///   the object to be materialized. 
+    /// - Note: This will return nil when `meta` is nil or will return the same `meta` object when `meta` is already a `Self` type.
     public static func materialize(_ meta: ComponentMeta?) -> Self? {
         guard let meta = meta else {
             return nil
