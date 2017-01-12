@@ -29,7 +29,7 @@ class JSONFactoryTests: QuickSpec {
         
         let factories: [ComponentFactory] = [tabBarFactory, stackFactory, buttonFactory, labelFactory, tableViewFactory]
         
-        describe("Factories") {
+        describe("Register factories") {
             
             context("when no factories added") {
                 let jsonFactory = JSONFactory()
@@ -62,19 +62,22 @@ class JSONFactoryTests: QuickSpec {
         
         describe("Produce") {
             
-            it("throws an assertion when the JSON object does not have type or id") {
+            it("throws an assertion when the JSON object does not have mandatory keys") {
                 let jsonFactory = JSONFactory()
-                let object = ["foo" : "bar"]
-                let faultyProduce = { _ = jsonFactory.produce(from: object) }
+                let faultyProduceNoKeys = { _ = try! jsonFactory.produce(from: ["foo" : "bar"]) }
+                let faultyProduceNoId = { _ = try! jsonFactory.produce(from: ["id" : "bar"]) }
+                let faultyProduceNoType = { _ = try! jsonFactory.produce(from: ["type" : "bar"]) }
                 
-                expect(faultyProduce()).to(throwAssertion())
+                expect(faultyProduceNoKeys()).to(throwAssertion())
+                expect(faultyProduceNoId()).to(throwAssertion())
+                expect(faultyProduceNoType()).to(throwAssertion())
             }
             
             context("when no factories are added") {
                 let jsonFactorry = JSONFactory()
                 
                 it("returns nil when trying to produce") {
-                    let component = jsonFactorry.produce(from: json)
+                    let component = try! jsonFactorry.produce(from: json)
                     expect(component).to(beNil())
                 }
             }
@@ -83,7 +86,7 @@ class JSONFactoryTests: QuickSpec {
                 let jsonFactory = JSONFactory()
                 let tabBarFactory = TabBarClusterFactory()
                 jsonFactory.register(tabBarFactory)
-                let component = jsonFactory.produce(from: json)
+                let component = try! jsonFactory.produce(from: json)
                 
                 it("handles only those cluster components which have registered factories") {
                     expect(component).toNot(beNil())
@@ -96,7 +99,7 @@ class JSONFactoryTests: QuickSpec {
                 let jsonFactory = JSONFactory()
                 jsonFactory.register(tabBarFactory)
                 jsonFactory.register(stackFactory)
-                let component = jsonFactory.produce(from: json)
+                let component = try! jsonFactory.produce(from: json)
                 
                 it("handles all cluster components") {
                     expect(component).toNot(beNil())
@@ -124,7 +127,7 @@ class JSONFactoryTests: QuickSpec {
             context("when registering all available factories") {
                 let jsonFactory = JSONFactory()
                 factories.forEach { jsonFactory.register($0) }
-                let component = jsonFactory.produce(from: json)
+                let component = try! jsonFactory.produce(from: json)
                 
                 it("handles all components recursively") {
                     let firstChildren = component!.children().first!

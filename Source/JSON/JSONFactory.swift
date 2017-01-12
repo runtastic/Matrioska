@@ -8,6 +8,13 @@
 
 import Foundation
 
+/// An error type for JSONFactory
+///
+/// - missing: specifies that a mandatory key is missing
+enum JSONFactoryError: Error {
+    case missing(JSONObject, String)
+}
+
 /// A factory that wraps ComponentFactory objects and uses them to produce Components
 public final class JSONFactory {
     
@@ -26,18 +33,18 @@ public final class JSONFactory {
         factories[factory.typeName()] = factory
     }
     
-    /// Produces a Component from a given JSONObject
+    /// Produces a Component from a given JSONObject, which has two mandatory keys: `typeKey` and `idKey`
     ///
     /// - Parameter json: the JSONObject to be used
     /// - Returns: An optional Component
-    /// - Throws an assertion if the given JSONObject does not have typeKey or idKey keys
-    public func produce(from json: JSONObject) -> Component? {
-        guard let type = json[typeKey] as? String,
-              let _ = json[idKey] as? String else { fatalError("Missing mandatory fields") }
+    /// - Throws: JSONFactoryError when a mandatory key is missing
+    public func produce(from json: JSONObject) throws -> Component? {
+        guard let type = json[typeKey] as? String else { throw JSONFactoryError.missing(json, typeKey) }
+        guard let _ = json[idKey] as? String else { throw JSONFactoryError.missing(json, idKey) }
         
         let meta = json[metaKey] as? [String : Any]
         let children = json[childrenKey] as? [JSONObject] ?? []
-        let componentChildren = children.flatMap { produce(from: $0) }
+        let componentChildren = try children.flatMap { try produce(from: $0) }
         
         return factories[type]?.produce(children: componentChildren, meta: meta)
     }
