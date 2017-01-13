@@ -112,7 +112,7 @@ class ComponentMetaTests: QuickSpec {
     }
 }
 
-public class DummyMeta: MaterializableComponentMeta {
+public class DummyMeta: ExpressibleByComponentMeta {
     public let property1: String?
     internal let property2: String
     fileprivate let property3: String

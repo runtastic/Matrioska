@@ -11,7 +11,7 @@ import Foundation
 extension ClusterLayout {
     
     /// Tab configuration.
-    public struct TabConfig: MaterializableComponentMeta {
+    public struct TabConfig: ExpressibleByComponentMeta {
         /// The tab title
         public let title: String
         /// The tab icon
@@ -49,7 +49,7 @@ extension ClusterLayout {
     }
     
     /// TabBar component configuration.
-    public struct TabBarConfig: MaterializableComponentMeta {
+    public struct TabBarConfig: ExpressibleByComponentMeta {
         /// The selected index of the tabBar. Not optional
         public let selectedIndex: Int
         

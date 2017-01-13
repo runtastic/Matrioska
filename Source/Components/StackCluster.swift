@@ -11,7 +11,7 @@ import Foundation
 extension ClusterLayout {
     
     /// Stack component configuration.
-    public struct StackConfig: MaterializableComponentMeta {
+    public struct StackConfig: ExpressibleByComponentMeta {
         /// The title of the stack view, nil by default.
         public let title: String?
         /// The spacing of the components inside the stack. Default 10.

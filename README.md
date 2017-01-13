@@ -16,7 +16,7 @@
   - [Standard Components](#standard-components)
   - [Meta](#meta)
     - [ComponentMeta](#componentmeta)
-    - [MaterializableComponentMeta](#materializablecomponentmeta)
+    - [ExpressibleByComponentMeta](#expressiblebycomponentMeta)
   - [Creating Components](#creating-components)
   - [Layout](#layout)
 - [Roadmap](#roadmap)
@@ -73,20 +73,20 @@ Every `Component` may handle additional metadata. The `Component`’s meta is op
 #### ComponentMeta
 
 Every meta has to conform to `ComponentMeta`, a simple protocol that provides a keyed (String) subscript.  
-`ComponentMeta` provides a default implementation of a subscript that uses reflection (`Swift.Mirror`) to mirror the object and use its properties names and values. Objects that conform to this protocol can eventually override this behavior.  
+`ComponentMeta` provides a default implementation of a subscript that uses reflection (`Swift.Mirror`) to mirror the object and use its property's names and values. Objects that conform to this protocol can eventually override this behavior.  
 `ZipMeta`, for example, is a simple meta wrapper that aggregates multiple metas together; see its documentation and implementation for more info.
 `Dictionary` also conforms to `ComponentMeta`, this is a convenient way to provide meta but is especially useful to materialize a `ComponentMeta` coming from a json/dictionary.
 
-#### MaterializableComponentMeta
+#### ExpressibleByComponentMeta
 
 When creating a new `Component` you should document which kind of meta it expects. A good way to do this is to also create an object that represents the `Component`’s meta (e.g. see `StackConfig`) and make it conform to `ComponentMeta`.  
-`MaterializableComponentMeta` however provides some convenience methods that let you load your components from a json or materialize a meta from a dictionary.  
-Other than `ComponentMeta`’s requirements you also need to provide a ` init?(meta: ComponentMeta)`, then you can materialize any compatible meta into your own `MaterializableComponentMeta`.  
+`ExpressibleByComponentMeta`, however, provides some convenience methods that lets you load your components from a json or materialize a meta from a dictionary; that is, it lets you express your meta configuration by any `ComponentMeta` object.  
+Other than `ComponentMeta`’s requirements you also need to provide a ` init?(meta: ComponentMeta)`, then you can materialize any compatible meta into your own `ExpressibleByComponentMeta`.  
 
 Example:
 
 ```swift
-public struct MyConfig: MaterializableComponentMeta {
+public struct MyConfig: ExpressibleByComponentMeta {
     public let title: String
     
     public init?(meta: ComponentMeta) {
