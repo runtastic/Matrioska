@@ -77,7 +77,8 @@ extension ExpressibleByComponentMeta {
     ///   or an already materialized meta object.
     /// - Returns: A materialized `ExpressibleByComponentMeta` object if the input represents correctly
     ///   the object to be materialized. 
-    /// - Note: This will return nil when `meta` is nil or will return the same `meta` object when `meta` is already a `Self` type.
+    /// - Note: This will return nil when `meta` is nil or 
+    ///   will return the same `meta` object when `meta` is already a `Self` type.
     public static func materialize(_ meta: ComponentMeta?) -> Self? {
         guard let meta = meta else {
             return nil
