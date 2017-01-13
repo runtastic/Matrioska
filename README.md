@@ -73,7 +73,7 @@ Every `Component` may handle additional metadata. The `Component`’s meta is op
 #### ComponentMeta
 
 Every meta has to conform to `ComponentMeta`, a simple protocol that provides a keyed (String) subscript.  
-`ComponentMeta` provides a default implementation of a subscript that uses reflection (`Swift.Mirror`) to mirror the object and use its propertie's names and values. Objects that conform to this protocol can eventually override this behavior.  
+`ComponentMeta` provides a default implementation of a subscript that uses reflection (`Swift.Mirror`) to mirror the object and use its property's names and values. Objects that conform to this protocol can eventually override this behavior.  
 `ZipMeta`, for example, is a simple meta wrapper that aggregates multiple metas together; see its documentation and implementation for more info.
 `Dictionary` also conforms to `ComponentMeta`, this is a convenient way to provide meta but is especially useful to materialize a `ComponentMeta` coming from a json/dictionary.
 
