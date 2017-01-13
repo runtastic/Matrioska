@@ -64,12 +64,10 @@ class JSONFactoryTests: QuickSpec {
             
             it("throws an assertion when the JSON object does not have mandatory keys") {
                 let jsonFactory = JSONFactory()
-                let faultyProduceNoKeys = { _ = try! jsonFactory.produce(from: ["foo" : "bar"]) }
-                let faultyProduceNoId = { _ = try! jsonFactory.produce(from: ["id" : "bar"]) }
-                let faultyProduceNoType = { _ = try! jsonFactory.produce(from: ["type" : "bar"]) }
+                let faultyProduceNoKeys = { _ = try! jsonFactory.produce(from: ["foo": "bar"]) }
+                let faultyProduceNoType = { _ = try! jsonFactory.produce(from: ["id": "bar"]) }
                 
                 expect(faultyProduceNoKeys()).to(throwAssertion())
-                expect(faultyProduceNoId()).to(throwAssertion())
                 expect(faultyProduceNoType()).to(throwAssertion())
             }
             

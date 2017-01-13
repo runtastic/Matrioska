@@ -22,12 +22,12 @@ class TabBarClusterTests: QuickSpec {
             let children: [Component] = [
                 simpleComponent(meta: TabConfig(title: "test1"), color: .red),
                 simpleComponent(meta: TabConfig(title: "test2"), color: .blue),
-                simpleComponent(meta: TabConfig(title: "test3"), color: .orange),
+                simpleComponent(meta: TabConfig(title: "test3"), color: .orange)
                 ]
             
             it("should display its children") {
                 let children: [Component] = [
-                    simpleComponent(meta: TabConfig(title: "test1"), color: .purple),
+                    simpleComponent(meta: TabConfig(title: "test1"), color: .purple)
                 ]
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 1
@@ -84,7 +84,7 @@ class TabBarClusterTests: QuickSpec {
             it("should ignore children without view") {
                 let children: [Component] = [
                     Component.view(builder: { _ in nil }, meta: TabConfig(title: "_")),
-                    simpleComponent(meta: TabConfig(title: "test1"), color: .red),
+                    simpleComponent(meta: TabConfig(title: "test1"), color: .red)
                     ]
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 1
@@ -98,7 +98,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should ignore children without config") {
                     let children: [Component] = [
                         simpleComponent(meta: nil),
-                        validComponent,
+                        validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1
@@ -109,7 +109,7 @@ class TabBarClusterTests: QuickSpec {
                     let bundle = Bundle(for: TabBarClusterTests.self)
                     let children: [Component] = [
                         simpleComponent(meta: ["title": "test", "iconName": "checkmark"]),
-                        validComponent,
+                        validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children,
                                                   meta: nil,
@@ -121,7 +121,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should not use config defined as dictionaries when missing the title") {
                     let children: [Component] = [
                         simpleComponent(meta: ["iconName": "_"]),
-                        validComponent,
+                        validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1
@@ -131,7 +131,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should not use config defined as dictionaries when missing the iconName") {
                     let children: [Component] = [
                         simpleComponent(meta: ["title": "_"]),
-                        validComponent,
+                        validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1

@@ -15,7 +15,7 @@ class ComponentTests: QuickSpec {
     
     override func spec() {
         
-        typealias DictMeta = Dictionary<String, String>
+        typealias DictMeta = [String:String]
         
         describe("View component") {
             it("should build a viewController") {

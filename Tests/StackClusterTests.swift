@@ -22,7 +22,7 @@ class StackClusterTests: QuickSpec {
             let children = [
                 labelComponent(title: "first", color: .red),
                 labelComponent(title: "second", color: .blue),
-                labelComponent(title: "third\ntwo lines", color: .orange),
+                labelComponent(title: "third\ntwo lines", color: .orange)
                 ]
             
             it("should display its child and respect their intrinsic contentSize") {
@@ -35,7 +35,7 @@ class StackClusterTests: QuickSpec {
                     labelComponent(title: "first", color: .red),
                     Component.view(builder: { _ in nil }, meta: nil),
                     labelComponent(title: "second", color: .orange),
-                    Component.view(builder: { _ in nil }, meta: nil),
+                    Component.view(builder: { _ in nil }, meta: nil)
                     ]
                 let vc = stack(with: children)
                 expect(vc).to(haveValidSnapshot())
@@ -46,7 +46,7 @@ class StackClusterTests: QuickSpec {
                 it("should use the default configuration") {
                     let children = [
                         labelComponent(title: "first", color: .yellow),
-                        labelComponent(title: "second", color: .green),
+                        labelComponent(title: "second", color: .green)
                         ]
                     let vc = stack(with: children, meta: ["foo": "bar"])
                     expect(vc).to(haveValidSnapshot())
@@ -112,7 +112,7 @@ class StackClusterTests: QuickSpec {
                     labelComponent(title: "1", color: .red, labelSize: size),
                     labelComponent(title: "2", color: .red, labelSize: size),
                     labelComponent(title: "3", color: .red, labelSize: size),
-                    labelComponent(title: "4", color: .red, labelSize: size),
+                    labelComponent(title: "4", color: .red, labelSize: size)
                     ]
 
                 it("should be able to scroll horizontally") {
@@ -173,9 +173,7 @@ class StackClusterTests: QuickSpec {
             
             context("when the content doesn't overflows") {
                 it("should not be able to scroll") {
-                    let children = [
-                        labelComponent(title: "first", color: .red),
-                        ]
+                    let children = [labelComponent(title: "first", color: .red)]
                     let vc = stack(with: children)
                     expect(vc).to(haveValidSnapshot())
                     let scrollView = vc?.stackView.superview as? UIScrollView
@@ -195,7 +193,7 @@ class StackClusterTests: QuickSpec {
                 let nest = [
                     ClusterLayout.stack(children: children, meta: meta),
                     ClusterLayout.stack(children: fixedSizeChildren, meta: horizontalMeta),
-                    ClusterLayout.stack(children: children, meta: nil),
+                    ClusterLayout.stack(children: children, meta: nil)
                 ]
                 
                 let vc = stack(with: nest)

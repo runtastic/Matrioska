@@ -19,7 +19,6 @@ enum JSONFactoryError: Error {
 public final class JSONFactory {
     
     let typeKey = "type"
-    let idKey = "id"
     let metaKey = "meta"
     let childrenKey = "children"
     
@@ -33,14 +32,13 @@ public final class JSONFactory {
         factories[factory.typeName()] = factory
     }
     
-    /// Produces a Component from a given JSONObject, which has two mandatory keys: `typeKey` and `idKey`
+    /// Produces a Component from a given JSONObject, which has one mandatory key: `typeKey`
     ///
     /// - Parameter json: the JSONObject to be used
     /// - Returns: An optional Component
     /// - Throws: JSONFactoryError when a mandatory key is missing
     public func produce(from json: JSONObject) throws -> Component? {
         guard let type = json[typeKey] as? String else { throw JSONFactoryError.missing(json, typeKey) }
-        guard let _ = json[idKey] as? String else { throw JSONFactoryError.missing(json, idKey) }
         
         let meta = json[metaKey] as? [String : Any]
         let children = json[childrenKey] as? [JSONObject] ?? []
