@@ -35,6 +35,11 @@ public final class JSONFactory {
     private var wrapperFactory: [String: WrapperFactoryBuilder] = [:]
     private var clusterFactory: [String: ClusterFactoryBuilder] = [:]
     
+    /// Initialize a new JSONFactory
+    public init() {
+        // Empty but needed to be initialized from other modules
+    }
+    
     /// Registers a new `ViewFactoryBuilder` which will be used when producing the component
     ///
     /// - Parameters:
