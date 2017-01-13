@@ -33,9 +33,4 @@ extension ComponentFactory {
                  meta: ComponentMeta?) -> Component? {
         return Component.view(builder: { _ in UIViewController() }, meta: meta)
     }
-    
-    /// A default implementation that returns the name of this type
-    func typeName() -> String {
-        return String(describing: self)
-    }
 }

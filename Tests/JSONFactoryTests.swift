@@ -21,8 +21,8 @@ class JSONFactoryTests: QuickSpec {
         let jsonObject = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         let json = structure(from: jsonObject)
         
-        let tabBarFactory = TabBarClusterFactory()
-        let stackFactory = StackClusterFactory()
+        let tabBarFactory = ClusterFactory.TabBarClusterFactory()
+        let stackFactory = ClusterFactory.StackClusterFactory()
         let buttonFactory = ButtonFactory()
         let labelFactory = LabelFactory()
         let tableViewFactory = TableViewFactory()
@@ -41,8 +41,8 @@ class JSONFactoryTests: QuickSpec {
             
             context("when registering factories") {
                 let jsonFactory = JSONFactory()
-                let tabBarFactory = TabBarClusterFactory()
-                let stackFactory = StackClusterFactory()
+                let tabBarFactory = ClusterFactory.TabBarClusterFactory()
+                let stackFactory = ClusterFactory.StackClusterFactory()
                 jsonFactory.register(tabBarFactory)
                 jsonFactory.register(stackFactory)
                 
@@ -82,7 +82,7 @@ class JSONFactoryTests: QuickSpec {
             
             context("when registering some available cluster factories") {
                 let jsonFactory = JSONFactory()
-                let tabBarFactory = TabBarClusterFactory()
+                let tabBarFactory = ClusterFactory.TabBarClusterFactory()
                 jsonFactory.register(tabBarFactory)
                 let component = try! jsonFactory.produce(from: json)
                 
