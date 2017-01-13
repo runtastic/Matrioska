@@ -48,7 +48,8 @@ class JSONReaderTests: QuickSpec {
                     XCTAssertNotNil(jsonObject)
                     XCTAssertNotNil(jsonObject!["structure"])
                     let structure = jsonObject!["structure"] as? JSONObject
-                    XCTAssertNotNil(structure!["id"])
+                    XCTAssertNotNil(structure!["type"])
+                    XCTAssertNotNil(structure!["meta"])
                 }
             }
             

@@ -1,13 +1,11 @@
 {
     "structure": {
-        "id": "tabbar",
         "type": "tabbar",
         "meta": {
             "default_tab_id": "main_tab"
         },
         "children": [
                      {
-                     "id": "history_tab",
                      "type": "stack",
                      "meta": {
                      "requires_navigation": "true",
@@ -21,13 +19,11 @@
                      },
                      "children": [
                                   {
-                                  "id": "history.table_view",
                                   "type": "table_view"
                                   }
                                   ]
                      },
                      {
-                     "id": "main_tab",
                      "type": "stack",
                      "meta": {
                      "requires_navigation": "true",
@@ -41,11 +37,9 @@
                      },
                      "children": [
                                   {
-                                  "id": "test_label",
                                   "type": "label"
                                   },
                                   {
-                                  "id": "main.test_feature",
                                   "type": "stack",
                                   "meta": {
                                   "requires_navigation": "true",
@@ -53,7 +47,6 @@
                                   }
                                   },
                                   {
-                                  "id": "main.start_button",
                                   "type": "button",
                                   "meta": {
                                   "title": {
