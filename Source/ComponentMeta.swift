@@ -55,14 +55,14 @@ extension ComponentMeta {
 }
 
 /// A type that can be expressed by a `ComponentMeta` type.
-/// Adopting this protocol, `Component`s are able to materialize a ComponentMeta object
+/// Adopting this protocol, `Component`s are able to materialize a `ComponentMeta` object
 /// into this type using `ExpressibleByComponentMeta.materialize(_ )`.
 public protocol ExpressibleByComponentMeta: ComponentMeta {
     
-    /// An initializer that takes a ComponentMeta to retreive the necessary metadata
+    /// An initializer that takes a `ComponentMeta` to retreive the necessary metadata
     /// in order to build this object.
     /// `ExpressibleByComponentMeta.materialize(_ )` will then use this initializer, if necessary,
-    /// to create this object.
+    /// to create an object of this type.
     ///
     /// - Parameter meta: An object that conforms to `ComponentMeta`
     ///   and contains the desired metadata. A `Dictionary` can also be used.
@@ -75,7 +75,7 @@ extension ExpressibleByComponentMeta {
     ///
     /// - Parameter meta: A representation of the meta object to materialize (e.g. a dictionary)
     ///   or an already materialized meta object.
-    /// - Returns: A materialized ExpressibleByComponentMeta object if the input represents correctly
+    /// - Returns: A materialized `ExpressibleByComponentMeta` object if the input represents correctly
     ///   the object to be materialized. 
     /// - Note: This will return nil when `meta` is nil or will return the same `meta` object when `meta` is already a `Self` type.
     public static func materialize(_ meta: ComponentMeta?) -> Self? {
