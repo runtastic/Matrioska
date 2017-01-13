@@ -21,70 +21,39 @@ class JSONFactoryTests: QuickSpec {
         let jsonObject = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         let json = structure(from: jsonObject)
         
-        let tabBarFactory = ClusterFactory.TabBarClusterFactory()
-        let stackFactory = ClusterFactory.StackClusterFactory()
-        let buttonFactory = ButtonFactory()
-        let labelFactory = LabelFactory()
-        let tableViewFactory = TableViewFactory()
-        
-        let factories: [ComponentFactory] = [tabBarFactory, stackFactory, buttonFactory, labelFactory, tableViewFactory]
-        
-        describe("Register factories") {
-            
-            context("when no factories added") {
-                let jsonFactory = JSONFactory()
-                
-                it("has no factories") {
-                    expect(jsonFactory.factories.count).to(equal(0))
-                }
-            }
-            
-            context("when registering factories") {
-                let jsonFactory = JSONFactory()
-                let tabBarFactory = ClusterFactory.TabBarClusterFactory()
-                let stackFactory = ClusterFactory.StackClusterFactory()
-                jsonFactory.register(tabBarFactory)
-                jsonFactory.register(stackFactory)
-                
-                it("has the registered factories") {
-                    expect(jsonFactory.factories.count).to(equal(2))
-                    expect(jsonFactory.factories[tabBarFactory.typeName()]).toNot(beNil())
-                    expect(jsonFactory.factories[stackFactory.typeName()]).toNot(beNil())
-                }
-                
-                it("does not have non registered factories") {
-                    expect(jsonFactory.factories["foo"]).to(beNil())
-                    expect(jsonFactory.factories["bar"]).to(beNil())
-                }
-            }
-            
+        let viewBuilder: JSONFactory.ViewFactoryBuilder = { (meta: ComponentMeta?) in
+            Component.view(builder: { _ in UIViewController() }, meta: meta)
         }
+        let tabBarBuilder: JSONFactory.ClusterFactoryBuilder = { (children, meta) in
+            ClusterLayout.tabBar(children: children, meta: meta)
+        }
+        let navigationBuilder: JSONFactory.WrapperFactoryBuilder = { (child, meta) in
+            Component.wrapper(builder: { _ in UINavigationController() }, child: child, meta: meta)
+        }
+        let stackBuilder: JSONFactory.ClusterFactoryBuilder = ClusterLayout.stack
         
-        describe("Produce") {
+        describe("Component from builder factories") {
             
             it("throws an assertion when the JSON object does not have mandatory keys") {
                 let jsonFactory = JSONFactory()
-                let faultyProduceNoKeys = { _ = try! jsonFactory.produce(from: ["foo": "bar"]) }
-                let faultyProduceNoType = { _ = try! jsonFactory.produce(from: ["id": "bar"]) }
                 
-                expect(faultyProduceNoKeys()).to(throwAssertion())
-                expect(faultyProduceNoType()).to(throwAssertion())
+                expect { try jsonFactory.component(from: ["foo": "bar"]) }.to(throwError())
+                expect { try jsonFactory.component(from: ["id": "bar"]) }.to(throwError())
             }
             
             context("when no factories are added") {
                 let jsonFactorry = JSONFactory()
                 
-                it("returns nil when trying to produce") {
-                    let component = try! jsonFactorry.produce(from: json)
+                it("returns nil when trying to get a component") {
+                    let component = try! jsonFactorry.component(from: json)
                     expect(component).to(beNil())
                 }
             }
             
             context("when registering some available cluster factories") {
                 let jsonFactory = JSONFactory()
-                let tabBarFactory = ClusterFactory.TabBarClusterFactory()
-                jsonFactory.register(tabBarFactory)
-                let component = try! jsonFactory.produce(from: json)
+                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
+                let component = try! jsonFactory.component(from: json)
                 
                 it("handles only those cluster components which have registered factories") {
                     expect(component).toNot(beNil())
@@ -95,9 +64,9 @@ class JSONFactoryTests: QuickSpec {
             
             context("when registering all available cluster factories") {
                 let jsonFactory = JSONFactory()
-                jsonFactory.register(tabBarFactory)
-                jsonFactory.register(stackFactory)
-                let component = try! jsonFactory.produce(from: json)
+                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
+                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
+                let component = try! jsonFactory.component(from: json)
                 
                 it("handles all cluster components") {
                     expect(component).toNot(beNil())
@@ -124,40 +93,43 @@ class JSONFactoryTests: QuickSpec {
             
             context("when registering all available factories") {
                 let jsonFactory = JSONFactory()
-                factories.forEach { jsonFactory.register($0) }
-                let component = try! jsonFactory.produce(from: json)
+                
+                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
+                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
+                jsonFactory.register(with: "navigation", factoryBuilder: navigationBuilder)
+                jsonFactory.register(with: "button", factoryBuilder: viewBuilder)
+                jsonFactory.register(with: "label", factoryBuilder: viewBuilder)
+                jsonFactory.register(with: "table_view", factoryBuilder: viewBuilder)
+                
+                let component = try! jsonFactory.component(from: json)
                 
                 it("handles all components recursively") {
-                    let firstChildren = component!.children().first!
-                    let secondChildren = component!.children().last!
+                    let firstChildren = component!.children()[0]
+                    let secondChildren = component!.children()[1]
+                    let thirdChildren = component!.children()[2]
                     
-                    expect(firstChildren.children().count).to(equal(1))
+                    expect(component?.children().count).to(equal(3))
                     expect(secondChildren.children().count).to(equal(3))
+                    expect(thirdChildren.children().count).to(equal(1))
                     expect(firstChildren.children()[0].viewController()).to(beAKindOf(UIViewController.self))
                     expect(secondChildren.children()[1].viewController()).to(beAKindOf(StackViewController.self))
+                }
+                
+                it("does not handle registered wrapper builders with no children") {
+                    let firstChildren = component!.children()[0]
+                    
+                    expect(firstChildren.children().count).to(equal(1))
+                }
+                
+                it("handles registered wrapper builders with views") {
+                    let thirdChildren = component!.children()[2]
+                    
+                    expect(thirdChildren.viewController()).to(beAKindOf(UINavigationController.self))
+                    expect(thirdChildren.children()[0].viewController()).to(beAKindOf(UIViewController.self))
                 }
             }
         }
         
-    }
-    
-}
-
-fileprivate class ButtonFactory: ComponentFactory {
-    fileprivate func typeName() -> String {
-        return "button"
-    }
-}
-
-fileprivate class LabelFactory: ComponentFactory {
-    fileprivate func typeName() -> String {
-        return "label"
-    }
-}
-
-fileprivate class TableViewFactory: ComponentFactory {
-    fileprivate func typeName() -> String {
-        return "table_view"
     }
 }
 

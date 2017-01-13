@@ -8,7 +8,6 @@
                      {
                      "type": "stack",
                      "meta": {
-                     "requires_navigation": "true",
                      "tab_config": {
                      "title": {
                      "key": "history_title",
@@ -20,13 +19,15 @@
                      "children": [
                                   {
                                   "type": "table_view"
+                                  },
+                                  {
+                                  "type": "navigation"
                                   }
                                   ]
                      },
                      {
                      "type": "stack",
                      "meta": {
-                     "requires_navigation": "true",
                      "tab_config": {
                      "title": {
                      "key": "main_tab_title",
@@ -54,6 +55,14 @@
                                   "type": "localized_string"
                                   }
                                   }
+                                  }
+                                  ]
+                     },
+                     {
+                     "type": "navigation",
+                     "children": [
+                                  {
+                                  "type": "label"
                                   }
                                   ]
                      }
