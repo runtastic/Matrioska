@@ -86,7 +86,7 @@ public final class JSONFactory {
             throw JSONFactoryError.missing(json, Key.type)
         }
         
-        let meta = json[Key.meta] as? [String : Any]
+        let meta = json[Key.meta] as? JSONObject
         let children = json[Key.children] as? [JSONObject] ?? []
         let componentChildren = try children.flatMap { try component(from: $0) }
         var componentResult: Component?

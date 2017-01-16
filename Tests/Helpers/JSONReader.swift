@@ -17,7 +17,7 @@ final class JSONReader {
     /// - Parameter data: the Data object used in serialization
     /// - Returns: an optional serialized JSONObject
     /// - Throws: throws an error in case of failure or invalid JSON data
-    public class func jsonObject(from data: Data) throws -> JSONObject? {
+    class func jsonObject(from data: Data) throws -> JSONObject? {
         let json = try JSONSerialization.jsonObject(with: data) as? JSONObject
         
         return json
@@ -30,7 +30,7 @@ final class JSONReader {
     ///   - bundle: the bundle where the file is located
     /// - Returns: an optional serialized JSONObject
     /// - Throws: throws an error in case of failure or invalid JSON data
-    public class func jsonObject(from jsonFilename: String, bundle: Bundle = .main) throws -> JSONObject? {
+    class func jsonObject(from jsonFilename: String, bundle: Bundle = .main) throws -> JSONObject? {
         guard let filePath = bundle.path(forResource: jsonFilename, ofType: "json") else {
             return nil
         }
