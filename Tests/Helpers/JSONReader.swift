@@ -7,12 +7,10 @@
 //
 
 import Foundation
-
-/// A JSONObject type
-public typealias JSONObject = [String: Any]
+@testable import Matrioska
 
 /// A JSONReader used to convert to JSONObject
-public final class JSONReader {
+final class JSONReader {
     
     /// Serializes from a given JSON Data into JSONObject
     ///

@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// A JSONObject type
+public typealias JSONObject = [String: Any]
+
 /// An error type for JSONFactory
 ///
 /// - missing: specifies that a mandatory key is missing
@@ -15,12 +18,15 @@ enum JSONFactoryError: Error {
     case missing(JSONObject, String)
 }
 
-/// A factory that wraps ComponentFactory objects and uses them to produce Components
+/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, 
+/// `WrapperFactoryBuilder` & `ClusterFactoryBuilder`) and uses them to produce `Component`s
 public final class JSONFactory {
     
-    static let typeKey = "type"
-    static let metaKey = "meta"
-    static let childrenKey = "children"
+    private enum Key {
+        static let type = "type"
+        static let meta = "meta"
+        static let children = "children"
+    }
     
     /// A factory closure to build a view `Component`
     public typealias ViewFactoryBuilder = (ComponentMeta?) -> Component
@@ -70,18 +76,18 @@ public final class JSONFactory {
         clusterFactory[type] = factoryBuilder
     }
     
-    /// Produces a `Component` from a given `JSONObject`, which has one mandatory key: `typeKey`
+    /// Produces a `Component` from a given `JSONObject`, which has one mandatory key: `type`
     ///
     /// - Parameter json: the `JSONObject` to be used
     /// - Returns: An optional `Component`
     /// - Throws: `JSONFactoryError` when a mandatory key is missing
     public func component(from json: JSONObject) throws -> Component? {
-        guard let type = json[JSONFactory.typeKey] as? String else {
-            throw JSONFactoryError.missing(json, JSONFactory.typeKey)
+        guard let type = json[Key.type] as? String else {
+            throw JSONFactoryError.missing(json, Key.type)
         }
         
-        let meta = json[JSONFactory.metaKey] as? [String : Any]
-        let children = json[JSONFactory.childrenKey] as? [JSONObject] ?? []
+        let meta = json[Key.meta] as? [String : Any]
+        let children = json[Key.children] as? [JSONObject] ?? []
         let componentChildren = try children.flatMap { try component(from: $0) }
         var componentResult: Component?
         
