@@ -1,7 +1,7 @@
 PODS:
   - Matrioska (0.1.0-alpha1):
     - SnapKit (~> 3.0)
-  - SnapKit (3.0.2)
+  - SnapKit (3.1.2)
 
 DEPENDENCIES:
   - Matrioska (from `../Matrioska.podspec`)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Matrioska: b070c1ad36e64bdf7ab9d847033e2a5e4d2b8ec7
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
 
 PODFILE CHECKSUM: b63a58336b9471a5dbe1ffe7ea7d0b94f6dbf667
 
