@@ -25,7 +25,7 @@ extension UIColor {
 
     /// Initialize a color if the input strings represents an hex color
     ///
-    /// - Parameter hexString: A Strign representing an hex color.
+    /// - Parameter hexString: A String representing an hex color.
     ///     Alpha not supported and compact form not supported.
     ///     Valid format: "0x123456" or "123456"
     public convenience init?(hexString: String) {
