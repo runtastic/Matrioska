@@ -13,7 +13,8 @@
 		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
 		8B3E4D4B1E2962BC00C82598 /* JSONFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E4D4A1E2962BC00C82598 /* JSONFactory.swift */; };
 		8BB284191E2D21D600243C0A /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284171E2D20C900243C0A /* JSONReader.swift */; };
-		8BB284271E310E8300243C0A /* RuleComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284261E310E8300243C0A /* RuleComponentTests.swift */; };
+		8BB284271E310E8300243C0A /* RuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284261E310E8300243C0A /* RuleTests.swift */; };
+		8BB2842A1E31754400243C0A /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284291E31754400243C0A /* Rule.swift */; };
 		8BCFF8B11E28D4340053AD98 /* ClusterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AC1E28D4340053AD98 /* ClusterLayout.swift */; };
 		8BCFF8B21E28D4340053AD98 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AD1E28D4340053AD98 /* Component.swift */; };
 		8BCFF8B31E28D4340053AD98 /* ComponentMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AE1E28D4340053AD98 /* ComponentMeta.swift */; };
@@ -56,7 +57,8 @@
 		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
 		8B3E4D4A1E2962BC00C82598 /* JSONFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFactory.swift; sourceTree = "<group>"; };
 		8BB284171E2D20C900243C0A /* JSONReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
-		8BB284261E310E8300243C0A /* RuleComponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleComponentTests.swift; sourceTree = "<group>"; };
+		8BB284261E310E8300243C0A /* RuleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleTests.swift; sourceTree = "<group>"; };
+		8BB284291E31754400243C0A /* Rule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Rule.swift; path = Rules/Rule.swift; sourceTree = "<group>"; };
 		8BCFF8AC1E28D4340053AD98 /* ClusterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterLayout.swift; sourceTree = "<group>"; };
 		8BCFF8AD1E28D4340053AD98 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8BCFF8AE1E28D4340053AD98 /* ComponentMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMeta.swift; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 				DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8BB284281E31752A00243C0A /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				8BB284291E31754400243C0A /* Rule.swift */,
+			);
+			name = Rules;
 			sourceTree = "<group>";
 		};
 		8BCFF8A21E28D3830053AD98 /* Factories */ = {
@@ -202,15 +212,15 @@
 			children = (
 				DE2D78611DDB3F7F00CD6E95 /* Assets */,
 				DE6CA3CC1DDC7F1D00E3A570 /* Helpers */,
-				DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */,
 				DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */,
+				DE3E8D961DD38AAA00417AE5 /* ComponentTests.swift */,
 				DE3E8D951DD38AAA00417AE5 /* Info.plist */,
 				DE2D78661DDB43FC00CD6E95 /* IntrinsicSizeAwareScrollViewTests.swift */,
 				8BCFF8B61E28D4990053AD98 /* JSONFactoryTests.swift */,
+				8BB284261E310E8300243C0A /* RuleTests.swift */,
 				DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */,
 				DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */,
 				DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */,
-				8BB284261E310E8300243C0A /* RuleComponentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -221,6 +231,7 @@
 				8BCFF8AB1E28D4340053AD98 /* Components */,
 				8BCFF8A21E28D3830053AD98 /* Factories */,
 				DEA64C891E017D7300687658 /* Helpers */,
+				8BB284281E31752A00243C0A /* Rules */,
 				DE067DC91DDE017700641D1A /* Views */,
 			);
 			path = Source;
@@ -459,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BCFF8B51E28D4340053AD98 /* TabBarCluster.swift in Sources */,
+				8BB2842A1E31754400243C0A /* Rule.swift in Sources */,
 				8BCFF8B31E28D4340053AD98 /* ComponentMeta.swift in Sources */,
 				DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */,
 				DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */,
@@ -476,7 +488,7 @@
 			files = (
 				8BCFF8BA1E28D4B90053AD98 /* JSONFactoryTests.swift in Sources */,
 				DE85E5AF1DEC842700DFF34A /* AppearanceSpyViewController.swift in Sources */,
-				8BB284271E310E8300243C0A /* RuleComponentTests.swift in Sources */,
+				8BB284271E310E8300243C0A /* RuleTests.swift in Sources */,
 				DE23D2981DDF63C400CDF333 /* TabBarClusterTests.swift in Sources */,
 				DE23D2971DDF63C400CDF333 /* ComponentTests.swift in Sources */,
 				DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */,

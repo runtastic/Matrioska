@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Represent a UI `Component`
+/// Represents a UI `Component`
 /// `Component`s can be nested and contain other components
 public indirect enum Component {
 
@@ -30,8 +30,6 @@ public indirect enum Component {
         _ children: [Component],
         _ meta: ComponentMeta?
         ) -> UIViewController?
-    /// A closure to evaluate the visibility of the `Component`
-    public typealias RuleEvaluator = () -> Bool
 
     /// Represents any `UIViewController`.
     /// The view should use AutoLayout to specify its `intrinsicContentSize`.
@@ -47,7 +45,7 @@ public indirect enum Component {
     case cluster(builder: ClusterBuilder, children: [Component], meta: ComponentMeta?)
     /// Represents a Component which visibility is specified 
     /// by the evaluation of a `RuleEvaluator`
-    case rule(evaluator: RuleEvaluator, component: Component)
+    case rule(rule: Rule, component: Component)
 
     /// The meta of the component
     public var meta: ComponentMeta? {
@@ -77,8 +75,8 @@ public indirect enum Component {
             return builder(child, meta)
         case let .cluster(builder, children, meta):
             return builder(children, meta)
-        case let .rule(evaluator, child):
-            return evaluator() ? child.viewController() : nil
+        case let .rule(rule, child):
+            return rule.evaluate() ? child.viewController() : nil
         }
     }
 }
