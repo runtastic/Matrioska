@@ -42,20 +42,20 @@ Below you can find a detailed schema for `Component`s and for each configuration
 	"structure": {
 		"type": "tabbar",
 		"meta": {
-			"selectedIndex": 1
+			"selected_index": 1
 		},
 		"children": [{
 			"type": "navigation",
 			"meta": {
 				"title": "history_title",
-				"iconName": "history_tab_icon"
+				"icon_name": "history_tab_icon"
 			},
 			"children": [{
 				"type": "stack",
 				"meta": {
           "axis": 1,
-          "preserveParentWidth": true,
-          "backgroundColor": "0x123456"
+          "preserve_parent_width": true,
+          "background_color": "0x123456"
 				},
 				"children": [{
 					"type": "table_view"
@@ -65,14 +65,14 @@ Below you can find a detailed schema for `Component`s and for each configuration
 			"type": "navigation",
 			"meta": {
 				"title": "main_tab_title",
-				"iconName": "main_tab_icon"
+				"icon_name": "main_tab_icon"
 			},
 			"children": [{
 				"type": "stack",
 				"meta": {
 					"axis": 1,
           "title": "Main stack",
-          "preserveParentWidth": true,
+          "preserve_parent_width": true,
 					"spacing": "5"
 				},
 				"children": [{
