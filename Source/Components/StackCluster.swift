@@ -34,10 +34,10 @@ extension ClusterLayout {
         public init?(meta: ComponentMeta) {
             let title = meta["title"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
-            let preserveParentWidth = meta["preserveParentWidth"] as? Bool
+            let preserveParentWidth = meta["preserve_parent_width"] as? Bool
             let axisRawValue = meta["axis"] as? Int
             let axis = axisRawValue.flatMap { UILayoutConstraintAxis(rawValue: $0) }
-            let hexString = meta["backgroundColor"] as? String
+            let hexString = meta["background_color"] as? String
             let backgroundColor = hexString.flatMap { UIColor(hexString: $0) }
 
             self.init(

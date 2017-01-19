@@ -1,0 +1,61 @@
+{
+    "structure": {
+        "type": "tabbar",
+        "meta": {
+            "default_tab_id": "main_tab"
+        },
+        "children": [
+                     {
+                     "type": "stack",
+                     "meta": {
+                     "title": "history_title",
+                     "icon_name": "history_tab_icon"
+                     },
+                     "children": [
+                                  {
+                                  "type": "table_view"
+                                  },
+                                  {
+                                  "type": "navigation"
+                                  }
+                                  ]
+                     },
+                     {
+                     "type": "stack",
+                     "meta": {
+                     "title": "main_tab_title",
+                     "icon_name": "main_tab_icon"
+                     },
+                     "children": [
+                                  {
+                                  "type": "label"
+                                  },
+                                  {
+                                  "type": "stack",
+                                  "meta": {
+                                  "requires_navigation": "true",
+                                  "orientation": "horizontal"
+                                  }
+                                  },
+                                  {
+                                  "type": "button",
+                                  "meta": {
+                                  "title": {
+                                  "key": "start_button_title",
+                                  "type": "localized_string"
+                                  }
+                                  }
+                                  }
+                                  ]
+                     },
+                     {
+                     "type": "navigation",
+                     "children": [
+                                  {
+                                  "type": "label"
+                                  }
+                                  ]
+                     }
+                     ]
+    }
+}

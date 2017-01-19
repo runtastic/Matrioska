@@ -1,19 +1,14 @@
 disabled_rules:
   - trailing_whitespace  # xcode add it by default, we might enable it and use autocorrect
   - function_body_length
+  - force_cast
+  - force_try
+  - force_unwrapping
+
+line_length: 200 # goal: 110
 
 opt_in_rules:
   - empty_count
-  - force_unwrapping
-  - private_outlet
-  - vertical_whitespace
-#  - missing_docs # broken
-  - closure_spacing
-  - conditional_returns_on_newline
-  - explicit_init
-  - overridden_super_call
-  - redundant_nil_coalesing
-#  - switch_case_on_newline # broken
 
 type_body_length:
   warning: 800

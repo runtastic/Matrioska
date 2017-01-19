@@ -9,7 +9,7 @@
 import UIKit
 import Matrioska
 
-struct TileConfig: MaterializableComponentMeta {
+struct TileConfig: ExpressibleByComponentMeta {
     let text: String?
     let color: UIColor?
     
