@@ -91,7 +91,7 @@ class JSONFactoryTests: QuickSpec {
                 }
             }
             
-            fcontext("when registering all available factories") {
+            context("when registering all available factories") {
                 let jsonFactory = JSONFactory()
                 
                 jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
