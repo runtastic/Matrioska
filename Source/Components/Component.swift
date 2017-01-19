@@ -30,6 +30,8 @@ public indirect enum Component {
         _ children: [Component],
         _ meta: ComponentMeta?
         ) -> UIViewController?
+    /// A closure to evaluate the visibility of the `Component`
+    public typealias RuleEvaluator = () -> Bool
 
     /// Represents any `UIViewController`.
     /// The view should use AutoLayout to specify its `intrinsicContentSize`.
@@ -43,6 +45,9 @@ public indirect enum Component {
     /// A cluster is responsible of laying out its children’s views.
     /// Since a cluster is itself a view it can also contain other clusters.
     case cluster(builder: ClusterBuilder, children: [Component], meta: ComponentMeta?)
+    /// Represents a Component which visibility is specified 
+    /// by the evaluation of a `RuleEvaluator`
+    case rule(evaluator: RuleEvaluator, component: Component)
 
     /// The meta of the component
     public var meta: ComponentMeta? {
@@ -53,6 +58,8 @@ public indirect enum Component {
             return meta
         case let .cluster(_, _, meta):
             return meta
+        case let .rule(_, child):
+            return child.meta
         }
     }
     
@@ -70,6 +77,8 @@ public indirect enum Component {
             return builder(child, meta)
         case let .cluster(builder, children, meta):
             return builder(children, meta)
+        case let .rule(evaluator, child):
+            return evaluator() ? child.viewController() : nil
         }
     }
 }

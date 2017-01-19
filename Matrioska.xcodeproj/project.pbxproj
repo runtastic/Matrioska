@@ -13,6 +13,7 @@
 		5A069A980F4B0D057E6B647F /* Pods_Matrioska.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4BE0A3C39644ABCB31722F /* Pods_Matrioska.framework */; };
 		8B3E4D4B1E2962BC00C82598 /* JSONFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E4D4A1E2962BC00C82598 /* JSONFactory.swift */; };
 		8BB284191E2D21D600243C0A /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284171E2D20C900243C0A /* JSONReader.swift */; };
+		8BB284271E310E8300243C0A /* RuleComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284261E310E8300243C0A /* RuleComponentTests.swift */; };
 		8BCFF8B11E28D4340053AD98 /* ClusterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AC1E28D4340053AD98 /* ClusterLayout.swift */; };
 		8BCFF8B21E28D4340053AD98 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AD1E28D4340053AD98 /* Component.swift */; };
 		8BCFF8B31E28D4340053AD98 /* ComponentMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFF8AE1E28D4340053AD98 /* ComponentMeta.swift */; };
@@ -55,6 +56,7 @@
 		60996A348436AB8E34E758DA /* Pods-Matrioska.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Matrioska.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Matrioska/Pods-Matrioska.debug.xcconfig"; sourceTree = "<group>"; };
 		8B3E4D4A1E2962BC00C82598 /* JSONFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFactory.swift; sourceTree = "<group>"; };
 		8BB284171E2D20C900243C0A /* JSONReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
+		8BB284261E310E8300243C0A /* RuleComponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleComponentTests.swift; sourceTree = "<group>"; };
 		8BCFF8AC1E28D4340053AD98 /* ClusterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterLayout.swift; sourceTree = "<group>"; };
 		8BCFF8AD1E28D4340053AD98 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8BCFF8AE1E28D4340053AD98 /* ComponentMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentMeta.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				DE6CA3CA1DDC77E800E3A570 /* StackClusterTests.swift */,
 				DE2D785C1DDB178500CD6E95 /* TabBarClusterTests.swift */,
 				DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */,
+				8BB284261E310E8300243C0A /* RuleComponentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 			files = (
 				8BCFF8BA1E28D4B90053AD98 /* JSONFactoryTests.swift in Sources */,
 				DE85E5AF1DEC842700DFF34A /* AppearanceSpyViewController.swift in Sources */,
+				8BB284271E310E8300243C0A /* RuleComponentTests.swift in Sources */,
 				DE23D2981DDF63C400CDF333 /* TabBarClusterTests.swift in Sources */,
 				DE23D2971DDF63C400CDF333 /* ComponentTests.swift in Sources */,
 				DE6CA3CE1DDC7F2D00E3A570 /* ScrollMatcher.swift in Sources */,

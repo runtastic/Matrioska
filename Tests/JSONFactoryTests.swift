@@ -147,6 +147,8 @@ fileprivate extension Component {
             return [child]
         case let .cluster(builder: _, children: children, meta: _):
             return children
+        case let .rule(_, child):
+            return child.children()
         }
     }
 }
