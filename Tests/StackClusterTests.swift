@@ -94,8 +94,8 @@ class StackClusterTests: QuickSpec {
                         "title": "Foo",
                         "spacing": 150.0,
                         "axis": UILayoutConstraintAxis.vertical.rawValue,
-                        "preserveParentWidth": true,
-                        "backgroundColor": "0xEEEEEE"
+                        "preserve_parent_width": true,
+                        "background_color": "0xEEEEEE"
                     ]
                     
                     let vc = stack(with: children, meta: config)

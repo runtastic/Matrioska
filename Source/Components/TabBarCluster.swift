@@ -27,7 +27,7 @@ extension ClusterLayout {
             guard let title = meta["title"] as? String else {
                 return nil
             }
-            guard let iconName = meta["iconName"] as? String else {
+            guard let iconName = meta["icon_name"] as? String else {
                 return nil
             }
             
@@ -58,7 +58,7 @@ extension ClusterLayout {
         ///
         /// - Parameter meta: A meta object
         public init?(meta: ComponentMeta) {
-            guard let selectedIndex = meta["selectedIndex"] as? Int else {
+            guard let selectedIndex = meta["selected_index"] as? Int else {
                 return nil
             }
             

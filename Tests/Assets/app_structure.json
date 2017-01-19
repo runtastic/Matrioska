@@ -8,13 +8,8 @@
                      {
                      "type": "stack",
                      "meta": {
-                     "tab_config": {
-                     "title": {
-                     "key": "history_title",
-                     "type": "localized_string"
-                     },
+                     "title": "history_title",
                      "icon_name": "history_tab_icon"
-                     }
                      },
                      "children": [
                                   {
@@ -28,13 +23,8 @@
                      {
                      "type": "stack",
                      "meta": {
-                     "tab_config": {
-                     "title": {
-                     "key": "main_tab_title",
-                     "type": "localized_string"
-                     },
-                     "iconName": "main_tab_icon"
-                     }
+                     "title": "main_tab_title",
+                     "icon_name": "main_tab_icon"
                      },
                      "children": [
                                   {

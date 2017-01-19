@@ -19,21 +19,21 @@ Below you can find a detailed schema for `Component`s and for each configuration
 | `title` | `String` | The title of the stack. | `title` | Yes | `nil` |
 | `spacing` | `Float` | The spacing of the components inside the stack. | `spacing` | Yes | `10` |
 | `axis` | `Int` | The orientation of the stack. Can be either `0`(horizontal) or `1`(vertical). | `axis` | Yes | `1` |
-| `preserveParentWidth` | `Bool` | Whether the arranged subviews should preserve the parent width or their own intrinsicContentSize. | `preserveParentWidth` | Yes | `false` |
-| `backgroundColor` | `String` | The background color of the stack. Alpha and compact forms are not supported. Valid formats: `0x123456` or `123456`. | `backgroundColor` | Yes | `ffffff`(white) |
+| `preserve_parent_width` | `Bool` | Whether the arranged subviews should preserve the parent width or their own intrinsicContentSize. | `preserveParentWidth` | Yes | `false` |
+| `background_color` | `String` | The background color of the stack. Alpha and compact forms are not supported. Valid formats: `0x123456` or `123456`. | `backgroundColor` | Yes | `ffffff`(white) |
 
 ### TabBarConfig schema
 
 | Key | Type | Description | Maps to | Optional | Default value |
 | --- | ---- | ----------- | ------- | -------- | ------------- |
-| `selectedIndex` | `Int` | The selected index of the tab bar. | `selectedIndex` | No | . |
+| `selected_index` | `Int` | The selected index of the tab bar. | `selectedIndex` | No | . |
 
 ### Tab schema
 
 | Key | Type | Description | Maps to | Optional | Default value |
 | --- | ---- | ----------- | ------- | -------- | ------------- |
 | `title` | `String` | The title to display on the tab. | `title` | No | . |
-| `iconName` | `Int` | The name of the icon to display on the tab. | `iconName` | No | . |
+| `icon_name` | `Int` | The name of the icon to display on the tab. | `iconName` | No | . |
 
 ## Example JSON
 

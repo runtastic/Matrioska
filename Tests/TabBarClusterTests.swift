@@ -66,7 +66,7 @@ class TabBarClusterTests: QuickSpec {
                 }
                 
                 it("should load config from a dictionary") {
-                    let meta = ["selectedIndex": 1]
+                    let meta = ["selected_index": 1]
                     let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
                     expect(vc).to(haveValidSnapshot())
                 }
@@ -108,7 +108,7 @@ class TabBarClusterTests: QuickSpec {
                 it("should use config defined as dictionaries") {
                     let bundle = Bundle(for: TabBarClusterTests.self)
                     let children: [Component] = [
-                        simpleComponent(meta: ["title": "test", "iconName": "checkmark"]),
+                        simpleComponent(meta: ["title": "test", "icon_name": "checkmark"]),
                         validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children,
@@ -120,7 +120,7 @@ class TabBarClusterTests: QuickSpec {
                 
                 it("should not use config defined as dictionaries when missing the title") {
                     let children: [Component] = [
-                        simpleComponent(meta: ["iconName": "_"]),
+                        simpleComponent(meta: ["icon_name": "_"]),
                         validComponent
                         ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()

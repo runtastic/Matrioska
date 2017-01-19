@@ -91,7 +91,7 @@ class JSONFactoryTests: QuickSpec {
                 }
             }
             
-            context("when registering all available factories") {
+            fcontext("when registering all available factories") {
                 let jsonFactory = JSONFactory()
                 
                 jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
@@ -107,6 +107,11 @@ class JSONFactoryTests: QuickSpec {
                     let firstChildren = component!.children()[0]
                     let secondChildren = component!.children()[1]
                     let thirdChildren = component!.children()[2]
+
+                    expect(firstChildren.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
+                    expect(firstChildren.meta!["title"] as? String).to(equal("history_title"))
+                    expect(secondChildren.meta!["icon_name"] as? String).to(equal("main_tab_icon"))
+                    expect(secondChildren.meta!["title"] as? String).to(equal("main_tab_title"))
                     
                     expect(component?.children().count).to(equal(3))
                     expect(secondChildren.children().count).to(equal(3))
