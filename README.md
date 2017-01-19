@@ -19,7 +19,7 @@
     - [ExpressibleByComponentMeta](#expressiblebycomponentmeta)
   - [Creating Components](#creating-components)
   - [Layout](#layout)
-  - [Load Components from JSON](#loadcomponentsfromjson)
+  - [Load Components from JSON](#load-components-from-json)
 - [Roadmap](#roadmap)
 - [License](#license)
 
