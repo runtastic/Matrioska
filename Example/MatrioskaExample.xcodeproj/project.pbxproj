@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21F6211E1E3147AF006C0DBE /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F6211D1E3147AF006C0DBE /* JSONReader.swift */; };
+		21F621201E3147D5006C0DBE /* app_structure.json in Resources */ = {isa = PBXBuildFile; fileRef = 21F6211F1E3147D5006C0DBE /* app_structure.json */; };
+		21F621221E3155D1006C0DBE /* MatrioskaCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F621211E3155D1006C0DBE /* MatrioskaCodeViewController.swift */; };
 		3E97AAB4FE1D9B124FD14CAB /* Pods_MatrioskaExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0188753F69D4AFD24551958B /* Pods_MatrioskaExample.framework */; };
 		DE7C386A1E005E3C00A399A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C38691E005E3C00A399A3 /* AppDelegate.swift */; };
 		DE7C386C1E005E3C00A399A3 /* TileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C386B1E005E3C00A399A3 /* TileViewController.swift */; };
@@ -17,6 +20,9 @@
 /* Begin PBXFileReference section */
 		0188753F69D4AFD24551958B /* Pods_MatrioskaExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10AE7CFAC2D2657BBA53BF57 /* Pods-MatrioskaExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaExample/Pods-MatrioskaExample.debug.xcconfig"; sourceTree = "<group>"; };
+		21F6211D1E3147AF006C0DBE /* JSONReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
+		21F6211F1E3147D5006C0DBE /* app_structure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_structure.json; sourceTree = "<group>"; };
+		21F621211E3155D1006C0DBE /* MatrioskaCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrioskaCodeViewController.swift; sourceTree = "<group>"; };
 		DE7C38661E005E3C00A399A3 /* MatrioskaExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatrioskaExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE7C38691E005E3C00A399A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE7C386B1E005E3C00A399A3 /* TileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileViewController.swift; sourceTree = "<group>"; };
@@ -68,11 +74,14 @@
 		DE7C38681E005E3C00A399A3 /* MatrioskaExample */ = {
 			isa = PBXGroup;
 			children = (
+				21F6211F1E3147D5006C0DBE /* app_structure.json */,
+				21F6211D1E3147AF006C0DBE /* JSONReader.swift */,
 				DE7C38691E005E3C00A399A3 /* AppDelegate.swift */,
 				DE7C386B1E005E3C00A399A3 /* TileViewController.swift */,
 				DE7C38701E005E3C00A399A3 /* Assets.xcassets */,
 				DE7C38721E005E3C00A399A3 /* LaunchScreen.storyboard */,
 				DE7C38751E005E3C00A399A3 /* Info.plist */,
+				21F621211E3155D1006C0DBE /* MatrioskaCodeViewController.swift */,
 			);
 			path = MatrioskaExample;
 			sourceTree = "<group>";
@@ -98,6 +107,7 @@
 				DE7C38641E005E3C00A399A3 /* Resources */,
 				4AE147B018A9543A80727648 /* [CP] Embed Pods Frameworks */,
 				AC908C2BE3E29B7037E5E673 /* [CP] Copy Pods Resources */,
+				21F621231E315F15006C0DBE /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -115,7 +125,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = runtastic;
 				TargetAttributes = {
 					DE7C38651E005E3C00A399A3 = {
@@ -148,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE7C38741E005E3C00A399A3 /* LaunchScreen.storyboard in Resources */,
+				21F621201E3147D5006C0DBE /* app_structure.json in Resources */,
 				DE7C38711E005E3C00A399A3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +166,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21F621231E315F15006C0DBE /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		4AE147B018A9543A80727648 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,7 +233,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE7C386C1E005E3C00A399A3 /* TileViewController.swift in Sources */,
+				21F6211E1E3147AF006C0DBE /* JSONReader.swift in Sources */,
 				DE7C386A1E005E3C00A399A3 /* AppDelegate.swift in Sources */,
+				21F621221E3155D1006C0DBE /* MatrioskaCodeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +271,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -294,6 +322,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -323,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 10AE7CFAC2D2657BBA53BF57 /* Pods-MatrioskaExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MatrioskaExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -336,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F685EB06043E630E39AC72CE /* Pods-MatrioskaExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MatrioskaExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

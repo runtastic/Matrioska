@@ -1,0 +1,70 @@
+{
+    "structure": {
+        "type": "tabbar",
+        "meta": {
+            "default_tab_id": "main_tab"
+        },
+        "children": [
+                     {
+                     "type": "navigation",
+                     "meta": {
+                     "title": "history_title",
+                     "icon_name": "home"
+                     },
+                     "children": [
+                                  {
+                                  "type": "stack",
+                                  "meta": {
+                                  "background_color": "1111AB"
+                                  },
+                                  "children": [
+                                               {
+                                               "type": "tile",
+                                               "meta": {
+                                               "text": "test",
+                                               "color": "FF6532"
+                                               }
+                                               },
+                                               {
+                                               "type": "stack",
+                                               "meta": {
+                                               "axis": 0
+                                               },
+                                               "children": [
+                                                            {
+                                                            "type": "tile",
+                                                            "meta": {
+                                                            "text": "test",
+                                                            "color": "FF6532"
+                                                            }
+                                                            },
+                                                            {
+                                                            "type": "tile",
+                                                            "meta": {
+                                                            "text": "test",
+                                                            "color": "F8B53D"
+                                                            }
+                                                            },
+                                                            {
+                                                            "type": "tile",
+                                                            "meta": {
+                                                            "text": "test",
+                                                            "color": "FF6532"
+                                                            }
+                                                            }
+                                                            ]
+                                               }
+                                               ]
+                                  }
+                                  ]
+                     },
+                     {
+                     "type": "matrioska",
+                     "meta": {
+                     "title": "main_tab_title",
+                     "icon_name": "map"
+                     }
+                     }
+                     ]
+    }
+}
