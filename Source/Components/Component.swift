@@ -44,7 +44,7 @@ public indirect enum Component {
     /// Since a cluster is itself a view it can also contain other clusters.
     case cluster(builder: ClusterBuilder, children: [Component], meta: ComponentMeta?)
     /// Represents a Component which visibility is specified 
-    /// by the evaluation of a `RuleEvaluator`
+    /// by the evaluation of a `Rule`
     case rule(rule: Rule, component: Component)
 
     /// The meta of the component

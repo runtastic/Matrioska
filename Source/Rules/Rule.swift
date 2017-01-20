@@ -14,7 +14,7 @@ public indirect enum Rule {
     /// A closure type used by the receiver's evaluator
     public typealias RuleEvaluator = () -> Bool
     
-    /// A simple rule.
+    /// A simple rule with a `RuleEvaluator`.
     case simple(evaluator: RuleEvaluator)
     
     /// A logical AND rule.
