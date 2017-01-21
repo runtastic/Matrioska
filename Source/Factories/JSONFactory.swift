@@ -18,20 +18,26 @@ enum JSONFactoryError: Error {
     case missing(JSONObject, String)
 }
 
-/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, `WrapperFactoryBuilder`, 
+fileprivate enum DocumentKey {
+    static let structure = "structure"
+}
+
+fileprivate enum ComponentKey {
+    static let type = "type"
+    static let meta = "meta"
+    static let children = "children"
+    static let rule = "rule"
+}
+
+fileprivate enum RuleKey {
+    static let and = "AND"
+    static let or = "OR"
+    static let not = "NOT"
+}
+
+/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, `WrapperFactoryBuilder`,
 /// `ClusterFactoryBuilder` & `RuleFactoryBuilder`) and uses them to produce `Component`s
 public final class JSONFactory {
-    
-    fileprivate enum Key {
-        static let structure = "structure"
-        static let type = "type"
-        static let meta = "meta"
-        static let children = "children"
-        static let rule = "rule"
-        static let and = "AND"
-        static let or = "OR"
-        static let not = "NOT"
-    }
     
     /// A factory closure to build a view `Component`
     public typealias ViewFactoryBuilder = (ComponentMeta?) -> Component
@@ -43,7 +49,7 @@ public final class JSONFactory {
     public typealias ClusterFactoryBuilder = ([Component], ComponentMeta?) -> Component
     
     /// A factory closure to build a rule `Component`
-    public typealias RuleFactoryBuilder = () -> Bool
+    public typealias RuleFactoryBuilder = Rule.RuleEvaluator
     
     fileprivate var viewFactory: [String: ViewFactoryBuilder] = [:]
     fileprivate var wrapperFactory: [String: WrapperFactoryBuilder] = [:]
@@ -102,24 +108,24 @@ public final class JSONFactory {
     /// - Throws: `JSONFactoryError` when a mandatory key is missing. For more information on
     /// the mandatory keys, check the JSON schema documentation 
     public func component(from json: JSONObject) throws -> Component? {
-        guard let structure = json[Key.structure] as? JSONObject else {
-            throw JSONFactoryError.missing(json, Key.structure)
+        guard let structure = json[DocumentKey.structure] as? JSONObject else {
+            throw JSONFactoryError.missing(json, DocumentKey.structure)
         }
         
         return try component(fromStructure: structure)
     }
     
     private func component(fromStructure json: JSONObject) throws -> Component? {
-        guard let type = json[Key.type] as? String else {
-            throw JSONFactoryError.missing(json, Key.type)
+        guard let type = json[ComponentKey.type] as? String else {
+            throw JSONFactoryError.missing(json, ComponentKey.type)
         }
         
-        let meta = json[Key.meta] as? JSONObject
-        let children = json[Key.children] as? [JSONObject] ?? []
+        let meta = json[ComponentKey.meta] as? JSONObject
+        let children = json[ComponentKey.children] as? [JSONObject] ?? []
         let componentChildren = try children.flatMap { try component(fromStructure: $0) }
         let componentResult = component(from: type, meta: meta, children: componentChildren)
         
-        if let rule = JSONFactory.rule(from: json[Key.rule] as Any, using: ruleFactory),
+        if let rule = JSONFactory.rule(from: json[ComponentKey.rule] as Any, using: ruleFactory),
            let componentResult = componentResult {
             return Component.rule(rule: rule, component: componentResult)
         }
@@ -168,7 +174,6 @@ extension String {
         
         return Rule.simple(evaluator: ruleFactory)
     }
-    
 }
 
 extension Sequence where Iterator.Element == (key: String, value: Any) {
@@ -182,11 +187,11 @@ extension Sequence where Iterator.Element == (key: String, value: Any) {
         let rules = values.flatMap { JSONFactory.rule(from: $0, using: factory) }
         
         switch rule.key {
-        case JSONFactory.Key.and where rules.count >= 2:
+        case RuleKey.and where rules.count >= 2:
             return Rule.and(rules: rules)
-        case JSONFactory.Key.or where rules.count >= 2:
+        case RuleKey.or where rules.count >= 2:
             return Rule.or(rules: rules)
-        case JSONFactory.Key.not where rules.count == 1:
+        case RuleKey.not where rules.count == 1:
             return Rule.not(rule: rules[0])
         default:
             return nil
