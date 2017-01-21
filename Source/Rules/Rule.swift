@@ -18,10 +18,10 @@ public indirect enum Rule {
     case simple(evaluator: RuleEvaluator)
     
     /// A logical AND rule.
-    case and(left: Rule, right: Rule)
+    case and(rules: [Rule])
     
     /// A logical OR rule.
-    case or(left: Rule, right: Rule)
+    case or(rules: [Rule])
     
     /// A logical NOT rule.
     case not(rule: Rule)
@@ -33,10 +33,14 @@ public indirect enum Rule {
         switch self {
         case let .simple(evaluator: evaluator):
             return evaluator()
-        case let .and(left: leftRule, right: rightRule):
-            return leftRule.evaluate() && rightRule.evaluate()
-        case let .or(left: leftRule, right: rightRule):
-            return leftRule.evaluate() || rightRule.evaluate()
+        case let .and(rules: rules):
+            return rules.reduce(true) { (evaluation, rule) in
+                return evaluation && rule.evaluate()
+            }
+        case let .or(rules: rules):
+            return rules.reduce(false) { (evaluation, rule) in
+                return evaluation || rule.evaluate()
+            }
         case let .not(rule: rule):
             return !rule.evaluate()
         }

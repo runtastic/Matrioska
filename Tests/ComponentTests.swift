@@ -145,13 +145,13 @@ class ComponentTests: QuickSpec {
                 let cluster = Component.cluster(builder: { _ in UIViewController() },
                                                 children: [randComponent()],
                                                 meta: nil)
-                let rule = Rule.and(left: Rule.simple(evaluator: { false }), right: Rule.simple(evaluator: { true }))
+                let rule = Rule.and(rules: [Rule.simple(evaluator: { false }), Rule.simple(evaluator: { true })])
                 let component = Component.rule(rule: rule, component: cluster)
                 expect(component.viewController()).to(beNil())
             }
             
             it("passes the children to the child's builder if it evaluates to true") {
-                let rule = Rule.or(left: Rule.simple(evaluator: { false }), right: Rule.simple(evaluator: { true }))
+                let rule = Rule.or(rules: [Rule.simple(evaluator: { false }), Rule.simple(evaluator: { true })])
                 var components: [Component]? = nil
                 let builder: Component.ClusterBuilder = { (children, _) in
                     components = children

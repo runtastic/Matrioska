@@ -30,17 +30,23 @@ class RuleComponentTests: QuickSpec {
             }
             
             it("returns true when a composed rule evaluates to true") {
-                let rule = Rule.and(left: Rule.not(rule: Rule.simple(false)),
-                                    right: Rule.or(left: Rule.simple(false),
-                                                   right: Rule.simple(true)))
+                let rule = Rule.and(rules: [Rule.not(rule: Rule.simple(false)),
+                                            Rule.or(rules: [Rule.simple(false),
+                                                            Rule.simple(true),
+                                                            Rule.simple(false)
+                                                           ])
+                                           ])
                 
                 expect(rule.evaluate()).to(beTrue())
             }
             
             it("returns false when a composed rule evaluates to false") {
-                let rule = Rule.not(rule: Rule.and(left: Rule.not(rule: Rule.simple(false)),
-                                                   right: Rule.or(left: Rule.simple(false),
-                                                                  right: Rule.simple(true))))
+                let rule = Rule.not(rule: Rule.and(rules: [Rule.not(rule: Rule.simple(false)),
+                                                           Rule.or(rules: [Rule.simple(false),
+                                                                          Rule.simple(true)
+                                                                          ]),
+                                                           Rule.simple(true)
+                                                          ]))
                 
                 expect(rule.evaluate()).to(beFalse())
             }

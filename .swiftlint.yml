@@ -22,4 +22,8 @@ excluded:
   - Pods
   - Example
 
+variable_name:
+  excluded: # excluded via string array
+    - or
+
 reporter: "xcode"

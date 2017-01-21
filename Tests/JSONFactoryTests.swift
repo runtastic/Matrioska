@@ -16,10 +16,22 @@ class JSONFactoryTests: QuickSpec {
     let bundle = Bundle(for: JSONFactoryTests.self)
     let jsonFileName = "app_structure"
     
+    /// This spec tests a set of expected behaviors on `JSONFactory` when creating a 
+    /// Component from a local JSON file.
+    ///
+    /// The loaded Component has the following structure:
+    ///
+    /// [ Cluster.TabBar -> [ AND(["is_gold_member", "is_male"], Cluster.Stack -> [ View,
+    ///                                                                            View ]),
+    ///                      Cluster.Stack -> [ ("is_male", View),
+    ///                                         OR(["is_gold_member", NOT("is_male")], Cluster.Stack),
+    ///                                         View ],
+    ///                      Wrapper -> [ NOT("is_male", View) ]
+    ///                     ]
+    /// ]
     override func spec() {
         
-        let jsonObject = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
-        let json = structure(from: jsonObject)
+        let json = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         
         let viewBuilder: JSONFactory.ViewFactoryBuilder = { (meta: ComponentMeta?) in
             Component.view(builder: { _ in UIViewController() }, meta: meta)
@@ -28,9 +40,17 @@ class JSONFactoryTests: QuickSpec {
             ClusterLayout.tabBar(children: children, meta: meta)
         }
         let navigationBuilder: JSONFactory.WrapperFactoryBuilder = { (child, meta) in
-            Component.wrapper(builder: { _ in UINavigationController() }, child: child, meta: meta)
+            let navigation: UINavigationController
+            if let vc = child.viewController() {
+                navigation = UINavigationController(rootViewController: vc)
+            } else {
+                navigation = UINavigationController()
+            }
+            return Component.wrapper(builder: { _ in navigation }, child: child, meta: meta)
         }
         let stackBuilder: JSONFactory.ClusterFactoryBuilder = ClusterLayout.stack
+        let trueRuleBuilder: JSONFactory.RuleFactoryBuilder = { true }
+        let falseRuleBuilder: JSONFactory.RuleFactoryBuilder = { false }
         
         describe("Component from builder factories") {
             
@@ -38,7 +58,8 @@ class JSONFactoryTests: QuickSpec {
                 let jsonFactory = JSONFactory()
                 
                 expect { try jsonFactory.component(from: ["foo": "bar"]) }.to(throwError())
-                expect { try jsonFactory.component(from: ["id": "bar"]) }.to(throwError())
+                expect { try jsonFactory.component(from: ["structure": ["foo": "bar"]]) }.to(throwError())
+                expect { try jsonFactory.component(from: ["structure": ["id": "bar"]]) }.to(throwError())
             }
             
             context("when no factories are added") {
@@ -75,19 +96,19 @@ class JSONFactoryTests: QuickSpec {
                 }
                 
                 it("handles all components recursively") {
-                    let firstChildren = component!.children().first
-                    let secondChildren = component!.children().last
+                    let firstChild = component!.children().first
+                    let secondChild = component!.children().last
                     
-                    expect(firstChildren?.viewController()).to(beAKindOf(StackViewController.self))
-                    expect(secondChildren?.viewController()).to(beAKindOf(StackViewController.self))
+                    expect(firstChild?.viewController()).to(beAKindOf(StackViewController.self))
+                    expect(secondChild?.viewController()).to(beAKindOf(StackViewController.self))
                 }
                 
                 it("does not handle not registered components") {
-                    let firstChildren = component!.children().first
-                    let secondChildren = component!.children().last
+                    let firstChild = component!.children().first
+                    let secondChild = component!.children().last
                     
-                    expect(firstChildren?.children().count).to(equal(0))
-                    expect(secondChildren?.children().count).to(equal(1))
+                    expect(firstChild?.children().count).to(equal(0))
+                    expect(secondChild?.children().count).to(equal(1))
                 }
             }
             
@@ -104,33 +125,90 @@ class JSONFactoryTests: QuickSpec {
                 let component = try! jsonFactory.component(from: json)
                 
                 it("handles all components recursively") {
-                    let firstChildren = component!.children()[0]
-                    let secondChildren = component!.children()[1]
-                    let thirdChildren = component!.children()[2]
+                    let firstChild = component!.children()[0]
+                    let secondChild = component!.children()[1]
+                    let thirdChild = component!.children()[2]
+                    let childViewControllers = component!.viewController()!.childViewControllers
 
-                    expect(firstChildren.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
-                    expect(firstChildren.meta!["title"] as? String).to(equal("history_title"))
-                    expect(secondChildren.meta!["icon_name"] as? String).to(equal("main_tab_icon"))
-                    expect(secondChildren.meta!["title"] as? String).to(equal("main_tab_title"))
+                    expect(firstChild.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
+                    expect(firstChild.meta!["title"] as? String).to(equal("history_title"))
+                    expect(secondChild.meta!["icon_name"] as? String).to(equal("main_tab_icon"))
+                    expect(secondChild.meta!["title"] as? String).to(equal("main_tab_title"))
                     
                     expect(component?.children().count).to(equal(3))
-                    expect(secondChildren.children().count).to(equal(3))
-                    expect(thirdChildren.children().count).to(equal(1))
-                    expect(firstChildren.children()[0].viewController()).to(beAKindOf(UIViewController.self))
-                    expect(secondChildren.children()[1].viewController()).to(beAKindOf(StackViewController.self))
+                    expect(secondChild.children().count).to(equal(3))
+                    expect(thirdChild.children().count).to(equal(1))
+                    expect(firstChild.children()[0].viewController()).to(beAKindOf(UIViewController.self))
+                    expect(secondChild.children()[1].viewController()).to(beAKindOf(StackViewController.self))
+                    
+                    expect(childViewControllers.count).to(equal(3))
+                    expect(childViewControllers[0].childViewControllers.count).to(equal(1))
+                    expect(childViewControllers[1].childViewControllers.count).to(equal(3))
+                    expect(childViewControllers[2].childViewControllers.count).to(equal(1))
                 }
                 
                 it("does not handle registered wrapper builders with no children") {
-                    let firstChildren = component!.children()[0]
+                    let firstChild = component!.children()[0]
                     
-                    expect(firstChildren.children().count).to(equal(1))
+                    expect(firstChild.children().count).to(equal(1))
                 }
                 
                 it("handles registered wrapper builders with views") {
-                    let thirdChildren = component!.children()[2]
+                    let thirdChild = component!.children()[2]
                     
-                    expect(thirdChildren.viewController()).to(beAKindOf(UINavigationController.self))
-                    expect(thirdChildren.children()[0].viewController()).to(beAKindOf(UIViewController.self))
+                    expect(thirdChild.viewController()).to(beAKindOf(UINavigationController.self))
+                    expect(thirdChild.children()[0].viewController()).to(beAKindOf(UIViewController.self))
+                }
+            }
+            
+            context("when registering all available factories and rules") {
+                let jsonFactory = JSONFactory()
+                
+                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
+                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
+                jsonFactory.register(with: "navigation", factoryBuilder: navigationBuilder)
+                jsonFactory.register(with: "button", factoryBuilder: viewBuilder)
+                jsonFactory.register(with: "label", factoryBuilder: viewBuilder)
+                jsonFactory.register(with: "table_view", factoryBuilder: viewBuilder)
+                jsonFactory.register(with: "is_male", factoryBuilder: falseRuleBuilder)
+                jsonFactory.register(with: "is_gold_member", factoryBuilder: trueRuleBuilder)
+                
+                let component = try! jsonFactory.component(from: json)
+                
+                it("handles all components recursively and evaluates the rules") {
+                    let firstChild = component!.children()[0]
+                    let secondChild = component!.children()[1]
+                    let thirdChild = component!.children()[2]
+                    let childViewControllers = component!.viewController()!.childViewControllers
+                    
+                    expect(firstChild.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
+                    expect(firstChild.meta!["title"] as? String).to(equal("history_title"))
+                    expect(secondChild.meta!["icon_name"] as? String).to(equal("main_tab_icon"))
+                    expect(secondChild.meta!["title"] as? String).to(equal("main_tab_title"))
+                    
+                    expect(component?.children().count).to(equal(3))
+                    expect(secondChild.children().count).to(equal(3))
+                    expect(thirdChild.children().count).to(equal(1))
+                    expect(firstChild.children()[0].viewController()).to(beAKindOf(UIViewController.self))
+                    expect(secondChild.children()[1].viewController()).to(beAKindOf(StackViewController.self))
+                    
+                    expect(childViewControllers.count).to(equal(2))
+                    expect(childViewControllers[0].childViewControllers.count).to(equal(2))
+                    expect(childViewControllers[1].childViewControllers.count).to(equal(1))
+                }
+                
+                it("returns a component with no rule when the JSON object has a rule with invalid JSON") {
+                    let jsonFactory = JSONFactory()
+                    jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
+                    let component = try! jsonFactory.component(from: ["structure": ["type": "tabbar",
+                                                                                    "rule": JSONObject()]])
+                    
+                    switch component! {
+                    case .rule(_, _):
+                        fail("it's a rule Component and it should not")
+                    default:
+                        break
+                    }
                 }
             }
         }
@@ -151,8 +229,4 @@ fileprivate extension Component {
             return child.children()
         }
     }
-}
-
-fileprivate func structure(from jsonObject: JSONObject) -> JSONObject {
-    return jsonObject["structure"] as! JSONObject
 }

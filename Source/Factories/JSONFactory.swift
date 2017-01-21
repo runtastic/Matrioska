@@ -18,14 +18,19 @@ enum JSONFactoryError: Error {
     case missing(JSONObject, String)
 }
 
-/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, 
-/// `WrapperFactoryBuilder` & `ClusterFactoryBuilder`) and uses them to produce `Component`s
+/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, `WrapperFactoryBuilder`, 
+/// `ClusterFactoryBuilder` & `RuleFactoryBuilder`) and uses them to produce `Component`s
 public final class JSONFactory {
     
-    private enum Key {
+    fileprivate enum Key {
+        static let structure = "structure"
         static let type = "type"
         static let meta = "meta"
         static let children = "children"
+        static let rule = "rule"
+        static let and = "AND"
+        static let or = "OR"
+        static let not = "NOT"
     }
     
     /// A factory closure to build a view `Component`
@@ -37,9 +42,13 @@ public final class JSONFactory {
     /// A factory closure to build a cluster `Component`
     public typealias ClusterFactoryBuilder = ([Component], ComponentMeta?) -> Component
     
-    private var viewFactory: [String: ViewFactoryBuilder] = [:]
-    private var wrapperFactory: [String: WrapperFactoryBuilder] = [:]
-    private var clusterFactory: [String: ClusterFactoryBuilder] = [:]
+    /// A factory closure to build a rule `Component`
+    public typealias RuleFactoryBuilder = () -> Bool
+    
+    fileprivate var viewFactory: [String: ViewFactoryBuilder] = [:]
+    fileprivate var wrapperFactory: [String: WrapperFactoryBuilder] = [:]
+    fileprivate var clusterFactory: [String: ClusterFactoryBuilder] = [:]
+    fileprivate var ruleFactory: [String: RuleFactoryBuilder] = [:]
     
     /// Initialize a new JSONFactory
     public init() {
@@ -76,30 +85,111 @@ public final class JSONFactory {
         clusterFactory[type] = factoryBuilder
     }
     
-    /// Produces a `Component` from a given `JSONObject`, which has one mandatory key: `type`
+    /// Registers a new `RuleFactoryBuilder` which will be used when producing the component
+    ///
+    /// - Parameters:
+    ///   - type: a string identifying this factory type
+    ///   - factoryBuilder: a `RuleFactoryBuilder` to build a `Component`
+    public func register(with type: String,
+                         factoryBuilder: @escaping RuleFactoryBuilder) {
+        ruleFactory[type] = factoryBuilder
+    }
+    
+    /// Produces a `Component` from a given `JSONObject`
     ///
     /// - Parameter json: the `JSONObject` to be used
     /// - Returns: An optional `Component`
-    /// - Throws: `JSONFactoryError` when a mandatory key is missing
+    /// - Throws: `JSONFactoryError` when a mandatory key is missing. For more information on
+    /// the mandatory keys, check the JSON schema documentation 
     public func component(from json: JSONObject) throws -> Component? {
+        guard let structure = json[Key.structure] as? JSONObject else {
+            throw JSONFactoryError.missing(json, Key.structure)
+        }
+        
+        return try component(fromStructure: structure)
+    }
+    
+    private func component(fromStructure json: JSONObject) throws -> Component? {
         guard let type = json[Key.type] as? String else {
             throw JSONFactoryError.missing(json, Key.type)
         }
         
         let meta = json[Key.meta] as? JSONObject
         let children = json[Key.children] as? [JSONObject] ?? []
-        let componentChildren = try children.flatMap { try component(from: $0) }
-        var componentResult: Component?
+        let componentChildren = try children.flatMap { try component(fromStructure: $0) }
+        let componentResult = component(from: type, meta: meta, children: componentChildren)
         
-        if let viewFactory = viewFactory[type] {
-            componentResult = viewFactory(meta)
-        } else if let wrapperFactory = wrapperFactory[type],
-                  let componentChild = componentChildren.first {
-            componentResult = wrapperFactory(componentChild, meta)
-        } else if let clusterFactory = clusterFactory[type] {
-            componentResult = clusterFactory(componentChildren, meta)
+        if let rule = JSONFactory.rule(from: json[Key.rule] as Any, using: ruleFactory),
+           let componentResult = componentResult {
+            return Component.rule(rule: rule, component: componentResult)
         }
         
         return componentResult
+    }
+}
+
+extension JSONFactory {
+    
+    fileprivate func component(from type: String, meta: JSONObject?, children: [Component]) -> Component? {
+        var component: Component? = nil
+        
+        if let viewFactory = viewFactory[type] {
+            component = viewFactory(meta)
+        } else if let wrapperFactory = wrapperFactory[type],
+            let componentChild = children.first {
+            component = wrapperFactory(componentChild, meta)
+        } else if let clusterFactory = clusterFactory[type] {
+            component = clusterFactory(children, meta)
+        }
+        
+        return component
+    }
+    
+    fileprivate static func rule(from object: Any, using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
+        if let rule = (object as? String)?.rule(using: factory) {
+            return rule
+        }
+        
+        if let jsonObject = object as? JSONObject,
+            let rule = jsonObject.rule(using: factory) {
+            return rule
+        }
+        
+        return nil
+    }
+}
+
+extension String {
+    
+    fileprivate func rule(using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
+        guard let ruleFactory = factory[self] else {
+                return nil
+        }
+        
+        return Rule.simple(evaluator: ruleFactory)
+    }
+    
+}
+
+extension Sequence where Iterator.Element == (key: String, value: Any) {
+    
+    fileprivate func rule(using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
+        guard let rule = first(where: { _ in true }) else {
+            return nil
+        }
+
+        let values = rule.value as? [Any] ?? [rule.value]
+        let rules = values.flatMap { JSONFactory.rule(from: $0, using: factory) }
+        
+        switch rule.key {
+        case JSONFactory.Key.and where rules.count >= 2:
+            return Rule.and(rules: rules)
+        case JSONFactory.Key.or where rules.count >= 2:
+            return Rule.or(rules: rules)
+        case JSONFactory.Key.not where rules.count == 1:
+            return Rule.not(rule: rules[0])
+        default:
+            return nil
+        }
     }
 }

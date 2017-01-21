@@ -1,61 +1,83 @@
 {
-    "structure": {
-        "type": "tabbar",
-        "meta": {
-            "default_tab_id": "main_tab"
+    "structure":{
+        "type":"tabbar",
+        "meta":{
+            "default_tab_id":"main_tab"
         },
-        "children": [
-                     {
-                     "type": "stack",
-                     "meta": {
-                     "title": "history_title",
-                     "icon_name": "history_tab_icon"
-                     },
-                     "children": [
-                                  {
-                                  "type": "table_view"
-                                  },
-                                  {
-                                  "type": "navigation"
-                                  }
-                                  ]
-                     },
-                     {
-                     "type": "stack",
-                     "meta": {
-                     "title": "main_tab_title",
-                     "icon_name": "main_tab_icon"
-                     },
-                     "children": [
-                                  {
-                                  "type": "label"
-                                  },
-                                  {
-                                  "type": "stack",
-                                  "meta": {
-                                  "requires_navigation": "true",
-                                  "orientation": "horizontal"
-                                  }
-                                  },
-                                  {
-                                  "type": "button",
-                                  "meta": {
-                                  "title": {
-                                  "key": "start_button_title",
-                                  "type": "localized_string"
-                                  }
-                                  }
-                                  }
-                                  ]
-                     },
-                     {
-                     "type": "navigation",
-                     "children": [
-                                  {
-                                  "type": "label"
-                                  }
-                                  ]
-                     }
-                     ]
+        "children":[
+                    {
+                    "type":"stack",
+                    "meta":{
+                    "title":"history_title",
+                    "icon_name":"history_tab_icon"
+                    },
+                    "children":[
+                                {
+                                "type":"table_view"
+                                },
+                                {
+                                "type":"navigation"
+                                }
+                                ],
+                    "rule":{
+                    "AND":[
+                           "is_gold_member",
+                           "is_male"
+                           ]
+                    }
+                    },
+                    {
+                    "type":"stack",
+                    "meta":{
+                    "title":"main_tab_title",
+                    "icon_name":"main_tab_icon"
+                    },
+                    "children":[
+                                {
+                                "type":"label",
+                                "rule": "is_male"
+                                },
+                                {
+                                "type":"stack",
+                                "meta":{
+                                "requires_navigation":"true",
+                                "orientation":"horizontal"
+                                },
+                                "rule":{
+                                "OR":[
+                                      "is_gold_member",
+                                      {
+                                      "NOT":"is_male"
+                                      }
+                                      ]
+                                }
+                                },
+                                {
+                                "type":"button",
+                                "meta":{
+                                "title":{
+                                "key":"start_button_title",
+                                "type":"localized_string"
+                                }
+                                }
+                                }
+                                ]
+                    },
+                    {
+                    "type":"navigation",
+                    "meta":{
+                    "title":"profile_title",
+                    "icon_name":"profile_tab_icon"
+                    },
+                    "children":[
+                                {
+                                "type":"label"
+                                }
+                                ],
+                    "rule":{
+                    "NOT":"is_male"
+                    }
+                    }
+                    ]
     }
 }
