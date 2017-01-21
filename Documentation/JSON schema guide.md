@@ -23,13 +23,13 @@ Below you can find a detailed schema for `Component`s and for each configuration
 
 ### Rule schema
 
-A `Rule` can be composed by a simple rule (String) or a logical operator combining multiple rules.
+A `Rule` can be composed by a simple rule type (`String`) or a logical operator combining multiple rule types.
 
 | Operator | Description | Example |
 | --------- | ------------ | ----------- |
-| `AND` | AND operation on an array with at least two rules. | `{"AND":["is_gold_member", {"NOT": "is_male"}]}` |
-| `OR` | OR operation on an array with at least two rules. | `{"OR":[{"NOT": "is_gold_member"}, "is_male", "has_devices"]}` |
-| `NOT` | NOT operation on a rule. | `{"NOT":"is_gold_member"}` |
+| `AND` | AND operation on an array with at least two rule types. | `{"AND":["is_gold_member", {"NOT": "is_male"}]}` |
+| `OR` | OR operation on an array with at least two rule types. | `{"OR":[{"NOT": "is_gold_member"}, "is_male", "has_devices"]}` |
+| `NOT` | NOT operation on a rule type. | `{"NOT":"is_gold_member"}` |
 
 ### TabBarConfig meta schema
 

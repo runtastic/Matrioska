@@ -19,6 +19,7 @@
     - [ExpressibleByComponentMeta](#expressiblebycomponentmeta)
   - [Creating Components](#creating-components)
   - [Layout](#layout)
+  - [Rulesets to define Component visibility](#rulesets-to-define-component-visibility)
   - [Load Components from JSON](#load-components-from-json)
 - [Roadmap](#roadmap)
 - [License](#license)
@@ -34,6 +35,7 @@ To build your UI you can use nested `Component`s. A `Component` can be 3 differe
 - **View**: Any `UIViewController` that can use AutoLayout to specify its `intrinsicContentSize`
 - **Cluster**: Views with children (other `Component`s). A cluster is responsible for laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
 - **Wrapper**: A View with only one child (a `Component`). You can see it as a special cluster or as a special view. It’s responsible for displaying its child’s view.
+- **Rule**: A `Component` which visibility is specified by a given `Rule`.
 
 The goal is to provide a tiny but powerful foundation to build your app on top of.
 Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.  
@@ -149,6 +151,28 @@ window.rootViewController = component.viewController()
 Views are responsible for defining their `intrinsicContentSize` using AutoLayout, clusters can decide whether to respect their dimensions or not, both vertical and horizontal or also only one of the two.
 To make sure that a `Component`’s `UIViewController`has a valid `intrinsicContentSize` you need to add appropriate constraints to the view. [To know more about this read the documentation about “Views with Intrinsic Content Size”](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html).
 
+### Rulesets to define Component visibility
+
+Since the visibility of a `Component` may depend on external data, Matrioska provides rules in order to specify it.
+
+`Rule`s are evaluated in order to resolve the visibility of their `Component`: when evaluating to true, they return their `Component`'s view when asked for their view; otherwise they return nil when evaluating to false.  
+
+`Rules` can also be composed in logical operators:
+
+```
+let rule = Rule.not(rule: Rule.simple(evaluator: { false }))
+let component = Component.rule(rule: rule, component: someComponent)
+let vc = component.viewController() // Evaluates to true, vc is present
+
+---
+
+let rule = Rule.and(rules: [Rule.simple(evaluator: { false }), Rule.simple(evaluator: { true })])
+let component = Component.rule(rule: rule, component: cluster)
+let vc = component.viewController() // Evaluates to false, vc is nil
+```
+
+The `Rule`'s meta will be their `Component`'s meta.
+
 ### Load Components from JSON
 
 `Components` can also be loaded from JSON. For this, you are responsible for registering factories (`Component` builders) that will be used when parsing the JSON structure. In order to register factories, usage of `JSONFactory` is needed:
@@ -156,34 +180,43 @@ To make sure that a `Component`’s `UIViewController`has a valid `intrinsicCont
 ```
 let jsonFactory = JSONFactory()
 
-jsonFactory.register(with: "tab_bar", factoryBuilder: { (children, meta) -> Component in
+jsonFactory.register(with: "tab_bar", factoryBuilder: { (children, meta) in
     ClusterLayout.tabBar(children: children, meta: meta)
 })
 
-jsonFactory.register(with: "navigation", factoryBuilder: { (child, meta) -> Component in
+jsonFactory.register(with: "navigation", factoryBuilder: { (child, meta) in
     Component.wrapper(builder: { _ in UINavigationController() }, child: child, meta: meta)
 })
 
-jsonFactory.register(with: "table_view", factoryBuilder: { (meta) -> Component in
+jsonFactory.register(with: "table_view", factoryBuilder: { (meta) in
     Component.view(builder: { _ in UITableViewController() }, meta: meta)
+})
+
+jsonFactory.register(with: "is_male", factoryBuilder: { () in
+  return User.isMale
+})
+
+jsonFactory.register(with: "is_gold_member", factoryBuilder: { () in
+  return User.isGoldMember
 })
 ```
 
 Whenever you register a new factory you should provide the `type` key that will match the JSON. Check the [provided JSON schema](/Documentation/JSON\ schema\ guide.md) for more details on that.
 
-You can register different factories for `View`, `Wrapper` and  `Cluster` `Component` types using the `JSONFactory`. After registration, you can use the factory to get the component out of a JSON:
+You can register different factories for `View`, `Wrapper`, `Cluster` and  `Rule` `Component` types using the `JSONFactory`. After registration, you can use the factory to get the component out of a JSON:
 
 ```
 let component = try jsonFactory.component(from: json)
 ```
 
-Besides providing `type` on the JSON, `Component`s should also match the JSON schema that the library provides by default whenever using the built-in components (TabBar or Stack) meta configuration.
+`Component`s, `Meta`s and `Rule`s should also match the JSON schema that the library provides by default.
 
-Check the [JSON schem guide](/Documentation/JSON\ schema\ guide.md) for more information.
+For instance, whenever using the built-in components (TabBar or Stack), the meta configuration should meet the documented JSON schema.
+
+Check the [JSON schema guide](/Documentation/JSON\ schema\ guide.md) for more information.
 
 ## Roadmap
 
-- Rulesets to define the visibility of a Component [#4](https://github.com/runtastic/Matrioska/issues/4)
 - Deep Linking [#5](https://github.com/runtastic/Matrioska/issues/5)
 
 ## License
