@@ -15,7 +15,7 @@ class RuleComponentTests: QuickSpec {
     
     override func spec() {
         
-        describe("Rule Component") {
+        fdescribe("Rule Component") {
             
             it("returns false when the rule evaluates to false") {
                 let rule = Rule.simple(false)
