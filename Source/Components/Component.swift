@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Represent a UI `Component`
+/// Represents a UI `Component`
 /// `Component`s can be nested and contain other components
 public indirect enum Component {
 
@@ -43,6 +43,9 @@ public indirect enum Component {
     /// A cluster is responsible of laying out its children’s views.
     /// Since a cluster is itself a view it can also contain other clusters.
     case cluster(builder: ClusterBuilder, children: [Component], meta: ComponentMeta?)
+    /// Represents a Component which visibility is specified 
+    /// by the evaluation of a `Rule`
+    case rule(rule: Rule, component: Component)
 
     /// The meta of the component
     public var meta: ComponentMeta? {
@@ -53,6 +56,8 @@ public indirect enum Component {
             return meta
         case let .cluster(_, _, meta):
             return meta
+        case let .rule(_, child):
+            return child.meta
         }
     }
     
@@ -70,6 +75,8 @@ public indirect enum Component {
             return builder(child, meta)
         case let .cluster(builder, children, meta):
             return builder(children, meta)
+        case let .rule(rule, child):
+            return rule.evaluate() ? child.viewController() : nil
         }
     }
 }
