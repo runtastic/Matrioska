@@ -152,13 +152,13 @@ private func expectTabCount(_ viewController: UIViewController?,
 }
 
 private func simpleComponent(meta: ComponentMeta?, color: UIColor? = nil) -> Component {
-    let builder: Component.SingleViewBuilder = { meta in
+    let viewBuilder: Component.SingleViewBuilder = { meta in
         let vc = UIViewController()
         vc.view.backgroundColor = color
         return vc
     }
     
-    return Component.single(viewBuilder: builder,
+    return Component.single(viewBuilder: viewBuilder,
                             meta: meta)
 }
 

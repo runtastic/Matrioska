@@ -286,7 +286,7 @@ private func labelComponent(title: String?,
                             color: UIColor? = nil,
                             labelSize: CGSize? = nil) -> Component {
     
-    let builder: Component.SingleViewBuilder = { meta in
+    let viewBuilder: Component.SingleViewBuilder = { meta in
         let vc = UIViewController()
         vc.view.backgroundColor = color
         let label = UILabel()
@@ -304,7 +304,7 @@ private func labelComponent(title: String?,
     }
     
     return Component.single(
-        viewBuilder: builder,
+        viewBuilder: viewBuilder,
         meta: title.map { ["title": $0] }
     )
 }

@@ -51,12 +51,12 @@ class ComponentTests: QuickSpec {
             
             it("should pass the child to the builder") {
                 var component: Component? = nil
-                let builder: Component.WrapperViewBuilder = { (child, _) in
+                let viewBuilder: Component.WrapperViewBuilder = { (child, _) in
                     component = child
                     return UIViewController()
                 }
                 
-                _ =  Component.wrapper(viewBuilder: builder,
+                _ =  Component.wrapper(viewBuilder: viewBuilder,
                                        child: randComponent(),
                                        meta: nil).viewController()
                 
@@ -65,12 +65,12 @@ class ComponentTests: QuickSpec {
             
             it("should pass metadata to the builder") {
                 var value: ComponentMeta? = nil
-                let builder: Component.WrapperViewBuilder = { (_, meta) in
+                let viewBuilder: Component.WrapperViewBuilder = { (_, meta) in
                     value = meta
                     return UIViewController()
                 }
                 
-                _ =  Component.wrapper(viewBuilder: builder,
+                _ =  Component.wrapper(viewBuilder: viewBuilder,
                                        child: randComponent(),
                                        meta: ["foo": "bar"]).viewController()
                 
@@ -96,12 +96,12 @@ class ComponentTests: QuickSpec {
             
             it("should pass the children to the builder") {
                 var components: [Component]? = nil
-                let builder: Component.ClusterViewBuilder = { (children, _) in
+                let viewBuilder: Component.ClusterViewBuilder = { (children, _) in
                     components = children
                     return UIViewController()
                 }
                 
-                _ =  Component.cluster(viewBuilder: builder,
+                _ =  Component.cluster(viewBuilder: viewBuilder,
                                        children: [randComponent()],
                                        meta: nil).viewController()
                 
@@ -110,12 +110,12 @@ class ComponentTests: QuickSpec {
             
             it("should pass metadata to the builder") {
                 var value: ComponentMeta? = nil
-                let builder: Component.ClusterViewBuilder = { (_, meta) in
+                let viewBuilder: Component.ClusterViewBuilder = { (_, meta) in
                     value = meta
                     return UIViewController()
                 }
                 
-                _ =  Component.cluster(viewBuilder: builder,
+                _ =  Component.cluster(viewBuilder: viewBuilder,
                                        children: [randComponent()],
                                        meta: ["foo": "bar"]).viewController()
                 
@@ -153,11 +153,11 @@ class ComponentTests: QuickSpec {
             it("passes the children to the child's builder if it evaluates to true") {
                 let rule = Rule.or(rules: [Rule.simple(evaluator: { false }), Rule.simple(evaluator: { true })])
                 var components: [Component]? = nil
-                let builder: Component.ClusterViewBuilder = { (children, _) in
+                let viewBuilder: Component.ClusterViewBuilder = { (children, _) in
                     components = children
                     return UIViewController()
                 }
-                let cluster = Component.cluster(viewBuilder: builder,
+                let cluster = Component.cluster(viewBuilder: viewBuilder,
                                                 children: [randComponent()],
                                                 meta: nil)
                 
@@ -169,11 +169,11 @@ class ComponentTests: QuickSpec {
             it("does not pass the children to the child's builder if it evaluates to false") {
                 let rule = Rule.not(rule: Rule.simple(evaluator: { true }))
                 var components: [Component]? = nil
-                let builder: Component.ClusterViewBuilder = { (children, _) in
+                let viewBuilder: Component.ClusterViewBuilder = { (children, _) in
                     components = children
                     return UIViewController()
                 }
-                let cluster = Component.cluster(viewBuilder: builder,
+                let cluster = Component.cluster(viewBuilder: viewBuilder,
                                                 children: [randComponent()],
                                                 meta: nil)
                 
@@ -185,11 +185,11 @@ class ComponentTests: QuickSpec {
             it("passes metadata to the child's builder if it evaluates to true") {
                 let rule = Rule.not(rule: Rule.simple(evaluator: { false }))
                 var value: ComponentMeta? = nil
-                let builder: Component.ClusterViewBuilder = { (_, meta) in
+                let viewBuilder: Component.ClusterViewBuilder = { (_, meta) in
                     value = meta
                     return UIViewController()
                 }
-                let cluster = Component.cluster(viewBuilder: builder,
+                let cluster = Component.cluster(viewBuilder: viewBuilder,
                                                 children: [randComponent()],
                                                 meta: ["foo": "bar"])
                 
@@ -201,11 +201,11 @@ class ComponentTests: QuickSpec {
             it("does not pass metadata to the child's builder if it evaluates to false") {
                 let rule = Rule.simple(evaluator: { false })
                 var value: ComponentMeta? = nil
-                let builder: Component.ClusterViewBuilder = { (_, meta) in
+                let viewBuilder: Component.ClusterViewBuilder = { (_, meta) in
                     value = meta
                     return UIViewController()
                 }
-                let cluster = Component.cluster(viewBuilder: builder,
+                let cluster = Component.cluster(viewBuilder: viewBuilder,
                                                 children: [randComponent()],
                                                 meta: ["one": "two"])
                 
