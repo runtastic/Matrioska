@@ -39,16 +39,16 @@ fileprivate enum RuleKey {
 /// `ClusterBuilder` & `RuleBuilder`) and uses them to produce `Component`s
 public final class JSONFactory {
     
-    /// A closure to build a .single `Component`
+    /// A closure to build a single `Component`
     public typealias SingleBuilder = (ComponentMeta?) -> Component
     
-    /// A closure to build a .wrapper `Component`
+    /// A closure to build a wrapper `Component`
     public typealias WrapperBuilder = (Component, ComponentMeta?) -> Component
     
-    /// A closure to build a .cluster `Component`
+    /// A closure to build a cluster `Component`
     public typealias ClusterBuilder = ([Component], ComponentMeta?) -> Component
     
-    /// A closure to build a .rule `Component`
+    /// A closure to build a rule `Component`
     public typealias RuleBuilder = Rule.RuleEvaluator
     
     fileprivate var singleBuilders: [String: SingleBuilder] = [:]
@@ -64,8 +64,8 @@ public final class JSONFactory {
     /// Registers a new `SingleBuilder` which will be used when producing the component
     ///
     /// - Parameters:
-    ///   - type: a string identifying this factory type
-    ///   - builder: a `SingleBuilder` to build a `Component`
+    ///   - type: a string identifying the component type
+    ///   - builder: a `SingleBuilder` for the given type
     public func register(builder: @escaping SingleBuilder, forType type: String) {
         singleBuilders[type] = builder
     }
@@ -73,8 +73,8 @@ public final class JSONFactory {
     /// Registers a new `WrapperBuilder` which will be used when producing the component
     ///
     /// - Parameters:
-    ///   - type: a string identifying this factory type
-    ///   - builder: a `WrapperBuilder` to build a `Component`
+    ///   - type: a string identifying the component type
+    ///   - builder: a `WrapperBuilder` for the given type
     public func register(builder: @escaping WrapperBuilder, forType type: String) {
         wrapperBuilders[type] = builder
     }
@@ -82,8 +82,8 @@ public final class JSONFactory {
     /// Registers a new `ClusterBuilder` which will be used when producing the component
     ///
     /// - Parameters:
-    ///   - type: a string identifying this factory type
-    ///   - builder: a `ClusterBuilder` to build a `Component`
+    ///   - type: a string identifying the component type
+    ///   - builder: a `ClusterBuilder` for the given type
     public func register(builder: @escaping ClusterBuilder, forType type: String) {
         clusterBuilders[type] = builder
     }
@@ -91,8 +91,8 @@ public final class JSONFactory {
     /// Registers a new `RuleBuilder` which will be used when producing the component
     ///
     /// - Parameters:
-    ///   - type: a string identifying this factory type
-    ///   - builder: a `RuleBuilder` to build a `Component`
+    ///   - type: a string identifying the component type
+    ///   - builder: a `RuleBuilder` for the given type
     public func register(builder: @escaping RuleBuilder, forType type: String) {
         ruleBuilders[type] = builder
     }
@@ -135,13 +135,13 @@ extension JSONFactory {
     fileprivate func makeComponent(type: String, meta: JSONObject?, children: [Component]) -> Component? {
         var component: Component? = nil
         
-        if let standaloneFactory = singleBuilders[type] {
-            component = standaloneFactory(meta)
-        } else if let wrapperFactory = wrapperBuilders[type],
-            let componentChild = children.first {
-            component = wrapperFactory(componentChild, meta)
-        } else if let clusterFactory = clusterBuilders[type] {
-            component = clusterFactory(children, meta)
+        if let singleBuilder = singleBuilders[type] {
+            component = singleBuilder(meta)
+        } else if let wrapperBuilder = wrapperBuilders[type],
+            let child = children.first {
+            component = wrapperBuilder(child, meta)
+        } else if let clusterBuilder = clusterBuilders[type] {
+            component = clusterBuilder(children, meta)
         }
         
         return component
@@ -164,10 +164,10 @@ extension JSONFactory {
 extension String {
     
     fileprivate func makeRule(builders: [String: JSONFactory.RuleBuilder]) -> Rule? {
-        guard let ruleFactory = builders[self] else {
+        guard let ruleBuilder = builders[self] else {
             return nil
         }
-        return Rule.simple(evaluator: ruleFactory)
+        return Rule.simple(evaluator: ruleBuilder)
     }
 }
 

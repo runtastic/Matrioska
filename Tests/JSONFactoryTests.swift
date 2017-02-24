@@ -33,7 +33,7 @@ class JSONFactoryTests: QuickSpec {
         
         let json = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         
-        let viewBuilder: JSONFactory.SingleBuilder = { (meta: ComponentMeta?) in
+        let singleBuilder: JSONFactory.SingleBuilder = { (meta: ComponentMeta?) in
             Component.single(viewBuilder: { _ in UIViewController() }, meta: meta)
         }
         let tabBarBuilder: JSONFactory.ClusterBuilder = { (children, meta) in
@@ -118,9 +118,9 @@ class JSONFactoryTests: QuickSpec {
                 jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
                 jsonFactory.register(builder: stackBuilder, forType: "stack")
                 jsonFactory.register(builder: navigationBuilder, forType: "navigation")
-                jsonFactory.register(builder: viewBuilder, forType: "button")
-                jsonFactory.register(builder: viewBuilder, forType: "label")
-                jsonFactory.register(builder: viewBuilder, forType: "table_view")
+                jsonFactory.register(builder: singleBuilder, forType: "button")
+                jsonFactory.register(builder: singleBuilder, forType: "label")
+                jsonFactory.register(builder: singleBuilder, forType: "table_view")
                 
                 let component = try! jsonFactory.makeComponent(json: json)
                 
@@ -167,9 +167,9 @@ class JSONFactoryTests: QuickSpec {
                 jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
                 jsonFactory.register(builder: stackBuilder, forType: "stack")
                 jsonFactory.register(builder: navigationBuilder, forType: "navigation")
-                jsonFactory.register(builder: viewBuilder, forType: "button")
-                jsonFactory.register(builder: viewBuilder, forType: "label")
-                jsonFactory.register(builder: viewBuilder, forType: "table_view")
+                jsonFactory.register(builder: singleBuilder, forType: "button")
+                jsonFactory.register(builder: singleBuilder, forType: "label")
+                jsonFactory.register(builder: singleBuilder, forType: "table_view")
                 jsonFactory.register(builder: falseRuleBuilder, forType: "is_male")
                 jsonFactory.register(builder: trueRuleBuilder, forType: "is_gold_member")
                 

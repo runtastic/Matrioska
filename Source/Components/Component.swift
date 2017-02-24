@@ -9,25 +9,26 @@
 import Foundation
 
 /// Represents a UI `Component`
-/// `Component`s can be nested and contain other components
+/// `Component`s can be nested and contain other components.
 public indirect enum Component {
 
-    /// A closure to build a `UIViewController`. Can receive metadata for additional configuration.
+    /// A closure to build a `UIViewController` for a single component.
+    /// Can receive metadata for additional configuration.
     public typealias SingleViewBuilder = (_ meta: ComponentMeta?) -> UIViewController?
     
-    /// A closure to build a wrapper `UIViewController`.
+    /// A closure to build a `UIViewController` for a wrapper component.
     /// The view is responsible to wrap and display it's child component.
-    /// Can receive metadata 
+    /// Can receive metadata for additional configuration.
     public typealias WrapperViewBuilder = (
         _ child: Component,
         _ meta: ComponentMeta?
         ) -> UIViewController?
     
-    /// A closure to build a cluster `UIViewController`.
+    /// A closure to build a `UIViewController` for a cluster component.
     /// The builder can return nil in case the `Component` shouldn't be shown.
     /// For example a `Component` that lacks proper metadata might not be displayable.
     /// The view is responsible to display and layout its children components.
-    /// Can receive metadata for additional configuration..
+    /// Can receive metadata for additional configuration.
     public typealias ClusterViewBuilder = (
         _ children: [Component],
         _ meta: ComponentMeta?
