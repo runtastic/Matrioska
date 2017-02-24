@@ -23,7 +23,7 @@ class TabBarClusterTests: QuickSpec {
                 simpleComponent(meta: TabConfig(title: "test1"), color: .red),
                 simpleComponent(meta: TabConfig(title: "test2"), color: .blue),
                 simpleComponent(meta: TabConfig(title: "test3"), color: .orange)
-                ]
+            ]
             
             it("should display its children") {
                 let children: [Component] = [
@@ -43,7 +43,7 @@ class TabBarClusterTests: QuickSpec {
             context("when meta represents the selected index") {
                 
                 typealias TabBarConfig = ClusterLayout.TabBarConfig
-
+                
                 it("should consider it and select the proper tab") {
                     let meta = TabBarConfig(selectedIndex: 1)
                     let vc = ClusterLayout.tabBar(children: children, meta: meta).viewController()
@@ -83,9 +83,9 @@ class TabBarClusterTests: QuickSpec {
             
             it("should ignore children without view") {
                 let children: [Component] = [
-                    Component.view(builder: { _ in nil }, meta: TabConfig(title: "_")),
+                    Component.single(viewBuilder: { _ in nil }, meta: TabConfig(title: "_")),
                     simpleComponent(meta: TabConfig(title: "test1"), color: .red)
-                    ]
+                ]
                 let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                 expectTabCount(vc) == 1
                 expect(vc).to(haveValidSnapshot())
@@ -99,7 +99,7 @@ class TabBarClusterTests: QuickSpec {
                     let children: [Component] = [
                         simpleComponent(meta: nil),
                         validComponent
-                        ]
+                    ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1
                     expect(vc).to(haveValidSnapshot())
@@ -110,7 +110,7 @@ class TabBarClusterTests: QuickSpec {
                     let children: [Component] = [
                         simpleComponent(meta: ["title": "test", "icon_name": "checkmark"]),
                         validComponent
-                        ]
+                    ]
                     let vc = ClusterLayout.tabBar(children: children,
                                                   meta: nil,
                                                   bundle: bundle).viewController()
@@ -122,7 +122,7 @@ class TabBarClusterTests: QuickSpec {
                     let children: [Component] = [
                         simpleComponent(meta: ["icon_name": "_"]),
                         validComponent
-                        ]
+                    ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1
                     expect(vc).to(haveValidSnapshot())
@@ -132,7 +132,7 @@ class TabBarClusterTests: QuickSpec {
                     let children: [Component] = [
                         simpleComponent(meta: ["title": "_"]),
                         validComponent
-                        ]
+                    ]
                     let vc = ClusterLayout.tabBar(children: children, meta: nil).viewController()
                     expectTabCount(vc) == 1
                     expect(vc).to(haveValidSnapshot())
@@ -152,14 +152,14 @@ private func expectTabCount(_ viewController: UIViewController?,
 }
 
 private func simpleComponent(meta: ComponentMeta?, color: UIColor? = nil) -> Component {
-    let builder: Component.ViewBuilder = { meta in
+    let builder: Component.SingleViewBuilder = { meta in
         let vc = UIViewController()
         vc.view.backgroundColor = color
         return vc
     }
     
-    return Component.view(builder: builder,
-                          meta: meta)
+    return Component.single(viewBuilder: builder,
+                            meta: meta)
 }
 
 private typealias TabConfig = ClusterLayout.TabConfig

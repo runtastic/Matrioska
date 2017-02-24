@@ -16,7 +16,7 @@ class JSONFactoryTests: QuickSpec {
     let bundle = Bundle(for: JSONFactoryTests.self)
     let jsonFileName = "app_structure"
     
-    /// This spec tests a set of expected behaviors on `JSONFactory` when creating a 
+    /// This spec tests a set of expected behaviors on `JSONFactory` when creating a
     /// Component from a local JSON file.
     ///
     /// The loaded Component has the following structure:
@@ -33,48 +33,48 @@ class JSONFactoryTests: QuickSpec {
         
         let json = try! JSONReader.jsonObject(from: jsonFileName, bundle: bundle)!
         
-        let viewBuilder: JSONFactory.ViewFactoryBuilder = { (meta: ComponentMeta?) in
-            Component.view(builder: { _ in UIViewController() }, meta: meta)
+        let viewBuilder: JSONFactory.SingleBuilder = { (meta: ComponentMeta?) in
+            Component.single(viewBuilder: { _ in UIViewController() }, meta: meta)
         }
-        let tabBarBuilder: JSONFactory.ClusterFactoryBuilder = { (children, meta) in
+        let tabBarBuilder: JSONFactory.ClusterBuilder = { (children, meta) in
             ClusterLayout.tabBar(children: children, meta: meta)
         }
-        let navigationBuilder: JSONFactory.WrapperFactoryBuilder = { (child, meta) in
+        let navigationBuilder: JSONFactory.WrapperBuilder = { (child, meta) in
             let navigation: UINavigationController
             if let vc = child.viewController() {
                 navigation = UINavigationController(rootViewController: vc)
             } else {
                 navigation = UINavigationController()
             }
-            return Component.wrapper(builder: { _ in navigation }, child: child, meta: meta)
+            return Component.wrapper(viewBuilder: { _ in navigation }, child: child, meta: meta)
         }
-        let stackBuilder: JSONFactory.ClusterFactoryBuilder = ClusterLayout.stack
-        let trueRuleBuilder: JSONFactory.RuleFactoryBuilder = { true }
-        let falseRuleBuilder: JSONFactory.RuleFactoryBuilder = { false }
+        let stackBuilder: JSONFactory.ClusterBuilder = ClusterLayout.stack
+        let trueRuleBuilder: JSONFactory.RuleBuilder = { true }
+        let falseRuleBuilder: JSONFactory.RuleBuilder = { false }
         
         describe("Component from builder factories") {
             
             it("throws an assertion when the JSON object does not have mandatory keys") {
                 let jsonFactory = JSONFactory()
                 
-                expect { try jsonFactory.component(from: ["foo": "bar"]) }.to(throwError())
-                expect { try jsonFactory.component(from: ["structure": ["foo": "bar"]]) }.to(throwError())
-                expect { try jsonFactory.component(from: ["structure": ["id": "bar"]]) }.to(throwError())
+                expect { try jsonFactory.makeComponent(json: ["foo": "bar"]) }.to(throwError())
+                expect { try jsonFactory.makeComponent(json: ["structure": ["foo": "bar"]]) }.to(throwError())
+                expect { try jsonFactory.makeComponent(json: ["structure": ["id": "bar"]]) }.to(throwError())
             }
             
             context("when no factories are added") {
-                let jsonFactorry = JSONFactory()
+                let jsonFactory = JSONFactory()
                 
                 it("returns nil when trying to get a component") {
-                    let component = try! jsonFactorry.component(from: json)
+                    let component = try! jsonFactory.makeComponent(json: json)
                     expect(component).to(beNil())
                 }
             }
             
             context("when registering some available cluster factories") {
                 let jsonFactory = JSONFactory()
-                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-                let component = try! jsonFactory.component(from: json)
+                jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
+                let component = try! jsonFactory.makeComponent(json: json)
                 
                 it("handles only those cluster components which have registered factories") {
                     expect(component).toNot(beNil())
@@ -85,9 +85,9 @@ class JSONFactoryTests: QuickSpec {
             
             context("when registering all available cluster factories") {
                 let jsonFactory = JSONFactory()
-                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
-                let component = try! jsonFactory.component(from: json)
+                jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
+                jsonFactory.register(builder: stackBuilder, forType: "stack")
+                let component = try! jsonFactory.makeComponent(json: json)
                 
                 it("handles all cluster components") {
                     expect(component).toNot(beNil())
@@ -115,21 +115,21 @@ class JSONFactoryTests: QuickSpec {
             context("when registering all available factories") {
                 let jsonFactory = JSONFactory()
                 
-                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
-                jsonFactory.register(with: "navigation", factoryBuilder: navigationBuilder)
-                jsonFactory.register(with: "button", factoryBuilder: viewBuilder)
-                jsonFactory.register(with: "label", factoryBuilder: viewBuilder)
-                jsonFactory.register(with: "table_view", factoryBuilder: viewBuilder)
+                jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
+                jsonFactory.register(builder: stackBuilder, forType: "stack")
+                jsonFactory.register(builder: navigationBuilder, forType: "navigation")
+                jsonFactory.register(builder: viewBuilder, forType: "button")
+                jsonFactory.register(builder: viewBuilder, forType: "label")
+                jsonFactory.register(builder: viewBuilder, forType: "table_view")
                 
-                let component = try! jsonFactory.component(from: json)
+                let component = try! jsonFactory.makeComponent(json: json)
                 
                 it("handles all components recursively") {
                     let firstChild = component!.children()[0]
                     let secondChild = component!.children()[1]
                     let thirdChild = component!.children()[2]
                     let childViewControllers = component!.viewController()!.childViewControllers
-
+                    
                     expect(firstChild.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
                     expect(firstChild.meta!["title"] as? String).to(equal("history_title"))
                     expect(secondChild.meta!["icon_name"] as? String).to(equal("main_tab_icon"))
@@ -164,16 +164,16 @@ class JSONFactoryTests: QuickSpec {
             context("when registering all available factories and rules") {
                 let jsonFactory = JSONFactory()
                 
-                jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-                jsonFactory.register(with: "stack", factoryBuilder: stackBuilder)
-                jsonFactory.register(with: "navigation", factoryBuilder: navigationBuilder)
-                jsonFactory.register(with: "button", factoryBuilder: viewBuilder)
-                jsonFactory.register(with: "label", factoryBuilder: viewBuilder)
-                jsonFactory.register(with: "table_view", factoryBuilder: viewBuilder)
-                jsonFactory.register(with: "is_male", factoryBuilder: falseRuleBuilder)
-                jsonFactory.register(with: "is_gold_member", factoryBuilder: trueRuleBuilder)
+                jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
+                jsonFactory.register(builder: stackBuilder, forType: "stack")
+                jsonFactory.register(builder: navigationBuilder, forType: "navigation")
+                jsonFactory.register(builder: viewBuilder, forType: "button")
+                jsonFactory.register(builder: viewBuilder, forType: "label")
+                jsonFactory.register(builder: viewBuilder, forType: "table_view")
+                jsonFactory.register(builder: falseRuleBuilder, forType: "is_male")
+                jsonFactory.register(builder: trueRuleBuilder, forType: "is_gold_member")
                 
-                let component = try! jsonFactory.component(from: json)
+                let component = try! jsonFactory.makeComponent(json: json)
                 
                 it("handles all components recursively and evaluates the rules") {
                     let firstChild = component!.children()[0]
@@ -199,9 +199,9 @@ class JSONFactoryTests: QuickSpec {
                 
                 it("returns a component with no rule when the JSON object has a rule with invalid JSON") {
                     let jsonFactory = JSONFactory()
-                    jsonFactory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-                    let component = try! jsonFactory.component(from: ["structure": ["type": "tabbar",
-                                                                                    "rule": JSONObject()]])
+                    jsonFactory.register(builder: tabBarBuilder, forType: "tabbar")
+                    let component = try! jsonFactory.makeComponent(json: ["structure": ["type": "tabbar",
+                                                                                        "rule": JSONObject()]])
                     
                     switch component! {
                     case .rule(_, _):
@@ -219,11 +219,11 @@ class JSONFactoryTests: QuickSpec {
 fileprivate extension Component {
     func children() -> [Component] {
         switch self {
-        case .view(builder: _, meta: _):
+        case .single(viewBuilder: _, meta: _):
             return []
-        case let .wrapper(builder: _, child: child, meta: _):
+        case let .wrapper(viewBuilder: _, child: child, meta: _):
             return [child]
-        case let .cluster(builder: _, children: children, meta: _):
+        case let .cluster(viewBuilder: _, children: children, meta: _):
             return children
         case let .rule(_, child):
             return child.children()

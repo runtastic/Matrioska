@@ -35,70 +35,66 @@ fileprivate enum RuleKey {
     static let not = "NOT"
 }
 
-/// A factory that wraps `Component` builder closures (ViewFactoryBuilder, `WrapperFactoryBuilder`,
-/// `ClusterFactoryBuilder` & `RuleFactoryBuilder`) and uses them to produce `Component`s
+/// A factory that wraps `Component` builder closures (`SingleBuilder`, `WrapperBuilder`,
+/// `ClusterBuilder` & `RuleBuilder`) and uses them to produce `Component`s
 public final class JSONFactory {
     
-    /// A factory closure to build a view `Component`
-    public typealias ViewFactoryBuilder = (ComponentMeta?) -> Component
+    /// A closure to build a .single `Component`
+    public typealias SingleBuilder = (ComponentMeta?) -> Component
     
-    /// A factory closure to build a wrapper `Component`
-    public typealias WrapperFactoryBuilder = (Component, ComponentMeta?) -> Component
+    /// A closure to build a .wrapper `Component`
+    public typealias WrapperBuilder = (Component, ComponentMeta?) -> Component
     
-    /// A factory closure to build a cluster `Component`
-    public typealias ClusterFactoryBuilder = ([Component], ComponentMeta?) -> Component
+    /// A closure to build a .cluster `Component`
+    public typealias ClusterBuilder = ([Component], ComponentMeta?) -> Component
     
-    /// A factory closure to build a rule `Component`
-    public typealias RuleFactoryBuilder = Rule.RuleEvaluator
+    /// A closure to build a .rule `Component`
+    public typealias RuleBuilder = Rule.RuleEvaluator
     
-    fileprivate var viewFactory: [String: ViewFactoryBuilder] = [:]
-    fileprivate var wrapperFactory: [String: WrapperFactoryBuilder] = [:]
-    fileprivate var clusterFactory: [String: ClusterFactoryBuilder] = [:]
-    fileprivate var ruleFactory: [String: RuleFactoryBuilder] = [:]
+    fileprivate var singleBuilders: [String: SingleBuilder] = [:]
+    fileprivate var wrapperBuilders: [String: WrapperBuilder] = [:]
+    fileprivate var clusterBuilders: [String: ClusterBuilder] = [:]
+    fileprivate var ruleBuilders: [String: RuleBuilder] = [:]
     
     /// Initialize a new JSONFactory
     public init() {
         // Empty but needed to be initialized from other modules
     }
     
-    /// Registers a new `ViewFactoryBuilder` which will be used when producing the component
+    /// Registers a new `SingleBuilder` which will be used when producing the component
     ///
     /// - Parameters:
     ///   - type: a string identifying this factory type
-    ///   - factoryBuilder: a `ViewFactoryBuilder` to build a `Component`
-    public func register(with type: String,
-                         factoryBuilder: @escaping ViewFactoryBuilder) {
-        viewFactory[type] = factoryBuilder
+    ///   - builder: a `SingleBuilder` to build a `Component`
+    public func register(builder: @escaping SingleBuilder, forType type: String) {
+        singleBuilders[type] = builder
     }
     
-    /// Registers a new `WrapperFactoryBuilder` which will be used when producing the component
+    /// Registers a new `WrapperBuilder` which will be used when producing the component
     ///
     /// - Parameters:
     ///   - type: a string identifying this factory type
-    ///   - factoryBuilder: a `WrapperFactoryBuilder` to build a `Component`
-    public func register(with type: String,
-                         factoryBuilder: @escaping WrapperFactoryBuilder) {
-        wrapperFactory[type] = factoryBuilder
+    ///   - builder: a `WrapperBuilder` to build a `Component`
+    public func register(builder: @escaping WrapperBuilder, forType type: String) {
+        wrapperBuilders[type] = builder
     }
     
-    /// Registers a new `ClusterFactoryBuilder` which will be used when producing the component
+    /// Registers a new `ClusterBuilder` which will be used when producing the component
     ///
     /// - Parameters:
     ///   - type: a string identifying this factory type
-    ///   - factoryBuilder: a `ClusterFactoryBuilder` to build a `Component`
-    public func register(with type: String,
-                         factoryBuilder: @escaping ClusterFactoryBuilder) {
-        clusterFactory[type] = factoryBuilder
+    ///   - builder: a `ClusterBuilder` to build a `Component`
+    public func register(builder: @escaping ClusterBuilder, forType type: String) {
+        clusterBuilders[type] = builder
     }
     
-    /// Registers a new `RuleFactoryBuilder` which will be used when producing the component
+    /// Registers a new `RuleBuilder` which will be used when producing the component
     ///
     /// - Parameters:
     ///   - type: a string identifying this factory type
-    ///   - factoryBuilder: a `RuleFactoryBuilder` to build a `Component`
-    public func register(with type: String,
-                         factoryBuilder: @escaping RuleFactoryBuilder) {
-        ruleFactory[type] = factoryBuilder
+    ///   - builder: a `RuleBuilder` to build a `Component`
+    public func register(builder: @escaping RuleBuilder, forType type: String) {
+        ruleBuilders[type] = builder
     }
     
     /// Produces a `Component` from a given `JSONObject`
@@ -106,58 +102,58 @@ public final class JSONFactory {
     /// - Parameter json: the `JSONObject` to be used
     /// - Returns: An optional `Component`
     /// - Throws: `JSONFactoryError` when a mandatory key is missing. For more information on
-    /// the mandatory keys, check the JSON schema documentation 
-    public func component(from json: JSONObject) throws -> Component? {
+    /// the mandatory keys, check the JSON schema documentation
+    public func makeComponent(json: JSONObject) throws -> Component? {
         guard let structure = json[DocumentKey.structure] as? JSONObject else {
             throw JSONFactoryError.missing(json, DocumentKey.structure)
         }
         
-        return try component(fromStructure: structure)
+        return try makeComponent(structure: structure)
     }
     
-    private func component(fromStructure json: JSONObject) throws -> Component? {
+    private func makeComponent(structure json: JSONObject) throws -> Component? {
         guard let type = json[ComponentKey.type] as? String else {
             throw JSONFactoryError.missing(json, ComponentKey.type)
         }
         
         let meta = json[ComponentKey.meta] as? JSONObject
-        let children = json[ComponentKey.children] as? [JSONObject] ?? []
-        let componentChildren = try children.flatMap { try component(fromStructure: $0) }
-        let componentResult = component(from: type, meta: meta, children: componentChildren)
+        let childObjects = json[ComponentKey.children] as? [JSONObject] ?? []
+        let children = try childObjects.flatMap { try makeComponent(structure: $0) }
+        let component = makeComponent(type: type, meta: meta, children: children)
         
-        if let rule = JSONFactory.rule(from: json[ComponentKey.rule] as Any, using: ruleFactory),
-           let componentResult = componentResult {
-            return Component.rule(rule: rule, component: componentResult)
+        if let rule = JSONFactory.makeRule(object: json[ComponentKey.rule], builders: ruleBuilders),
+            let component = component {
+            return Component.rule(rule: rule, component: component)
         }
         
-        return componentResult
+        return component
     }
 }
 
 extension JSONFactory {
     
-    fileprivate func component(from type: String, meta: JSONObject?, children: [Component]) -> Component? {
+    fileprivate func makeComponent(type: String, meta: JSONObject?, children: [Component]) -> Component? {
         var component: Component? = nil
         
-        if let viewFactory = viewFactory[type] {
-            component = viewFactory(meta)
-        } else if let wrapperFactory = wrapperFactory[type],
+        if let standaloneFactory = singleBuilders[type] {
+            component = standaloneFactory(meta)
+        } else if let wrapperFactory = wrapperBuilders[type],
             let componentChild = children.first {
             component = wrapperFactory(componentChild, meta)
-        } else if let clusterFactory = clusterFactory[type] {
+        } else if let clusterFactory = clusterBuilders[type] {
             component = clusterFactory(children, meta)
         }
         
         return component
     }
     
-    fileprivate static func rule(from object: Any, using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
-        if let rule = (object as? String)?.rule(using: factory) {
+    fileprivate static func makeRule(object: Any?, builders: [String: JSONFactory.RuleBuilder]) -> Rule? {
+        if let rule = (object as? String)?.makeRule(builders: builders) {
             return rule
         }
         
         if let jsonObject = object as? JSONObject,
-            let rule = jsonObject.rule(using: factory) {
+            let rule = jsonObject.makeRule(builders: builders) {
             return rule
         }
         
@@ -167,24 +163,23 @@ extension JSONFactory {
 
 extension String {
     
-    fileprivate func rule(using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
-        guard let ruleFactory = factory[self] else {
-                return nil
+    fileprivate func makeRule(builders: [String: JSONFactory.RuleBuilder]) -> Rule? {
+        guard let ruleFactory = builders[self] else {
+            return nil
         }
-        
         return Rule.simple(evaluator: ruleFactory)
     }
 }
 
 extension Sequence where Iterator.Element == (key: String, value: Any) {
     
-    fileprivate func rule(using factory: [String: JSONFactory.RuleFactoryBuilder]) -> Rule? {
+    fileprivate func makeRule(builders: [String: JSONFactory.RuleBuilder]) -> Rule? {
         guard let rule = first(where: { _ in true }) else {
             return nil
         }
-
+        
         let values = rule.value as? [Any] ?? [rule.value]
-        let rules = values.flatMap { JSONFactory.rule(from: $0, using: factory) }
+        let rules = values.flatMap { JSONFactory.makeRule(object: $0, builders: builders) }
         
         switch rule.key {
         case RuleKey.and where rules.count >= 2:

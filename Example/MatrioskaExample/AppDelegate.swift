@@ -63,22 +63,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 private func navComponent(child: Component) -> Component {
-    let builder: Component.WrapperBuilder = { (child, meta) -> UIViewController? in
+    let builder: Component.WrapperViewBuilder = { (child, meta) -> UIViewController? in
         return child.viewController().map { UINavigationController(rootViewController: $0) }
     }
     
-    return Component.wrapper(builder: builder, child: child, meta: child.meta)
+    return Component.wrapper(viewBuilder: builder, child: child, meta: child.meta)
 }
 
 private func blankComponent(meta: ComponentMeta?) -> Component {
-    let builder: Component.ViewBuilder = { (meta) in
+    let builder: Component.SingleViewBuilder = { (meta) in
         let vc = UIViewController()
         vc.view.backgroundColor = .white
         return vc
     }
-    return Component.view(builder: builder, meta: meta)
+    return Component.single(viewBuilder: builder, meta: meta)
 }
 
 private func tileComponent(meta: TileConfig) -> Component {
-    return Component.view(builder: TileViewController.init(meta:), meta: meta)
+    return Component.single(viewBuilder: TileViewController.init(meta:), meta: meta)
 }
