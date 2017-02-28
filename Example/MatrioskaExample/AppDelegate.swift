@@ -32,12 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 tileComponent(meta: TileConfig(text: "A", color: .red)),
                                 tileComponent(meta: TileConfig(text: "B", color: .green)),
                                 tileComponent(meta: TileConfig(text: "C", color: .orange)),
-                                tileComponent(meta: TileConfig(text: "D", color: .yellow)),
+                                tileComponent(meta: TileConfig(text: "D", color: .yellow))
                                 ],
                             meta: ClusterLayout.StackConfig(axis: .horizontal)
                         ),
                         tileComponent(meta: TileConfig(text: "Three", color: .orange)),
-                        tileComponent(meta: TileConfig(text: "Four", color: .yellow)),
+                        tileComponent(meta: TileConfig(text: "Four", color: .yellow))
                     ],
                     meta: ZipMeta(ClusterLayout.TabConfig(title: "Third", iconName: "tabIcon"))
                 )
@@ -47,12 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ),
             blankComponent(
                 meta: ClusterLayout.TabConfig(title: "Fifth", iconName: "tabIcon")
-            ),
+            )
         ],
         meta: ClusterLayout.TabBarConfig(selectedIndex: 2)
     )
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootComponent.viewController()
