@@ -23,7 +23,7 @@ class StackClusterTests: QuickSpec {
                 labelComponent(title: "first", color: .red),
                 labelComponent(title: "second", color: .blue),
                 labelComponent(title: "third\ntwo lines", color: .orange)
-                ]
+            ]
             
             it("should display its child and respect their intrinsic contentSize") {
                 let vc = stack(with: children)
@@ -33,10 +33,10 @@ class StackClusterTests: QuickSpec {
             it("should not display childs that don't have a view") {
                 let children = [
                     labelComponent(title: "first", color: .red),
-                    Component.view(builder: { _ in nil }, meta: nil),
+                    Component.single(viewBuilder: { _ in nil }, meta: nil),
                     labelComponent(title: "second", color: .orange),
-                    Component.view(builder: { _ in nil }, meta: nil)
-                    ]
+                    Component.single(viewBuilder: { _ in nil }, meta: nil)
+                ]
                 let vc = stack(with: children)
                 expect(vc).to(haveValidSnapshot())
                 expect(vc?.stackView.arrangedSubviews).to(haveCount(2))
@@ -47,7 +47,7 @@ class StackClusterTests: QuickSpec {
                     let children = [
                         labelComponent(title: "first", color: .yellow),
                         labelComponent(title: "second", color: .green)
-                        ]
+                    ]
                     let vc = stack(with: children, meta: ["foo": "bar"])
                     expect(vc).to(haveValidSnapshot())
                     let defaultConfig = ClusterLayout.StackConfig()
@@ -82,13 +82,13 @@ class StackClusterTests: QuickSpec {
                     let vc = stack(with: children, meta: config)
                     expect(vc).to(haveValidSnapshot())
                 }
-
+                
                 it("should respect the backgroundColor config") {
                     let config = ClusterLayout.StackConfig(backgroundColor: UIColor.lightGray)
                     let vc = stack(with: children, meta: config)
                     expect(vc).to(haveValidSnapshot())
                 }
-
+                
                 it("should load config from a dictionary") {
                     let config: [String: Any] = [
                         "title": "Foo",
@@ -113,14 +113,14 @@ class StackClusterTests: QuickSpec {
                     labelComponent(title: "2", color: .red, labelSize: size),
                     labelComponent(title: "3", color: .red, labelSize: size),
                     labelComponent(title: "4", color: .red, labelSize: size)
-                    ]
-
+                ]
+                
                 it("should be able to scroll horizontally") {
                     let meta = ClusterLayout.StackConfig(axis: .horizontal)
                     let vc = stack(with: children, meta: meta)
                     vc?.loadViewIfNeeded()
                     let scrollView = vc?.stackView.superview as? UIScrollView
-
+                    
                     expect(vc).to(haveValidSnapshot())
                     expect(scrollView).to(scroll(.horizontal))
                     expect(scrollView).toNot(scroll(.vertical))
@@ -130,41 +130,41 @@ class StackClusterTests: QuickSpec {
                     let vc = stack(with: children)
                     vc?.loadViewIfNeeded()
                     let scrollView = vc?.stackView.superview as? UIScrollView
-
+                    
                     expect(vc).to(haveValidSnapshot())
                     expect(scrollView).to(scroll(.vertical))
                     expect(scrollView).toNot(scroll(.horizontal))
                 }
-
+                
                 context("when a horizontal stack is contained in a vertical stack") {
-
+                    
                     let nestedStack: () -> StackViewController? = {
                         let horizontal = ClusterLayout.StackConfig(axis: .horizontal)
                         let vertical = ClusterLayout.StackConfig(axis: .vertical)
-
+                        
                         return stack(
                             with: [ClusterLayout.stack(children: children, meta: horizontal)],
                             meta: vertical
                         )
                     }
-
+                    
                     it("should not cause the parent stack to overflow horizontally") {
                         let vc = nestedStack()
                         vc?.loadViewIfNeeded()
-
+                        
                         let scrollView = vc?.stackView.superview as? UIScrollView
-
+                        
                         expect(vc).to(haveValidSnapshot())
                         expect(scrollView).toNot(scroll(.horizontal))
                     }
-
+                    
                     it("should be able to scroll horizontally") {
                         let vc = nestedStack()
                         vc?.loadViewIfNeeded()
-
+                        
                         let horizontalStack = vc?.childViewControllers.first as? StackViewController
                         let scrollView2 = horizontalStack?.stackView.superview as? UIScrollView
-
+                        
                         expect(vc).to(haveValidSnapshot())
                         expect(scrollView2).to(scroll(.horizontal))
                     }
@@ -189,7 +189,7 @@ class StackClusterTests: QuickSpec {
                 let fixedSizeChildren = (1...4).map {
                     labelComponent(title: String($0), color: .red, labelSize: size)
                 }
-
+                
                 let nest = [
                     ClusterLayout.stack(children: children, meta: meta),
                     ClusterLayout.stack(children: fixedSizeChildren, meta: horizontalMeta),
@@ -278,7 +278,7 @@ private func stack(with children: [Component], meta: ComponentMeta? = nil) -> St
 }
 
 func stackViewController(with child: UIViewController) -> UIViewController? {
-    let component = Component.view(builder: { _ in child }, meta: nil)
+    let component = Component.single(viewBuilder: { _ in child }, meta: nil)
     return ClusterLayout.stack(children: [component], meta: nil).viewController()
 }
 
@@ -286,7 +286,7 @@ private func labelComponent(title: String?,
                             color: UIColor? = nil,
                             labelSize: CGSize? = nil) -> Component {
     
-    let builder: Component.ViewBuilder = { meta in
+    let viewBuilder: Component.SingleViewBuilder = { meta in
         let vc = UIViewController()
         vc.view.backgroundColor = color
         let label = UILabel()
@@ -303,8 +303,8 @@ private func labelComponent(title: String?,
         return vc
     }
     
-    return Component.view(
-        builder: builder,
+    return Component.single(
+        viewBuilder: viewBuilder,
         meta: title.map { ["title": $0] }
     )
 }

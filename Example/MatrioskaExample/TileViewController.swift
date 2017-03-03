@@ -15,7 +15,7 @@ struct TileConfig: ExpressibleByComponentMeta {
     
     init?(meta: ComponentMeta) {
         text = meta["text"] as? String
-        color = meta["color"] as? UIColor // TODO: in a json would probably we a string
+        color = meta["color"] as? UIColor
     }
     
     init(text: String?, color: UIColor) {

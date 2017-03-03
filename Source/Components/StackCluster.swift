@@ -79,7 +79,7 @@ extension ClusterLayout {
     ///   - meta: Should represent `StackConfig` object to configure the stack view
     /// - Returns: A stack component
     public static func stack(children: [Component], meta: ComponentMeta?) -> Component {
-        return Component.cluster(builder: stackBuilder,
+        return Component.cluster(viewBuilder: stackBuilder,
                                  children: children,
                                  meta: meta)
     }

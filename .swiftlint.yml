@@ -17,10 +17,11 @@ opt_in_rules:
 included:
   - Source
   - Tests
-  
+  - Example
+ 
 excluded:
   - Pods
-  - Example
+  - Example/Pods
 
 variable_name:
   excluded: # excluded via string array

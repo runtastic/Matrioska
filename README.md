@@ -30,16 +30,16 @@ The vision of Matrioska is to let you build and prototype your app easily, reusi
 With Matrioska you can go as far as specifing the content and layout of your views from an external source (e.g. JSON).
 With this power you can easily change the structure of your app, do A/B testing, staged rollout or prototype.
 
-To build your UI you can use nested `Component`s. A `Component` can be 3 different things:
+Matrioska builds your UI from a `Component` tree. A `Component` can be one of:
 
-- **View**: Any `UIViewController` that can use AutoLayout to specify its `intrinsicContentSize`
-- **Cluster**: Views with children (other `Component`s). A cluster is responsible for laying out its children’s views. Since a cluster is itself a view it can also contain other clusters.
-- **Wrapper**: A View with only one child (a `Component`). You can see it as a special cluster or as a special view. It’s responsible for displaying its child’s view.
+- **Single**: A component whose view is any `UIViewController` that can express its `intrinsicContentSize` using AutoLayout. 
+- **Cluster**: A component that groups several children (other `Component`s). A cluster is responsible for laying out its children’s views. Since a cluster is itself a `Component`, clusters can be nested.
+- **Wrapper**: A component with only one child (another `Component`). You can see it as a special cluster, or as a decorator for a single component. It’s responsible for displaying its child’s view.
 - **Rule**: A `Component` which visibility is specified by a given `Rule`.
 
 The goal is to provide a tiny but powerful foundation to build your app on top of.
 Matrioska will contain a limited set of standard components and we will consider to add more on a case by case basis.  
-It’s really easy to extend Matrioska to add new components that fits your needs.
+It’s really easy to extend Matrioska to add new components that fit your needs.
 
 ## Installation
 
@@ -124,8 +124,8 @@ extension UITabBarController {
     }
 }
 
-// Any UIViewController can be used as a View
-// we can define a convenience init or just use an inline closure to build the ViewController
+// Any UIViewController can be used as a the view for a `Single` component. 
+// We can define a convenience initializer or just use an inline closure to build the ViewController
 class MyViewController: UIViewController {
     init(meta: Any?) {
         super.init(nibName: nil, bundle: nil)
@@ -138,9 +138,9 @@ class MyViewController: UIViewController {
 Then create models that can be easily used to create the entire tree of views:
 
 ```swift
-let component = Component.cluster(builder: UITabBarController.init, children: [
-    Component.view(builder: MyViewController.init, meta: ["title": "tab1"]),
-    Component.view(builder: { _ in UIViewController() }, meta: nil),
+let component = Component.cluster(viewBuilder: UITabBarController.init, children: [
+    Component.single(viewBuilder: MyViewController.init, meta: ["title": "tab1"]),
+    Component.single(viewBuilder: { _ in UIViewController() }, meta: nil),
     ], meta: nil)
 
 window.rootViewController = component.viewController()
@@ -175,38 +175,40 @@ The `Rule`'s meta will be their `Component`'s meta.
 
 ### Load Components from JSON
 
-`Components` can also be loaded from JSON. For this, you are responsible for registering factories (`Component` builders) that will be used when parsing the JSON structure. In order to register factories, usage of `JSONFactory` is needed:
+`Components` can also be loaded from JSON. For this, you are responsible for registering `Component` builders that will be used when parsing the JSON structure. 
+
+Here's how to register component builders on a `JSONFactory`:
 
 ```
 let jsonFactory = JSONFactory()
 
-jsonFactory.register(with: "tab_bar", factoryBuilder: { (children, meta) in
+jsonFactory.register(builder: { (children, meta) in
     ClusterLayout.tabBar(children: children, meta: meta)
-})
+}, forType: "tab_bar")
 
-jsonFactory.register(with: "navigation", factoryBuilder: { (child, meta) in
-    Component.wrapper(builder: { _ in UINavigationController() }, child: child, meta: meta)
-})
+jsonFactory.register(builder: { (child, meta) in
+    Component.wrapper(viewBuilder: { _ in UINavigationController() }, child: child, meta: meta)
+}, forType: "navigation")
 
-jsonFactory.register(with: "table_view", factoryBuilder: { (meta) in
-    Component.view(builder: { _ in UITableViewController() }, meta: meta)
-})
+jsonFactory.register(builder: { (meta) in
+    Component.single(viewBuilder: { _ in UITableViewController() }, meta: meta)
+}, forType: "table_view")
 
-jsonFactory.register(with: "is_male", factoryBuilder: { () in
-  return User.isMale
-})
+jsonFactory.register(builder: { () in
+    return User.isMale
+}, forType: "is_male")
 
-jsonFactory.register(with: "is_gold_member", factoryBuilder: { () in
-  return User.isGoldMember
-})
+jsonFactory.register(builder: { () in
+    return User.isGoldMember
+}, forType: "is_gold_member")
 ```
 
-Whenever you register a new factory you should provide the `type` key that will match the JSON. Check the [provided JSON schema](/Documentation/JSON\ schema\ guide.md) for more details on that.
+Whenever you register a new component builder you should provide the `type` key that will match the JSON. Check the [provided JSON schema](/Documentation/JSON\ schema\ guide.md) for more details on that.
 
-You can register different factories for `View`, `Wrapper`, `Cluster` and  `Rule` `Component` types using the `JSONFactory`. After registration, you can use the factory to get the component out of a JSON:
+You can register different component builders for `Single`, `Wrapper`, `Cluster` and  `Rule` `Component` types using the `JSONFactory`. After registration, you can use the factory to get the root component from a JSON:
 
 ```
-let component = try jsonFactory.component(from: json)
+return try jsonFactory.makeComponent(json: json)
 ```
 
 `Component`s, `Meta`s and `Rule`s should also match the JSON schema that the library provides by default.
@@ -222,4 +224,5 @@ Check the [JSON schema guide](/Documentation/JSON\ schema\ guide.md) for more in
 ## License
 
 Matrioska is released under the MIT License.  
-At Runtastic we don't keep an internal mirror of this repo and all development on Matrioska is done in the open.
+
+At Runtastic we don't keep an internal mirror of this repo. All development on Matrioska is done in the open.
