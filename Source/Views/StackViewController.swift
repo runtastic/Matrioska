@@ -74,6 +74,14 @@ final class StackViewController: UIViewController {
         childViewController.didMove(toParentViewController: self)
     }
     
+    /// A method to access the scrollView from outside and scroll to a given target ViewController. 
+    /// If no relativePosition parameter is provided, it will try to center the target.
+    ///
+    /// - Parameters:
+    ///   - target: Each child should have a meta representing `TabConfig`
+    ///   - relativePosition: An optional parameter to specify the alignement of the target. Depending of 
+    ///     the stackViews' orientation the relativePosition values have different meaning, e.g. top or 
+    ///     left.
     public func scrollToViewController(target targetViewController: UIViewController,
                                        position relativePosition: RelativePosition = .center) {
         
