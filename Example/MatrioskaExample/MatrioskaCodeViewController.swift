@@ -61,5 +61,5 @@ class MatrioskaCodeViewController: UIViewController {
 }
 
 private func tileComponent(meta: TileConfig) -> Component {
-    return Component.view(builder: TileViewController.init(meta:), meta: meta)
+    return Component.single(viewBuilder: TileViewController.init(meta:), meta: meta)
 }

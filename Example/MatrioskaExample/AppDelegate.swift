@@ -23,16 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let factory = JSONFactory()
         
-        let tabBarBuilder: JSONFactory.ClusterFactoryBuilder = { (children, meta) in
+        let tabBarBuilder: JSONFactory.ClusterBuilder = { (children, meta) in
             ClusterLayout.tabBar(children: children, meta: meta)
         }
         
-        let stackBuilder: JSONFactory.ClusterFactoryBuilder = { (children, meta) in
+        let stackBuilder: JSONFactory.ClusterBuilder = { (children, meta) in
             ClusterLayout.stack(children: children, meta: meta)
         }
         
-        let navigationBuilder: JSONFactory.WrapperFactoryBuilder = { (child, meta) in
-            Component.wrapper(builder: { (child, meta) in
+        let navigationBuilder: JSONFactory.WrapperBuilder = { (child, meta) in
+            Component.wrapper(viewBuilder: { (child, meta) in
                 guard let vc = child.viewController() else {
                     return nil
                 }
@@ -40,26 +40,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }, child: child, meta: meta)
         }
         
-        let tileBuilder: JSONFactory.ViewFactoryBuilder = { (meta) in
-            Component.view(builder: { (meta) -> UIViewController? in
+        let tileBuilder: JSONFactory.SingleBuilder = { (meta) in
+            Component.single(viewBuilder: { (meta) -> UIViewController? in
                     TileViewController.init(meta: TileConfig.materialize(meta))
                 }, meta: meta)
         }
         
-        let matrioskaCodeBuilder: JSONFactory.ViewFactoryBuilder = { (meta) in
-            Component.view(builder: MatrioskaCodeViewController.init(meta:), meta: meta)
+        let matrioskaCodeBuilder: JSONFactory.SingleBuilder = { (meta) in
+            Component.single(viewBuilder: MatrioskaCodeViewController.init(meta:), meta: meta)
         }
         
-        factory.register(with: "tabbar", factoryBuilder: tabBarBuilder)
-        factory.register(with: "stack", factoryBuilder: stackBuilder)
-        factory.register(with: "navigation", factoryBuilder: navigationBuilder)
-        factory.register(with: "tile", factoryBuilder: tileBuilder)
-        factory.register(with: "matrioska", factoryBuilder: matrioskaCodeBuilder)
+        factory.register(builder: tabBarBuilder, forType: "tabbar")
+        factory.register(builder: stackBuilder, forType: "stack")
+        factory.register(builder: navigationBuilder, forType: "navigation")
+        factory.register(builder: tileBuilder, forType: "tile")
+        factory.register(builder: matrioskaCodeBuilder, forType: "matrioska")
         
         do {
-            if let json = try JSONReader.jsonObject(from: "app_structure"),
-                let structure = json["structure"] as? JSONObject {
-                let rootComponent = try factory.component(from: structure)
+            if let json = try JSONReader.jsonObject(from: "app_structure") {
+                
+                let rootComponent = try factory.makeComponent(json: json)
                 window?.rootViewController = rootComponent?.viewController()
                 window?.makeKeyAndVisible()
             }
