@@ -13,10 +13,10 @@ matrix:
   include:
     - env: DESTINATION="OS=10.1,name=iPhone 7" SCHEME=Matrioska SDK="iphonesimulator10.1" COVERAGE=YES
       before_install:
-        #- gem install danger --no-ri --no-doc
-        #- gem install danger-swiftlint --no-ri --no-doc
+        - gem install danger --no-ri --no-doc
+        - gem install danger-swiftlint --no-ri --no-doc
       before_script:
-        #- danger
+        - danger
         #- pod lib lint --quick
       after_success:
         - bash <(curl -s https://codecov.io/bash) -J 'Matrioska'

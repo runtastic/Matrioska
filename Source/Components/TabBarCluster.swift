@@ -85,14 +85,14 @@ extension ClusterLayout {
                               meta: ComponentMeta?,
                               bundle: Bundle? = nil) -> Component {
         
-        return Component.cluster(builder: tabBarBuilder(bundle),
+        return Component.cluster(viewBuilder: tabBarViewBuilder(bundle),
                                  children: children,
                                  meta: meta)
     }
     
     /// A builder for tabBar component that uses partial application
     /// to let us specify the bundle where the images of tabBar items are located
-    private static func tabBarBuilder(_ bundle: Bundle?) -> Component.ClusterBuilder {
+    private static func tabBarViewBuilder(_ bundle: Bundle?) -> Component.ClusterViewBuilder {
         
         typealias Tab = (meta: TabConfig, viewController: UIViewController)
 
