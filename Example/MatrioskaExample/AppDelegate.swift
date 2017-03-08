@@ -47,7 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let matrioskaCodeBuilder: JSONFactory.SingleBuilder = { (meta) in
-            Component.single(viewBuilder: MatrioskaCodeViewController.init(meta:), meta: meta)
+            Component.single(viewBuilder: {_ in 
+                return MatrioskaCodeViewController()
+            }, meta: meta)
         }
         
         factory.register(builder: tabBarBuilder, forType: "tabbar")
