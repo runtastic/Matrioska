@@ -35,14 +35,13 @@ extension ClusterLayout {
             let title = meta["title"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
             let preserveParentWidth = meta["preserve_parent_width"] as? Bool
-            let orientationRawValue = meta["orientation"] as? String
             var axis = UILayoutConstraintAxis.vertical
+            if let orientationRawValue = meta["orientation"] as? String,
+                let orientation = Orientation(rawValue: orientationRawValue) {
+                axis = orientation.layoutConstraintAxis
+            }
             let hexString = meta["background_color"] as? String
             let backgroundColor = hexString.flatMap { UIColor(hexString: $0) }
-            
-            if "horizontal" == orientationRawValue {
-                axis = .horizontal
-            }
             
             self.init(
                 title: title,

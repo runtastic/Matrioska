@@ -14,5 +14,20 @@ import Foundation
 ///
 /// See the documentation of the clusters for more informations and configuration options.
 public enum ClusterLayout {
-    /* empty ATM, extended in other files... at some point there will be something here */
+    
+    /// Custom enum to handle orientation values
+    public enum Orientation: String {
+        case horizontal
+        case vertical
+    }
+}
+
+/// This extension allows us to map our custom orientation enum values to UILayoutConstraintAxis
+extension ClusterLayout.Orientation {
+    var layoutConstraintAxis: UILayoutConstraintAxis {
+        switch self {
+        case .horizontal: return .horizontal
+        case .vertical: return .vertical
+        }
+    }
 }
