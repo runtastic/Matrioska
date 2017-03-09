@@ -10,7 +10,9 @@ import UIKit
 import SnapKit
 
 public enum RelativePosition {
-    case beginning, center, end
+    case beginning
+    case center
+    case end
 }
 
 /// A ViewController that contains a stackView
