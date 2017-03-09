@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 public enum RelativePosition {
-    case topOrLeft, center, bottomOrRight
+    case beginning, center, end
 }
 
 /// A ViewController that contains a stackView
@@ -78,10 +78,10 @@ final class StackViewController: UIViewController {
     /// If no relativePosition parameter is provided, it will try to center the target.
     ///
     /// - Parameters:
-    ///   - target: Each child should have a meta representing `TabConfig`
-    ///   - relativePosition: An optional parameter to specify the alignement of the target. Depending of 
-    ///     the stackViews' orientation the relativePosition values have different meaning, e.g. top or 
-    ///     left.
+    ///   - target: The ViewController which should scroll into focus
+    ///   - relativePosition: An optional parameter to specify the alignement of the target. Depending of
+    ///     the stackViews' orientation some relativePosition values have different meaning: 
+    ///     beginning - top/left, end - bottom/right
     public func scrollToViewController(target targetViewController: UIViewController,
                                        position relativePosition: RelativePosition = .center) {
         
@@ -98,13 +98,13 @@ final class StackViewController: UIViewController {
             let bottomOffset = targetFrame.origin.y + targetFrame.height - scrollView.bounds.height
             
             switch relativePosition {
-            case .topOrLeft:
+            case .beginning:
                 targetOffset.y = topOffset
                 break
             case .center:
                 targetOffset.y = topOffset - bottomOffset - (targetFrame.height / 2)
                 break
-            case .bottomOrRight:
+            case .end:
                 targetOffset.y = bottomOffset
                 break
             }
@@ -113,13 +113,13 @@ final class StackViewController: UIViewController {
             let rightOffset = targetFrame.origin.x + targetFrame.width - scrollView.bounds.width
             
             switch relativePosition {
-            case .topOrLeft:
+            case .beginning:
                 targetOffset.x = targetFrame.origin.x - scrollView.contentInset.left
                 break
             case .center:
                 targetOffset.x = -(targetOffset.x - rightOffset - (targetFrame.width / 2))
                 break
-            case .bottomOrRight:
+            case .end:
                 targetOffset.x = rightOffset
                 break
             }
