@@ -349,17 +349,17 @@ class StackClusterTests: QuickSpec {
                 
                 it("a target should be able to be centered") {
                     childStack?.scrollToViewController(target: targetVC!, position: .center, animated: false)
-                    expect(vc).to(recordSnapshot())
+                    expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on top") {
                     childStack?.scrollToViewController(target: targetVC!, position: .beginning, animated: false)
-                    expect(vc).to(recordSnapshot())
+                    expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on the bottom") {
                     childStack?.scrollToViewController(target: targetVC!, position: .end, animated: false)
-                    expect(vc).to(recordSnapshot())
+                    expect(vc).to(haveValidSnapshot())
                 }
             }
             
