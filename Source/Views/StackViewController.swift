@@ -99,37 +99,56 @@ final class StackViewController: UIViewController {
             targetOffset.x = -scrollView.contentInset.left
             let topOffset = targetFrame.origin.y - scrollView.contentInset.top
             let bottomOffset = targetFrame.origin.y + targetFrame.height - scrollView.bounds.height
+            let verticalLimit = scrollView.contentSize.height - scrollView.bounds.height
             
             switch relativePosition {
             case .beginning:
                 targetOffset.y = topOffset
-                break
             case .center:
                 targetOffset.y = topOffset - (topOffset - bottomOffset) / 2
-                break
             case .end:
                 targetOffset.y = bottomOffset
-                break
             }
+
+            if targetOffset.y > verticalLimit {
+                targetOffset.y = verticalLimit
+            }
+            if targetOffset.y < scrollView.contentInset.top {
+                targetOffset.y = scrollView.contentInset.top
+            }
+            targetOffset.y = ensureRangeFor(value: targetOffset.y,
+                                            lowerLimit: scrollView.contentInset.top,
+                                            upperLimit: verticalLimit)
         } else {
             // keep current vertical offset
             targetOffset.y = -scrollView.contentInset.top
             let leftOffset = targetFrame.origin.x - scrollView.contentInset.left
             let rightOffset = targetFrame.origin.x + targetFrame.width - scrollView.bounds.width
-            
+            let horizontalLimit = scrollView.contentSize.width - scrollView.bounds.width
             switch relativePosition {
             case .beginning:
                 targetOffset.x = leftOffset
-                break
             case .center:
                 targetOffset.x = leftOffset - (leftOffset - rightOffset) / 2
-                break
             case .end:
                 targetOffset.x = rightOffset
-                break
             }
+
+            targetOffset.x = ensureRangeFor(value: targetOffset.x,
+                                            lowerLimit: scrollView.contentInset.left,
+                                            upperLimit: horizontalLimit)
         }
 
         scrollView.setContentOffset(targetOffset, animated: animated)
+    }
+    
+    private func ensureRangeFor(value: CGFloat, lowerLimit: CGFloat, upperLimit: CGFloat) -> CGFloat {
+        if value < lowerLimit {
+            return lowerLimit
+        }
+        if value > upperLimit {
+            return upperLimit
+        }
+        return value
     }
 }
