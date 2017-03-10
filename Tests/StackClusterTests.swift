@@ -119,6 +119,7 @@ class StackClusterTests: QuickSpec {
                     let meta = ClusterLayout.StackConfig(axis: .horizontal)
                     let vc = stack(with: children, meta: meta)
                     vc?.loadViewIfNeeded()
+                    vc?.view.layoutIfNeeded()
                     let scrollView = vc?.stackView.superview as? UIScrollView
                     
                     expect(vc).to(haveValidSnapshot())
@@ -129,6 +130,7 @@ class StackClusterTests: QuickSpec {
                 it("should be able to scroll vertically") {
                     let vc = stack(with: children)
                     vc?.loadViewIfNeeded()
+                    vc?.view.layoutIfNeeded()
                     let scrollView = vc?.stackView.superview as? UIScrollView
                     
                     expect(vc).to(haveValidSnapshot())
@@ -161,7 +163,7 @@ class StackClusterTests: QuickSpec {
                     it("should be able to scroll horizontally") {
                         let vc = nestedStack()
                         vc?.loadViewIfNeeded()
-                        
+                        vc?.view.layoutIfNeeded()
                         let horizontalStack = vc?.childViewControllers.first as? StackViewController
                         let scrollView2 = horizontalStack?.stackView.superview as? UIScrollView
                         
@@ -209,6 +211,7 @@ class StackClusterTests: QuickSpec {
                 it("should not be able to scroll") {
                     let children = [labelComponent(title: "first", color: .red)]
                     let vc = stack(with: children)
+                    vc?.view.layoutIfNeeded()
                     expect(vc).to(haveValidSnapshot())
                     let scrollView = vc?.stackView.superview as? UIScrollView
                     expect(scrollView).toNot(scroll(.vertical))
