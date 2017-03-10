@@ -85,7 +85,7 @@ final class StackViewController: UIViewController {
     ///     the stackViews' orientation some relativePosition values have different meaning: 
     ///     beginning - top/left, end - bottom/right
     public func scrollToViewController(target targetViewController: UIViewController,
-                                       position relativePosition: RelativePosition = .center) {
+                                       position relativePosition: RelativePosition = .center, animated: Bool = false) {
         
         guard self.childViewControllers.contains(targetViewController) else {
             return
@@ -95,6 +95,7 @@ final class StackViewController: UIViewController {
         let targetFrame = targetViewController.view.frame
         
         if stackView.axis == .vertical {
+            // keep current horizontal offset
             targetOffset.x = -scrollView.contentInset.left
             let topOffset = targetFrame.origin.y - scrollView.contentInset.top
             let bottomOffset = targetFrame.origin.y + targetFrame.height - scrollView.bounds.height
@@ -104,29 +105,31 @@ final class StackViewController: UIViewController {
                 targetOffset.y = topOffset
                 break
             case .center:
-                targetOffset.y = topOffset - bottomOffset - (targetFrame.height / 2)
+                targetOffset.y = topOffset - (topOffset - bottomOffset) / 2
                 break
             case .end:
                 targetOffset.y = bottomOffset
                 break
             }
         } else {
+            // keep current vertical offset
             targetOffset.y = -scrollView.contentInset.top
+            let leftOffset = targetFrame.origin.x - scrollView.contentInset.left
             let rightOffset = targetFrame.origin.x + targetFrame.width - scrollView.bounds.width
             
             switch relativePosition {
             case .beginning:
-                targetOffset.x = targetFrame.origin.x - scrollView.contentInset.left
+                targetOffset.x = leftOffset
                 break
             case .center:
-                targetOffset.x = -(targetOffset.x - rightOffset - (targetFrame.width / 2))
+                targetOffset.x = leftOffset - (leftOffset - rightOffset) / 2
                 break
             case .end:
                 targetOffset.x = rightOffset
                 break
             }
         }
-        
-        scrollView.setContentOffset(targetOffset, animated: true)
+
+        scrollView.setContentOffset(targetOffset, animated: animated)
     }
 }

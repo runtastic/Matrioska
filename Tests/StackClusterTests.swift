@@ -136,6 +136,40 @@ class StackClusterTests: QuickSpec {
                     expect(scrollView).toNot(scroll(.horizontal))
                 }
                 
+                context("scroll into view target can be positioned as wanted") {
+                    let size = CGSize(width: 300, height: 300)
+                    let children = [
+                        labelComponent(title: "1", color: .purple, labelSize: size),
+                        labelComponent(title: "2", color: .red, labelSize: size),
+                        labelComponent(title: "3", color: .yellow, labelSize: size),
+                        labelComponent(title: "4", color: .green, labelSize: size),
+                        labelComponent(title: "5", color: .green, labelSize: size)
+                    ]
+                    
+                    it("should be able to scroll horizontally to target") {
+                        let meta = ClusterLayout.StackConfig(axis: .horizontal)
+                        let vc = stack(with: children, meta: meta)
+                        vc?.loadViewIfNeeded()
+//                        let scrollView = vc?.stackView.superview as? UIScrollView
+                        let targetVC = vc?.childViewControllers[2]
+                        
+                        // WIP does not scroll at all, with or wothout dispatcher and setting the offset manually in scroll method
+                        let exp = self.expectation(description: "wait for scrolling")
+                        vc?.scrollToViewController(target: targetVC!, position: .center, animated: false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: (.now() + 3)) {
+                            
+                            exp.fulfill()
+                        }
+                        
+                        self.waitForExpectations(timeout: 5, handler: nil)
+                        
+//                        expect(vc).to(recordSnapshot())
+//                        expect(scrollView).to(scroll(.horizontal))
+//                        expect(scrollView).toNot(scroll(.vertical))
+                    }
+                }
+                
                 context("when a horizontal stack is contained in a vertical stack") {
                     
                     let nestedStack: () -> StackViewController? = {
