@@ -95,6 +95,17 @@ extension ClusterLayout {
     }
 }
 
+fileprivate enum Orientation: String {
+    case horizontal
+    case vertical
+    var layoutConstraintAxis: UILayoutConstraintAxis {
+        switch self {
+        case .horizontal: return .horizontal
+        case .vertical: return .vertical
+        }
+    }
+}
+
 fileprivate extension StackViewController {
     
     func add(children: [Component]) {

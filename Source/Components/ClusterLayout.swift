@@ -14,17 +14,5 @@ import Foundation
 ///
 /// See the documentation of the clusters for more informations and configuration options.
 public enum ClusterLayout {
-    public enum Orientation: String {
-        case horizontal
-        case vertical
-    }
-}
-
-extension ClusterLayout.Orientation {
-    var layoutConstraintAxis: UILayoutConstraintAxis {
-        switch self {
-        case .horizontal: return .horizontal
-        case .vertical: return .vertical
-        }
-    }
+    /* empty ATM, extended in other files... at some point there will be something here */
 }
