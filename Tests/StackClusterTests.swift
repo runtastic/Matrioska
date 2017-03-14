@@ -173,7 +173,7 @@ class StackClusterTests: QuickSpec {
                 }
             }
             
-            context("when scrolling horizontally") {
+            context("when scrolling horizontally to the leftmost item, it") {
                 let size = CGSize(width: 200, height: 300)
                 let children = [
                     labelComponent(title: "1", color: .purple, labelSize: size),
@@ -190,57 +190,89 @@ class StackClusterTests: QuickSpec {
                 
                 let purpleLeftmostTargetVC = vc?.childViewControllers[0]
                 
-                it("a leftmost target gets left aligned, if it could not get centered correctly") {
+                it("should get left aligned (although center requested)") {
                     vc?.scroll(to: purpleLeftmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a leftmost target gets left aligned, if it could not get right aligned correctly") {
-                    vc?.scroll(to: purpleLeftmostTargetVC!, at: .beginning, animated: false)
+                it("should get left aligned (although begin requested)") {
+                    vc?.scroll(to: purpleLeftmostTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a leftmost target should be able to be left aligned") {
+                it("should get left aligned") {
                     vc?.scroll(to: purpleLeftmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
+            }
+            
+            context("when scrolling horizontally to a target, it") {
+                let size = CGSize(width: 200, height: 300)
+                let children = [
+                    labelComponent(title: "1", color: .purple, labelSize: size),
+                    labelComponent(title: "2", color: .red, labelSize: size),
+                    labelComponent(title: "3", color: .yellow, labelSize: size),
+                    labelComponent(title: "4", color: .green, labelSize: size),
+                    labelComponent(title: "5", color: .blue, labelSize: size)
+                ]
+                
+                let meta = ClusterLayout.StackConfig(axis: .horizontal)
+                let vc = stack(with: children, meta: meta)
+                vc?.loadViewIfNeeded()
+                vc?.view.layoutIfNeeded()
                 
                 let yellowCenteredTargetVC = vc?.childViewControllers[2]
 
-                it("a target should be able to get centered") {
+                it("should get centered (center requested)") {
                     vc?.scroll(to: yellowCenteredTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to get left aligned") {
-                    vc?.scroll(to: yellowCenteredTargetVC!, at: .beginning, animated: false)
+                it("should get left aligned (begin requested)") {
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to get right aligned") {
+                it("should get right aligned (end requested)") {
                     vc?.scroll(to: yellowCenteredTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
+            }
+            
+            context("when scrolling horizontally to the rightmost item, it") {
+                let size = CGSize(width: 200, height: 300)
+                let children = [
+                    labelComponent(title: "1", color: .purple, labelSize: size),
+                    labelComponent(title: "2", color: .red, labelSize: size),
+                    labelComponent(title: "3", color: .yellow, labelSize: size),
+                    labelComponent(title: "4", color: .green, labelSize: size),
+                    labelComponent(title: "5", color: .blue, labelSize: size)
+                ]
+                
+                let meta = ClusterLayout.StackConfig(axis: .horizontal)
+                let vc = stack(with: children, meta: meta)
+                vc?.loadViewIfNeeded()
+                vc?.view.layoutIfNeeded()
                 
                 let blueRightmostTargetVC = vc?.childViewControllers[4]
                 
-                it("a rightmost target gets right aligned, if it could not get centered correctly") {
+                it("should get right aligned (although center requested)") {
                     vc?.scroll(to: blueRightmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a rightmost target gets right aligned, if it could not get left aligned correctly") {
-                    vc?.scroll(to: blueRightmostTargetVC!, at: .beginning, animated: false)
+                it("should get right aligned (although begin requested)") {
+                    vc?.scroll(to: blueRightmostTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a rightmost target should be able to be right aligned") {
+                it("should get right aligned (end requested)") {
                     vc?.scroll(to: blueRightmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }
             
-            context("when scrolling vertically") {
+            context("when scrolling vertically to the topmost item, it") {
                 let size = CGSize(width: 200, height: 300)
                 let children = [
                     labelComponent(title: "1", color: .purple, labelSize: size),
@@ -257,51 +289,83 @@ class StackClusterTests: QuickSpec {
                 
                 let purpleTopmostTargetVC = vc?.childViewControllers[0]
                 
-                it("a topmost target gets top aligned, if it could not get centered correctly") {
+                it("should get top aligned (although center requested)") {
                     vc?.scroll(to: purpleTopmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a topmost target gets top aligned, if it could not get bottom aligned correctly") {
-                    vc?.scroll(to: purpleTopmostTargetVC!, at: .beginning, animated: false)
+                it("should get top aligned (begin requested)") {
+                    vc?.scroll(to: purpleTopmostTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a topmost target should be able to be top aligned") {
+                it("should get top aligned (although end requested)") {
                     vc?.scroll(to: purpleTopmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
+            }
+            
+            context("when scrolling vertically to a target, it") {
+                let size = CGSize(width: 200, height: 300)
+                let children = [
+                    labelComponent(title: "1", color: .purple, labelSize: size),
+                    labelComponent(title: "2", color: .red, labelSize: size),
+                    labelComponent(title: "3", color: .yellow, labelSize: size),
+                    labelComponent(title: "4", color: .green, labelSize: size),
+                    labelComponent(title: "5", color: .blue, labelSize: size)
+                ]
+                
+                let meta = ClusterLayout.StackConfig(axis: .vertical)
+                let vc = stack(with: children, meta: meta)
+                vc?.loadViewIfNeeded()
+                vc?.view.layoutIfNeeded()
                 
                 let yellowCenteredTargetVC = vc?.childViewControllers[2]
                 
-                it("a target should be able to be centered") {
+                it("should get centered (center requested)") {
                     vc?.scroll(to: yellowCenteredTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to be on top") {
-                    vc?.scroll(to: yellowCenteredTargetVC!, at: .beginning, animated: false)
+                it("should get top aligned (begin requested)") {
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to be on the bottom") {
+                it("should get bottom aligned (end requested)") {
                     vc?.scroll(to: yellowCenteredTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
+            }
+            
+            context("when scrolling vertically to the bottommost item, it") {
+                let size = CGSize(width: 200, height: 300)
+                let children = [
+                    labelComponent(title: "1", color: .purple, labelSize: size),
+                    labelComponent(title: "2", color: .red, labelSize: size),
+                    labelComponent(title: "3", color: .yellow, labelSize: size),
+                    labelComponent(title: "4", color: .green, labelSize: size),
+                    labelComponent(title: "5", color: .blue, labelSize: size)
+                ]
+                
+                let meta = ClusterLayout.StackConfig(axis: .vertical)
+                let vc = stack(with: children, meta: meta)
+                vc?.loadViewIfNeeded()
+                vc?.view.layoutIfNeeded()
                 
                 let blueBottommostTargetVC = vc?.childViewControllers[4]
                 
-                it("a bottommost target gets bottom aligned, if it could not get centered correctly") {
+                it("should get bottom aligned (although center requested)") {
                     vc?.scroll(to: blueBottommostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a bottommost target gets bottom aligned, if it could not get top aligned correctly") {
-                    vc?.scroll(to: blueBottommostTargetVC!, at: .beginning, animated: false)
+                it("should get bottom aligned (although begin requested)") {
+                    vc?.scroll(to: blueBottommostTargetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a bottommost target should be able to be right aligned") {
+                it("should get bottom aligned (end requested)") {
                     vc?.scroll(to: blueBottommostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
@@ -342,7 +406,7 @@ class StackClusterTests: QuickSpec {
                 }
                 
                 it("a target should be able to get left aligned") {
-                    childStack?.scroll(to: targetVC!, at: .beginning, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
@@ -388,7 +452,7 @@ class StackClusterTests: QuickSpec {
                 }
                 
                 it("a target should be able to be on top") {
-                    childStack?.scroll(to: targetVC!, at: .beginning, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 

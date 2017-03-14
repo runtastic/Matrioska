@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 /// An enum that describes the relative position of an element. The enum should work horizontally as well as vertically.
-/// Orientation depending meaning: beginning - top/left, end - bottom/right
+/// Orientation depending meaning: begin - top/left, end - bottom/right
 public enum RelativePosition {
-    case beginning
+    case begin
     case center
     case end
 }
@@ -85,7 +85,7 @@ final class StackViewController: UIViewController {
     ///   - targetViewController: The ViewController which should scroll into focus
     ///   - position: An optional parameter to specify the alignement of the target. Depending of
     ///     the stackViews' orientation position values have different meaning:
-    ///     beginning - top/left, end - bottom/right
+    ///     begin - top/left, end - bottom/right
     public func scroll(to targetViewController: UIViewController,
                        at position: RelativePosition = .center,
                        animated: Bool = false) {
@@ -105,7 +105,7 @@ final class StackViewController: UIViewController {
             let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
             
             switch position {
-            case .beginning:
+            case .begin:
                 targetOffset.y = topOffset
             case .center:
                 targetOffset.y = topOffset - (topOffset - bottomOffset) / 2
@@ -121,7 +121,7 @@ final class StackViewController: UIViewController {
             let rightOffset = targetFrame.maxX - scrollView.bounds.width
             let maxOffset = scrollView.contentSize.width - scrollView.bounds.width
             switch position {
-            case .beginning:
+            case .begin:
                 targetOffset.x = leftOffset
             case .center:
                 targetOffset.x = leftOffset - (leftOffset - rightOffset) / 2
