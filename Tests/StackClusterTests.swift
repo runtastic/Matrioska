@@ -191,51 +191,51 @@ class StackClusterTests: QuickSpec {
                 let purpleLeftmostTargetVC = vc?.childViewControllers[0]
                 
                 it("a leftmost target gets left aligned, if it could not get centered correctly") {
-                    vc?.scrollToViewController(target: purpleLeftmostTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: purpleLeftmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a leftmost target gets left aligned, if it could not get right aligned correctly") {
-                    vc?.scrollToViewController(target: purpleLeftmostTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: purpleLeftmostTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a leftmost target should be able to be left aligned") {
-                    vc?.scrollToViewController(target: purpleLeftmostTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: purpleLeftmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 let yellowCenteredTargetVC = vc?.childViewControllers[2]
 
                 it("a target should be able to get centered") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to get left aligned") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to get right aligned") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 let blueRightmostTargetVC = vc?.childViewControllers[4]
                 
                 it("a rightmost target gets right aligned, if it could not get centered correctly") {
-                    vc?.scrollToViewController(target: blueRightmostTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: blueRightmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a rightmost target gets right aligned, if it could not get left aligned correctly") {
-                    vc?.scrollToViewController(target: blueRightmostTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: blueRightmostTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a rightmost target should be able to be right aligned") {
-                    vc?.scrollToViewController(target: blueRightmostTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: blueRightmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }
@@ -258,56 +258,56 @@ class StackClusterTests: QuickSpec {
                 let purpleTopmostTargetVC = vc?.childViewControllers[0]
                 
                 it("a topmost target gets top aligned, if it could not get centered correctly") {
-                    vc?.scrollToViewController(target: purpleTopmostTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: purpleTopmostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a topmost target gets top aligned, if it could not get bottom aligned correctly") {
-                    vc?.scrollToViewController(target: purpleTopmostTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: purpleTopmostTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a topmost target should be able to be top aligned") {
-                    vc?.scrollToViewController(target: purpleTopmostTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: purpleTopmostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 let yellowCenteredTargetVC = vc?.childViewControllers[2]
                 
                 it("a target should be able to be centered") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on top") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on the bottom") {
-                    vc?.scrollToViewController(target: yellowCenteredTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: yellowCenteredTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 let blueBottommostTargetVC = vc?.childViewControllers[4]
                 
                 it("a bottommost target gets bottom aligned, if it could not get centered correctly") {
-                    vc?.scrollToViewController(target: blueBottommostTargetVC!, position: .center, animated: false)
+                    vc?.scroll(to: blueBottommostTargetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a bottommost target gets bottom aligned, if it could not get top aligned correctly") {
-                    vc?.scrollToViewController(target: blueBottommostTargetVC!, position: .beginning, animated: false)
+                    vc?.scroll(to: blueBottommostTargetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a bottommost target should be able to be right aligned") {
-                    vc?.scrollToViewController(target: blueBottommostTargetVC!, position: .end, animated: false)
+                    vc?.scroll(to: blueBottommostTargetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }
             
-            context("when scrolling horziontally in a vertical nested stack") {
+            context("when scrolling horizontally in a vertical nested stack") {
                 let meta = ClusterLayout.StackConfig(preserveParentWidth: true)
                 let horizontalChildMeta = ClusterLayout.StackConfig(axis: .horizontal)
                 let size = CGSize(width: 100, height: 100)
@@ -337,17 +337,17 @@ class StackClusterTests: QuickSpec {
                 let targetVC = childStack?.childViewControllers[2]
                 
                 it("a target should be able to be centered") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .center, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to get left aligned") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .beginning, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to get right aligned") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .end, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }
@@ -383,17 +383,17 @@ class StackClusterTests: QuickSpec {
                 
                 // TODO: WIP stack layout is not as expected
                 it("a target should be able to be centered") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .center, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on top") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .beginning, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .beginning, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
                 it("a target should be able to be on the bottom") {
-                    childStack?.scrollToViewController(target: targetVC!, position: .end, animated: false)
+                    childStack?.scroll(to: targetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }

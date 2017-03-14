@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 
+/// An enum that describes the relative position of an element. The enum should work horizontally as well as vertically.
+/// Orientation depending meaning: beginning - top/left, end - bottom/right
 public enum RelativePosition {
     case beginning
     case center
@@ -43,7 +45,7 @@ final class StackViewController: UIViewController {
         scrollView.backgroundColor = configuration.backgroundColor
     }
     
-    required init?(coder _: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -54,13 +56,13 @@ final class StackViewController: UIViewController {
         scrollView.alwaysBounceVertical = false
         scrollView.showsHorizontalScrollIndicator = false
         
-        scrollView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
         }
         
         scrollView.addSubview(stackView)
         
-        stackView.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { (make) in
             make.edges.equalTo(scrollView)
             if preserveParentWidth {
                 make.width.equalTo(view)
@@ -76,32 +78,33 @@ final class StackViewController: UIViewController {
         childViewController.didMove(toParentViewController: self)
     }
     
-    /// A method to access the scrollView from outside and scroll to a given target ViewController. 
+    /// A method to access the scrollView from outside and scroll to a given target ViewController.
     /// If no relativePosition parameter is provided, it will try to center the target.
     ///
     /// - Parameters:
-    ///   - target: The ViewController which should scroll into focus
-    ///   - relativePosition: An optional parameter to specify the alignement of the target. Depending of
-    ///     the stackViews' orientation some relativePosition values have different meaning: 
+    ///   - targetViewController: The ViewController which should scroll into focus
+    ///   - position: An optional parameter to specify the alignement of the target. Depending of
+    ///     the stackViews' orientation position values have different meaning:
     ///     beginning - top/left, end - bottom/right
-    public func scrollToViewController(target targetViewController: UIViewController,
-                                       position relativePosition: RelativePosition = .center, animated: Bool = false) {
+    public func scroll(to targetViewController: UIViewController,
+                       at position: RelativePosition = .center,
+                       animated: Bool = false) {
         
-        guard self.childViewControllers.contains(targetViewController) else {
+        guard childViewControllers.contains(targetViewController) else {
             return
         }
         
-        var targetOffset = CGPoint(x: 0, y: 0)
+        var targetOffset = CGPoint.zero
         let targetFrame = targetViewController.view.frame
         
         if stackView.axis == .vertical {
             // keep current horizontal offset
             targetOffset.x = -scrollView.contentInset.left
             let topOffset = targetFrame.origin.y - scrollView.contentInset.top
-            let bottomOffset = targetFrame.origin.y + targetFrame.height - scrollView.bounds.height
-            let verticalLimit = scrollView.contentSize.height - scrollView.bounds.height
+            let bottomOffset = targetFrame.maxY - scrollView.bounds.height
+            let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
             
-            switch relativePosition {
+            switch position {
             case .beginning:
                 targetOffset.y = topOffset
             case .center:
@@ -110,22 +113,14 @@ final class StackViewController: UIViewController {
                 targetOffset.y = bottomOffset
             }
 
-            if targetOffset.y > verticalLimit {
-                targetOffset.y = verticalLimit
-            }
-            if targetOffset.y < scrollView.contentInset.top {
-                targetOffset.y = scrollView.contentInset.top
-            }
-            targetOffset.y = ensureRangeFor(value: targetOffset.y,
-                                            lowerLimit: scrollView.contentInset.top,
-                                            upperLimit: verticalLimit)
+            targetOffset.y = min(maxOffset, max(scrollView.contentInset.top, targetOffset.y))
         } else {
             // keep current vertical offset
             targetOffset.y = -scrollView.contentInset.top
             let leftOffset = targetFrame.origin.x - scrollView.contentInset.left
-            let rightOffset = targetFrame.origin.x + targetFrame.width - scrollView.bounds.width
-            let horizontalLimit = scrollView.contentSize.width - scrollView.bounds.width
-            switch relativePosition {
+            let rightOffset = targetFrame.maxX - scrollView.bounds.width
+            let maxOffset = scrollView.contentSize.width - scrollView.bounds.width
+            switch position {
             case .beginning:
                 targetOffset.x = leftOffset
             case .center:
@@ -134,21 +129,9 @@ final class StackViewController: UIViewController {
                 targetOffset.x = rightOffset
             }
 
-            targetOffset.x = ensureRangeFor(value: targetOffset.x,
-                                            lowerLimit: scrollView.contentInset.left,
-                                            upperLimit: horizontalLimit)
+            targetOffset.x = min(maxOffset, max(scrollView.contentInset.left, targetOffset.x))
         }
 
         scrollView.setContentOffset(targetOffset, animated: animated)
-    }
-    
-    private func ensureRangeFor(value: CGFloat, lowerLimit: CGFloat, upperLimit: CGFloat) -> CGFloat {
-        if value < lowerLimit {
-            return lowerLimit
-        }
-        if value > upperLimit {
-            return upperLimit
-        }
-        return value
     }
 }
