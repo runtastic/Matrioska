@@ -99,7 +99,7 @@ final class StackViewController: UIViewController {
         
         if stackView.axis == .vertical {
             // keep current horizontal offset
-            targetOffset.x = -scrollView.contentInset.left
+            targetOffset.x = scrollView.contentOffset.x
             let topOffset = targetFrame.origin.y - scrollView.contentInset.top
             let bottomOffset = targetFrame.maxY - scrollView.bounds.height
             let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
@@ -116,7 +116,7 @@ final class StackViewController: UIViewController {
             targetOffset.y = min(maxOffset, max(scrollView.contentInset.top, targetOffset.y))
         } else {
             // keep current vertical offset
-            targetOffset.y = -scrollView.contentInset.top
+            targetOffset.y = scrollView.contentOffset.y
             let leftOffset = targetFrame.origin.x - scrollView.contentInset.left
             let rightOffset = targetFrame.maxX - scrollView.bounds.width
             let maxOffset = scrollView.contentSize.width - scrollView.bounds.width
