@@ -36,6 +36,7 @@
 		DE85E5AF1DEC842700DFF34A /* AppearanceSpyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85E5AE1DEC842700DFF34A /* AppearanceSpyViewController.swift */; };
 		DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */; };
 		DEA64C8D1E01810500687658 /* UIColorHEXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */; };
+		EDC724671E784EA5004EFEC4 /* Focusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC724661E784EA5004EFEC4 /* Focusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		DEA64C8C1E01810500687658 /* UIColorHEXTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHEXTests.swift; sourceTree = "<group>"; };
 		DEECB3B21DD47C4A00F7DFB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		E08AB4E968331E4711F8DCD9 /* Pods_MatrioskaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatrioskaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDC724661E784EA5004EFEC4 /* Focusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Focusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 		DE3E8D9A1DD38D1C00417AE5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EDC724651E784E74004EFEC4 /* Protocols */,
 				8BCFF8AB1E28D4340053AD98 /* Components */,
 				8BCFF8A21E28D3830053AD98 /* Factories */,
 				DEA64C891E017D7300687658 /* Helpers */,
@@ -254,6 +257,14 @@
 				DEA64C8A1E017D8100687658 /* UIColor+HEX.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EDC724651E784E74004EFEC4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EDC724661E784EA5004EFEC4 /* Focusable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,6 +483,7 @@
 				8BCFF8B51E28D4340053AD98 /* TabBarCluster.swift in Sources */,
 				8BB2842A1E31754400243C0A /* Rule.swift in Sources */,
 				8BCFF8B31E28D4340053AD98 /* ComponentMeta.swift in Sources */,
+				EDC724671E784EA5004EFEC4 /* Focusable.swift in Sources */,
 				DEA64C8B1E017D8100687658 /* UIColor+HEX.swift in Sources */,
 				DE067DCC1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift in Sources */,
 				8BCFF8B21E28D4340053AD98 /* Component.swift in Sources */,

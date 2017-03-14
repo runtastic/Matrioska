@@ -132,3 +132,9 @@ extension ClusterLayout {
         }
     }
 }
+
+extension UITabBarController: Focusable {
+    func focus(on viewController: UIViewController) {
+        selectedViewController = viewController
+    }
+}

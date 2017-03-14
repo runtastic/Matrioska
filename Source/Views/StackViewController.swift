@@ -18,7 +18,7 @@ public enum RelativePosition {
 }
 
 /// A ViewController that contains a stackView
-final class StackViewController: UIViewController {
+final class StackViewController: UIViewController, Focusable {
     
     private let preserveParentWidth: Bool
     private let scrollView = IntrinsicSizeAwareScrollView()
@@ -78,6 +78,10 @@ final class StackViewController: UIViewController {
         childViewController.didMove(toParentViewController: self)
     }
     
+    public func focus(on viewController: UIViewController) {
+        scroll(to: viewController, at: .center, animated:  true)
+    }
+    
     /// A method to access the scrollView from outside and scroll to a given target ViewController.
     /// If no relativePosition parameter is provided, it will try to center the target.
     ///
@@ -86,9 +90,9 @@ final class StackViewController: UIViewController {
     ///   - position: An optional parameter to specify the alignement of the target. Depending of
     ///     the stackViews' orientation position values have different meaning:
     ///     begin - top/left, end - bottom/right
-    public func scroll(to targetViewController: UIViewController,
-                       at position: RelativePosition = .center,
-                       animated: Bool = false) {
+    private func scroll(to targetViewController: UIViewController,
+                        at position: RelativePosition = .center,
+                        animated: Bool = false) {
         
         guard childViewControllers.contains(targetViewController) else {
             return
