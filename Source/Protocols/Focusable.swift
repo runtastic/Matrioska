@@ -14,7 +14,9 @@ import Foundation
  */
 protocol Focusable {
 
-    /** Try to focus on the given UIViewController, otherwise it fails silently */
+    /// A generic method that tries to focus on a given target ViewController.
+    /// - Parameters:
+    ///   - viewController: The ViewController which should get into focus
     @discardableResult
     func focus(on viewController: UIViewController)
     

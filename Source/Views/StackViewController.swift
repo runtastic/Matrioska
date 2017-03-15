@@ -82,7 +82,7 @@ final class StackViewController: UIViewController, Focusable {
         scroll(to: viewController, at: .center, animated:  true)
     }
     
-    /// A method to access the scrollView from outside and scroll to a given target ViewController.
+    /// A method for scrolling to a given target ViewController.
     /// If no relativePosition parameter is provided, it will try to center the target.
     ///
     /// - Parameters:
@@ -90,9 +90,9 @@ final class StackViewController: UIViewController, Focusable {
     ///   - position: An optional parameter to specify the alignement of the target. Depending of
     ///     the stackViews' orientation position values have different meaning:
     ///     begin - top/left, end - bottom/right
-    private func scroll(to targetViewController: UIViewController,
-                        at position: RelativePosition = .center,
-                        animated: Bool = false) {
+    internal func scroll(to targetViewController: UIViewController,
+                         at position: RelativePosition = .center,
+                         animated: Bool = false) {
         
         guard childViewControllers.contains(targetViewController) else {
             return
