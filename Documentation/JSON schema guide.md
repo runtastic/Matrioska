@@ -54,7 +54,7 @@ All mandatory fields should be present, otherwise the Tab `Component` won't be b
 | --- | ---- | ----------- | ------- | -------- | ------------- |
 | `title` | `String` | The title of the stack. | `title` | Yes | `nil` |
 | `spacing` | `Float` | The spacing of the components inside the stack. | `spacing` | Yes | `10` |
-| `axis` | `Int` | The orientation of the stack. Can be either `0`(horizontal) or `1`(vertical). | `axis` | Yes | `1` |
+| `orientation` | `String` | The orientation of the stack. Can be either `horizontal` or `vertical`. | `axis` | Yes | `vertical` |
 | `preserve_parent_width` | `Bool` | Whether the arranged subviews should preserve the parent width or their own intrinsicContentSize. | `preserveParentWidth` | Yes | `false` |
 | `background_color` | `String` | The background color of the stack. Alpha and compact forms are not supported. Valid formats: `0x123456` or `123456`. | `backgroundColor` | Yes | `ffffff`(white) |
 
@@ -82,7 +82,7 @@ All mandatory fields should be present, otherwise the Tab `Component` won't be b
 			"children": [{
 				"type": "stack",
 				"meta": {
-					"axis": 1,
+					"orientation": "vertical",
 					"preserve_parent_width": true,
 					"background_color": "0x123456"
 				},
@@ -109,7 +109,7 @@ All mandatory fields should be present, otherwise the Tab `Component` won't be b
 			"children": [{
 				"type": "stack",
 				"meta": {
-					"axis": 1,
+					"orientation": "vertical",
 					"title": "Main stack",
 					"preserve_parent_width": true,
 					"spacing": "5"

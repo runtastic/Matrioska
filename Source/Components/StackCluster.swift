@@ -35,11 +35,14 @@ extension ClusterLayout {
             let title = meta["title"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
             let preserveParentWidth = meta["preserve_parent_width"] as? Bool
-            let axisRawValue = meta["axis"] as? Int
-            let axis = axisRawValue.flatMap { UILayoutConstraintAxis(rawValue: $0) }
+            var axis = UILayoutConstraintAxis.vertical
+            if let orientationRawValue = meta["orientation"] as? String,
+                let orientation = Orientation(rawValue: orientationRawValue) {
+                axis = orientation.layoutConstraintAxis
+            }
             let hexString = meta["background_color"] as? String
             let backgroundColor = hexString.flatMap { UIColor(hexString: $0) }
-
+            
             self.init(
                 title: title,
                 spacing: spacing.map { CGFloat($0) },
@@ -89,6 +92,17 @@ extension ClusterLayout {
         let stackViewController = StackViewController(configuration: StackConfig.materialize(meta))
         stackViewController.add(children: children)
         return stackViewController
+    }
+}
+
+fileprivate enum Orientation: String {
+    case horizontal
+    case vertical
+    var layoutConstraintAxis: UILayoutConstraintAxis {
+        switch self {
+        case .horizontal: return .horizontal
+        case .vertical: return .vertical
+        }
     }
 }
 
