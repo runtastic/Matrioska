@@ -68,10 +68,11 @@ final class StackViewController: UIViewController, Focusable {
                 make.width.equalTo(view)
             } else if stackView.axis == .vertical {
                 make.width.lessThanOrEqualTo(view)
+            } else if stackView.axis == .horizontal {
+                make.height.lessThanOrEqualTo(view)
             }
         }
     }
-    
     func add(child childViewController: UIViewController) {
         addChildViewController(childViewController)
         stackView.addArrangedSubview(childViewController.view)

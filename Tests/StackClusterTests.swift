@@ -371,7 +371,7 @@ class StackClusterTests: QuickSpec {
                 }
             }
             
-            context("when scrolling horizontally in a vertical nested stack") {
+            context("when scrolling horizontally in a vertical nested stack, the target") {
                 let meta = ClusterLayout.StackConfig(preserveParentWidth: true)
                 let horizontalChildMeta = ClusterLayout.StackConfig(axis: .horizontal)
                 let size = CGSize(width: 100, height: 100)
@@ -400,23 +400,23 @@ class StackClusterTests: QuickSpec {
                 let childStack = vc?.childViewControllers[1] as? StackViewController
                 let targetVC = childStack?.childViewControllers[2]
                 
-                it("a target should be able to be centered") {
+                it("should get centered") {
                     childStack?.scroll(to: targetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to get left aligned") {
+                it("should get left aligned") {
                     childStack?.scroll(to: targetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to get right aligned") {
+                it("should get right aligned") {
                     childStack?.scroll(to: targetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
             }
             
-            context("when scrolling vertically in a horizontal nested stack") {
+            context("when scrolling vertically in a horizontal nested stack, the target") {
                 let meta = ClusterLayout.StackConfig(axis: .horizontal)
                 let verticalChildMeta = ClusterLayout.StackConfig(axis: .vertical)
                 let size = CGSize(width: 40, height: 250)
@@ -444,19 +444,18 @@ class StackClusterTests: QuickSpec {
                 
                 let childStack = vc?.childViewControllers[1] as? StackViewController
                 let targetVC = childStack?.childViewControllers[2]
-                
-                // TODO: WIP stack layout is not as expected
-                it("a target should be able to be centered") {
+
+                it("should get centered") {
                     childStack?.scroll(to: targetVC!, at: .center, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to be on top") {
+                it("should get on top") {
                     childStack?.scroll(to: targetVC!, at: .begin, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
                 
-                it("a target should be able to be on the bottom") {
+                it("should get on the bottom") {
                     childStack?.scroll(to: targetVC!, at: .end, animated: false)
                     expect(vc).to(haveValidSnapshot())
                 }
