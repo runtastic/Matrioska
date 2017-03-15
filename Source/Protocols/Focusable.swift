@@ -17,7 +17,6 @@ protocol Focusable {
     /// A generic method that tries to focus on a given target ViewController.
     /// - Parameters:
     ///   - viewController: The ViewController which should get into focus
-    @discardableResult
     func focus(on viewController: UIViewController)
     
 }
