@@ -97,6 +97,7 @@ extension Dictionary: ComponentMeta {
     /// Forwards the subscript to Dictionary's implementation
     ///
     /// - Parameter key: the key of the value to retreive
+    @available(swift, obsoleted: 3.1)
     public subscript(key: String) -> Any? {
         if let key = key as? Key {
             return self[key]
