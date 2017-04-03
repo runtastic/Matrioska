@@ -26,10 +26,12 @@ struct TileConfig: ExpressibleByComponentMeta {
 
 class TileViewController: UIViewController {
 
+    let id: String?
     let label = UILabel()
     let config: TileConfig
     
-    required init?(meta: ComponentMeta?) {
+    required init?(id: String?, meta: ComponentMeta?) {
+        self.id = id
         guard let meta = meta as? TileConfig else {
             return nil
         }

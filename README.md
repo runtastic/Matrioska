@@ -117,17 +117,17 @@ Create custom components:
 ```swift
 // Create a cluster by extending an existing implementation
 extension UITabBarController {
-    convenience init(children: [Component], meta: Any?) {
+    convenience init(children: [Component], id: String?, meta: Any?) {
         self.init(nibName: nil, bundle: nil)
         self.viewControllers = children.flatMap { $0.viewController() }
-        // handle meta
+        // handle id and meta
     }
 }
 
 // Any UIViewController can be used as a the view for a `Single` component. 
 // We can define a convenience initializer or just use an inline closure to build the ViewController
 class MyViewController: UIViewController {
-    init(meta: Any?) {
+    init(id: String?, meta: Any?) {
         super.init(nibName: nil, bundle: nil)
         guard let meta = meta as? [String: Any] else { return }
         self.title = meta["title"] as? String
@@ -139,9 +139,9 @@ Then create models that can be easily used to create the entire tree of views:
 
 ```swift
 let component = Component.cluster(viewBuilder: UITabBarController.init, children: [
-    Component.single(viewBuilder: MyViewController.init, meta: ["title": "tab1"]),
-    Component.single(viewBuilder: { _ in UIViewController() }, meta: nil),
-    ], meta: nil)
+    Component.single(viewBuilder: MyViewController.init, id: "tab1", meta: ["title": "tab1"]),
+    Component.single(viewBuilder: { _ in UIViewController() }, id: nil, meta: nil),
+    ], id: nil, meta: nil)
 
 window.rootViewController = component.viewController()
 ```
@@ -182,16 +182,16 @@ Here's how to register component builders on a `JSONFactory`:
 ```
 let jsonFactory = JSONFactory()
 
-jsonFactory.register(builder: { (children, meta) in
-    ClusterLayout.tabBar(children: children, meta: meta)
+jsonFactory.register(builder: { (children, id, meta) in
+    ClusterLayout.tabBar(children: children, id: id, meta: meta)
 }, forType: "tab_bar")
 
-jsonFactory.register(builder: { (child, meta) in
-    Component.wrapper(viewBuilder: { _ in UINavigationController() }, child: child, meta: meta)
+jsonFactory.register(builder: { (child, id, meta) in
+    Component.wrapper(viewBuilder: { _ in UINavigationController() }, child: child, id: id, meta: meta)
 }, forType: "navigation")
 
-jsonFactory.register(builder: { (meta) in
-    Component.single(viewBuilder: { _ in UITableViewController() }, meta: meta)
+jsonFactory.register(builder: { (id, meta) in
+    Component.single(viewBuilder: { _ in UITableViewController() }, id: id, meta: meta)
 }, forType: "table_view")
 
 jsonFactory.register(builder: { () in
