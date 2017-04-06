@@ -93,7 +93,7 @@ class StackClusterTests: QuickSpec {
                     let config: [String: Any] = [
                         "title": "Foo",
                         "spacing": 150.0,
-                        "axis": UILayoutConstraintAxis.vertical.rawValue,
+                        "orientation": "vertical",
                         "preserve_parent_width": true,
                         "background_color": "0xEEEEEE"
                     ]
@@ -103,6 +103,27 @@ class StackClusterTests: QuickSpec {
                     expect(vc).to(haveValidSnapshot())
                     expect(vc?.stackView.spacing) == 150
                     expect(vc?.stackView.axis) == .vertical
+                }
+                
+                it("should load horizontal config from a dictionary") {
+                    let horizontalChildren = [
+                        labelComponent(title: "1", color: .red),
+                        labelComponent(title: "2", color: .blue),
+                        labelComponent(title: "3", color: .orange)
+                    ]
+                    let config: [String: Any] = [
+                        "title": "Foo",
+                        "spacing": 50.0,
+                        "orientation": "horizontal",
+                        "preserve_parent_width": true,
+                        "background_color": "0xEEEEEE"
+                    ]
+                    
+                    let vc = stack(with: horizontalChildren, meta: config)
+                    expect(vc?.title) == "Foo"
+                    expect(vc).to(haveValidSnapshot())
+                    expect(vc?.stackView.spacing) == 50
+                    expect(vc?.stackView.axis) == .horizontal
                 }
             }
             
