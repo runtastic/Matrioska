@@ -13,6 +13,7 @@ matrix:
   include:
     - env: DESTINATION="OS=10.3,name=iPhone 7" SCHEME=Matrioska SDK="iphonesimulator10.3" COVERAGE=YES
       before_install:
+        - brew update && brew install swiftlint
         - gem install danger --no-ri --no-doc
         - gem install danger-swiftlint --no-ri --no-doc
       before_script:
