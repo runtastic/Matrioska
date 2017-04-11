@@ -14,13 +14,16 @@ public indirect enum Component {
 
     /// A closure to build a `UIViewController` for a single component.
     /// Can receive metadata for additional configuration.
-    public typealias SingleViewBuilder = (_ meta: ComponentMeta?) -> UIViewController?
+    public typealias SingleViewBuilder = (
+        _ id: String?,
+        _ meta: ComponentMeta?) -> UIViewController?
     
     /// A closure to build a `UIViewController` for a wrapper component.
     /// The view is responsible to wrap and display it's child component.
     /// Can receive metadata for additional configuration.
     public typealias WrapperViewBuilder = (
         _ child: Component,
+        _ id: String?,
         _ meta: ComponentMeta?
         ) -> UIViewController?
     
@@ -31,21 +34,22 @@ public indirect enum Component {
     /// Can receive metadata for additional configuration.
     public typealias ClusterViewBuilder = (
         _ children: [Component],
+        _ id: String?,
         _ meta: ComponentMeta?
         ) -> UIViewController?
 
     /// Represents any `UIViewController`.
     /// The view should use AutoLayout to specify its `intrinsicContentSize`.
-    case single(viewBuilder: SingleViewBuilder, meta: ComponentMeta?)
+    case single(viewBuilder: SingleViewBuilder, id: String?, meta: ComponentMeta?)
     /// Represents a view with only one child (another `Component`).
     /// The view should use AutoLayout to specify its `intrinsicContentSize`.
     /// You can see it as a special cluster or as a special view.
     /// It’s responsible to display its child’s view.
-    case wrapper(viewBuilder: WrapperViewBuilder, child: Component, meta: ComponentMeta?)
+    case wrapper(viewBuilder: WrapperViewBuilder, child: Component, id: String?, meta: ComponentMeta?)
     /// Represents a view with children (other `Component`s).
     /// A cluster is responsible of laying out its children’s views.
     /// Since a cluster is itself a view it can also contain other clusters.
-    case cluster(viewBuilder: ClusterViewBuilder, children: [Component], meta: ComponentMeta?)
+    case cluster(viewBuilder: ClusterViewBuilder, children: [Component], id: String?, meta: ComponentMeta?)
     /// Represents a Component whose visibility is specified
     /// by the evaluation of a `Rule`.
     case rule(rule: Rule, component: Component)
@@ -53,11 +57,11 @@ public indirect enum Component {
     /// The meta of the component
     public var meta: ComponentMeta? {
         switch self {
-        case let .single(_, meta):
+        case let .single(_, _, meta):
             return meta
-        case let .wrapper(_, _, meta):
+        case let .wrapper(_, _, _, meta):
             return meta
-        case let .cluster(_, _, meta):
+        case let .cluster(_, _, _, meta):
             return meta
         case let .rule(_, child):
             return child.meta
@@ -72,12 +76,12 @@ public indirect enum Component {
     /// For example a `Component` that lacks proper metadata might not be displayable.
     public func viewController() -> UIViewController? {
         switch self {
-        case let .single(builder, meta):
-            return builder(meta)
-        case let .wrapper(builder, child, meta):
-            return builder(child, meta)
-        case let .cluster(builder, children, meta):
-            return builder(children, meta)
+        case let .single(builder, id, meta):
+            return builder(id, meta)
+        case let .wrapper(builder, child, id, meta):
+            return builder(child, id, meta)
+        case let .cluster(builder, children, id, meta):
+            return builder(children, id, meta)
         case let .rule(rule, child):
             return rule.evaluate() ? child.viewController() : nil
         }

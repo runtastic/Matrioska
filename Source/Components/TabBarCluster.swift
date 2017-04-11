@@ -82,11 +82,13 @@ extension ClusterLayout {
     ///             Overrides TabBarConfig's own bundle.
     /// - Returns: A tabBar cluster component
     public static func tabBar(children: [Component],
+                              id: String?,
                               meta: ComponentMeta?,
                               bundle: Bundle? = nil) -> Component {
         
         return Component.cluster(viewBuilder: tabBarViewBuilder(bundle),
                                  children: children,
+                                 id: id,
                                  meta: meta)
     }
     
@@ -96,7 +98,7 @@ extension ClusterLayout {
         
         typealias Tab = (meta: TabConfig, viewController: UIViewController)
 
-        return { (children: [Component], meta: ComponentMeta?) -> UIViewController? in
+        return { (children: [Component], id: String?, meta: ComponentMeta?) -> UIViewController? in
             
             let tabs: [Tab] = children.flatMap { (child) in
                 guard let vc = child.viewController() else {

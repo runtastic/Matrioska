@@ -17,6 +17,7 @@ Below you can find a detailed schema for `Component`s and for each configuration
 | Key | Type | Description | Optional |
 | --- | ---- | ----------- | -------- |
 | `type` | `String` | The type of the component. Used for factory registration. | No |
+| `id` | `String` | A unique identifier for this `Component`. | Yes |
 | `meta` | `Dictionary` | The additional metadata of the component. | Yes |
 | `children` | `[Component]` | The children array of this `Component`. | Yes |
 | `rule` | `Rule` | The `Rule` to apply to this `Component`. | Yes |

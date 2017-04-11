@@ -24,6 +24,7 @@ fileprivate enum DocumentKey {
 
 fileprivate enum ComponentKey {
     static let type = "type"
+    static let id = "id"
     static let meta = "meta"
     static let children = "children"
     static let rule = "rule"
@@ -40,13 +41,13 @@ fileprivate enum RuleKey {
 public final class JSONFactory {
     
     /// A closure to build a single `Component`
-    public typealias SingleBuilder = (ComponentMeta?) -> Component
+    public typealias SingleBuilder = (String?, ComponentMeta?) -> Component
     
     /// A closure to build a wrapper `Component`
-    public typealias WrapperBuilder = (Component, ComponentMeta?) -> Component
+    public typealias WrapperBuilder = (Component, String?, ComponentMeta?) -> Component
     
     /// A closure to build a cluster `Component`
-    public typealias ClusterBuilder = ([Component], ComponentMeta?) -> Component
+    public typealias ClusterBuilder = ([Component], String?, ComponentMeta?) -> Component
     
     /// A closure to build a rule `Component`
     public typealias RuleBuilder = Rule.RuleEvaluator
@@ -116,10 +117,11 @@ public final class JSONFactory {
             throw JSONFactoryError.missing(json, ComponentKey.type)
         }
         
+        let id = json[ComponentKey.id] as? String
         let meta = json[ComponentKey.meta] as? JSONObject
         let childObjects = json[ComponentKey.children] as? [JSONObject] ?? []
         let children = try childObjects.flatMap { try makeComponent(structure: $0) }
-        let component = makeComponent(type: type, meta: meta, children: children)
+        let component = makeComponent(type: type, id: id, meta: meta, children: children)
         
         if let rule = JSONFactory.makeRule(object: json[ComponentKey.rule], builders: ruleBuilders),
             let component = component {
@@ -132,16 +134,16 @@ public final class JSONFactory {
 
 extension JSONFactory {
     
-    fileprivate func makeComponent(type: String, meta: JSONObject?, children: [Component]) -> Component? {
+    fileprivate func makeComponent(type: String, id: String?, meta: JSONObject?, children: [Component]) -> Component? {
         var component: Component? = nil
         
         if let singleBuilder = singleBuilders[type] {
-            component = singleBuilder(meta)
+            component = singleBuilder(id, meta)
         } else if let wrapperBuilder = wrapperBuilders[type],
             let child = children.first {
-            component = wrapperBuilder(child, meta)
+            component = wrapperBuilder(child, id, meta)
         } else if let clusterBuilder = clusterBuilders[type] {
-            component = clusterBuilder(children, meta)
+            component = clusterBuilder(children, id, meta)
         }
         
         return component
