@@ -31,6 +31,16 @@ A `Rule` can be composed by a simple rule type (`String`) or a logical operator 
 | `OR` | OR operation on an array with at least two rule types. | `{"OR":[{"NOT": "is_gold_member"}, "is_male", "has_devices"]}` |
 | `NOT` | NOT operation on a rule type. | `{"NOT":"is_gold_member"}` |
 
+### Common meta schema
+
+Meta fields that apply to all `Component`s.
+
+| Key | Type | Description |  Optional | Default value |
+| --- | ---- | ----------- |  -------- | ------------- |
+| `id` | `String` | A string that (uniquely) identifies this `Component`. | Yes | `nil` |
+
+Note: `id` is a general purpose discriminator (e.g. distinguish between several instances of the same type). It's up to you if you use this and what you use it for.
+
 ### TabBarConfig meta schema
 
 All mandatory fields should be present, otherwise the TabBar `Component` won't be build.
@@ -89,6 +99,9 @@ All mandatory fields should be present, otherwise the Tab `Component` won't be b
 				"rule": "is_male",
 				"children": [{
 					"type": "table_view",
+					"meta": {
+						"id": "history_table"
+					}
 					"rule":{
 						"OR":[
 							"is_gold_member",
