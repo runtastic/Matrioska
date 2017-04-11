@@ -51,12 +51,13 @@ All mandatory fields should be present, otherwise the TabBar `Component` won't b
 
 ### Tab meta schema
 
-All mandatory fields should be present, otherwise the Tab `Component` won't be build and thus not added to the TabBar `Component`.
+`title` and `icon_name` are mandatory fields and must be present, otherwise the Tab `Component` won't be build and thus not added to the TabBar `Component`.
 
 | Key | Type | Description | Maps to | Optional | Default value |
 | --- | ---- | ----------- | ------- | -------- | ------------- |
 | `title` | `String` | The title to display on the tab. | `title` | No | . |
 | `icon_name` | `Int` | The name of the icon to display on the tab. | `iconName` | No | . |
+| `show_nav_bar` | `Bool` | `True` if the top navigation bar should be displayed and controlled by the Tab component, `false` otherwise. | `showNavBar` | Yes | `true` |
 
 ### StackConfig meta schema
 
