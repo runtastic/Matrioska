@@ -49,10 +49,11 @@ extension ComponentMeta {
             }
             return value
         }
-        
-        return nil
+        return ((self as? Dictionary)?[key]) ?? nil
     }
 }
+
+extension Dictionary: ComponentMeta { }
 
 /// A type that can be expressed by a `ComponentMeta` type.
 /// Adopting this protocol, `Component`s are able to materialize a `ComponentMeta` object
@@ -89,20 +90,6 @@ extension ExpressibleByComponentMeta {
         }
         
         return Self(meta: meta)
-    }
-}
-
-extension Dictionary: ComponentMeta {
-    
-    /// Forwards the subscript to Dictionary's implementation
-    ///
-    /// - Parameter key: the key of the value to retreive
-    @available(swift, obsoleted: 3.1)
-    public subscript(key: String) -> Any? {
-        if let key = key as? Key {
-            return self[key]
-        }
-        return nil
     }
 }
 

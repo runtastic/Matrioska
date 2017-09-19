@@ -17,5 +17,5 @@ The vision of Matrioska is to let you build and prototype your app easily, reusi
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'Source/**/*'
-  s.dependency 'SnapKit', '~> 3.0'
+  s.dependency 'SnapKit', '~> 4.0'
 end

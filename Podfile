@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Matrioska' do
-  pod 'SnapKit'
+  pod 'SnapKit', '~> 4.0'
 end
 
 target 'MatrioskaTests' do

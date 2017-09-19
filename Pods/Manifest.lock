@@ -4,30 +4,29 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - Nimble (5.1.1)
-  - Nimble-Snapshots (4.3.0):
-    - Nimble-Snapshots/Core (= 4.3.0)
-  - Nimble-Snapshots/Core (4.3.0):
+  - Nimble (7.0.1)
+  - Nimble-Snapshots (6.2.1):
+    - Nimble-Snapshots/Core (= 6.2.1)
+  - Nimble-Snapshots/Core (6.2.1):
     - FBSnapshotTestCase (~> 2.0)
-    - Nimble
-    - Quick
-  - Quick (0.10.0)
-  - SnapKit (3.0.2)
+    - Nimble (~> 7.0)
+  - Quick (1.1.0)
+  - SnapKit (4.0.0)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
   - Nimble
   - Nimble-Snapshots
   - Quick
-  - SnapKit
+  - SnapKit (~> 4.0)
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Nimble-Snapshots: 4ba722c35b73a680cbd856e4bc22076dfb8085d4
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  FBSnapshotTestCase: '094f9f314decbabe373b87cc339bea235a63e07a'
+  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
+  Nimble-Snapshots: 31c8ef7fcebf0e68b4dff83f6e2160813a4a116b
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: ef89ac5f6bdd305b322fe3ea67490a538ad54b72
+PODFILE CHECKSUM: 2bb88329484874e8ddc46039121e079712a96867
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
