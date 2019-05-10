@@ -43,7 +43,7 @@ class ComponentTests: QuickSpec {
         
         describe("Wrapper component") {
             it("should build a viewController") {
-                let component = Component.wrapper(viewBuilder: { _ in UIViewController() },
+                let component = Component.wrapper(viewBuilder: { _, _ in UIViewController() },
                                                   child: randComponent(),
                                                   meta: nil)
                 expect(component.viewController()).toNot(beNil())
@@ -78,7 +78,7 @@ class ComponentTests: QuickSpec {
             }
             
             it("should have the correct metadata") {
-                let component =  Component.wrapper(viewBuilder: { _ in UIViewController() },
+                let component =  Component.wrapper(viewBuilder: { _, _ in UIViewController() },
                                                    child: randComponent(),
                                                    meta: ["foo": "bar"])
                 
@@ -88,7 +88,7 @@ class ComponentTests: QuickSpec {
         
         describe("Cluster component") {
             it("should build a viewController") {
-                let component = Component.cluster(viewBuilder: { _ in UIViewController() },
+                let component = Component.cluster(viewBuilder: { _, _ in UIViewController() },
                                                   children: [randComponent()],
                                                   meta: nil)
                 expect(component.viewController()).toNot(beNil())
@@ -123,7 +123,7 @@ class ComponentTests: QuickSpec {
             }
             
             it("should have the correct metadata") {
-                let component =  Component.cluster(viewBuilder: { _ in UIViewController() },
+                let component =  Component.cluster(viewBuilder: { _, _ in UIViewController() },
                                                    children: [randComponent()],
                                                    meta: ["foo": "bar"])
                 
@@ -133,7 +133,7 @@ class ComponentTests: QuickSpec {
         
         describe("Rule component") {
             it("builds his child view controller if it evaluates to true") {
-                let cluster = Component.cluster(viewBuilder: { _ in UIViewController() },
+                let cluster = Component.cluster(viewBuilder: { _, _ in UIViewController() },
                                                 children: [randComponent()],
                                                 meta: nil)
                 let rule = Rule.not(rule: Rule.simple(evaluator: { false }))
@@ -142,7 +142,7 @@ class ComponentTests: QuickSpec {
             }
             
             it("does not build his child view controller if it evaluates to false") {
-                let cluster = Component.cluster(viewBuilder: { _ in UIViewController() },
+                let cluster = Component.cluster(viewBuilder: { _, _ in UIViewController() },
                                                 children: [randComponent()],
                                                 meta: nil)
                 let rule = Rule.and(rules: [Rule.simple(evaluator: { false }), Rule.simple(evaluator: { true })])
@@ -216,7 +216,7 @@ class ComponentTests: QuickSpec {
             
             it("has the correct child's metadata regardless of evaluating to true/false") {
                 let rule = Rule.simple(evaluator: { false })
-                let cluster =  Component.cluster(viewBuilder: { _ in UIViewController() },
+                let cluster =  Component.cluster(viewBuilder: { _, _ in UIViewController() },
                                                  children: [randComponent()],
                                                  meta: ["foo": "bar"])
                 let falseComponent = Component.rule(rule: rule, component: cluster)

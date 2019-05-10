@@ -14,7 +14,8 @@ The vision of Matrioska is to let you build and prototype your app easily, reusi
   s.author           = { 'Alex Manzella' => 'manzopower@icloud.com' }
   s.source           = { :git => 'https://github.com/runtastic/Matrioska.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target   = '9.0'
+  s.swift_version           = '4.2'
 
   s.source_files = 'Source/**/*'
   s.dependency 'SnapKit', '~> 4.0'

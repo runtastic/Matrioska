@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Nimble
 
-func scroll(_ axis: UILayoutConstraintAxis) -> ScrollMatcher {
+func scroll(_ axis: NSLayoutConstraint.Axis) -> ScrollMatcher {
     return ScrollMatcher(axis: axis)
 }
 
@@ -21,7 +21,7 @@ enum ScrollMatcherError: Error {
 struct ScrollMatcher: Matcher {
     typealias ValueType = UIScrollView
     
-    let axis: UILayoutConstraintAxis
+    let axis: NSLayoutConstraint.Axis
     
     private func composeFailureMessage(_ message: FailureMessage, negated: Bool) {
         message.expected = "Expected scrollView"

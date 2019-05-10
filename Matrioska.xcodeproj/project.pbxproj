@@ -65,6 +65,8 @@
 		8BCFF8AF1E28D4340053AD98 /* StackCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackCluster.swift; sourceTree = "<group>"; };
 		8BCFF8B01E28D4340053AD98 /* TabBarCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCluster.swift; sourceTree = "<group>"; };
 		8BCFF8B61E28D4990053AD98 /* JSONFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFactoryTests.swift; sourceTree = "<group>"; };
+		8EA598D222855A4300B4741C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		8EA598D322855A4300B4741C /* Matrioska.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Matrioska.podspec; sourceTree = "<group>"; };
 		DDE5072CEF32135290F71073 /* Pods-MatrioskaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatrioskaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE067DC71DDE005400641D1A /* ComponentMetaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ComponentMetaTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DE067DCA1DDE017700641D1A /* IntrinsicSizeAwareScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrinsicSizeAwareScrollView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,8 @@
 		DE3E8D6C1DD389F400417AE5 = {
 			isa = PBXGroup;
 			children = (
+				8EA598D322855A4300B4741C /* Matrioska.podspec */,
+				8EA598D222855A4300B4741C /* Podfile */,
 				DEECB3B21DD47C4A00F7DFB1 /* README.md */,
 				DE3E8D911DD38AAA00417AE5 /* Framework */,
 				DE3E8D9A1DD38D1C00417AE5 /* Source */,
@@ -280,7 +284,6 @@
 				DE3E8D731DD389F400417AE5 /* Headers */,
 				DE3E8D741DD389F400417AE5 /* Resources */,
 				6D8AB7BEA2A61B2036C1BD09 /* [CP] Copy Pods Resources */,
-				DE3E8D9B1DD38E4100417AE5 /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -324,11 +327,12 @@
 				TargetAttributes = {
 					DE3E8D751DD389F400417AE5 = {
 						CreatedOnToolsVersion = 8.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					DE3E8D7E1DD389F400417AE5 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -447,20 +451,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MatrioskaTests/Pods-MatrioskaTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		DE3E8D9B1DD38E4100417AE5 /* swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -631,6 +621,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -650,6 +641,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.Matrioska;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -661,6 +653,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -672,6 +665,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.runtastic.MatrioskaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

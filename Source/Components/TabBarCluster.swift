@@ -98,7 +98,7 @@ extension ClusterLayout {
 
         return { (children: [Component], meta: ComponentMeta?) -> UIViewController? in
             
-            let tabs: [Tab] = children.flatMap { (child) in
+            let tabs: [Tab] = children.compactMap { (child) in
                 guard let vc = child.viewController() else {
                     return nil
                 }
@@ -111,7 +111,7 @@ extension ClusterLayout {
             }
             
             let tabBarController = UITabBarController()
-            tabBarController.viewControllers = tabs.flatMap { $0.viewController }
+            tabBarController.viewControllers = tabs.compactMap { $0.viewController }
             
             if let items = tabBarController.tabBar.items {
                 for (item, tab) in zip(items, tabs) {

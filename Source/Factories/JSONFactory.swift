@@ -118,7 +118,7 @@ public final class JSONFactory {
         
         let meta = json[ComponentKey.meta] as? JSONObject
         let childObjects = json[ComponentKey.children] as? [JSONObject] ?? []
-        let children = try childObjects.flatMap { try makeComponent(structure: $0) }
+        let children = try childObjects.compactMap { try makeComponent(structure: $0) }
         let component = makeComponent(type: type, meta: meta, children: children)
         
         if let rule = JSONFactory.makeRule(object: json[ComponentKey.rule], builders: ruleBuilders),
@@ -179,7 +179,7 @@ extension Sequence where Iterator.Element == (key: String, value: Any) {
         }
         
         let values = rule.value as? [Any] ?? [rule.value]
-        let rules = values.flatMap { JSONFactory.makeRule(object: $0, builders: builders) }
+        let rules = values.compactMap { JSONFactory.makeRule(object: $0, builders: builders) }
         
         switch rule.key {
         case RuleKey.and where rules.count >= 2:

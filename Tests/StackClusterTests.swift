@@ -183,7 +183,7 @@ class StackClusterTests: QuickSpec {
                         let vc = nestedStack()
                         vc?.loadViewIfNeeded()
                         
-                        let horizontalStack = vc?.childViewControllers.first as? StackViewController
+                        let horizontalStack = vc?.children.first as? StackViewController
                         let scrollView2 = horizontalStack?.stackView.superview as? UIScrollView
                         
                         expect(vc).to(haveValidSnapshot())

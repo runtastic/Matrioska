@@ -65,8 +65,8 @@ final class StackViewController: UIViewController {
     }
     
     func add(child childViewController: UIViewController) {
-        addChildViewController(childViewController)
+        addChild(childViewController)
         stackView.addArrangedSubview(childViewController.view)
-        childViewController.didMove(toParentViewController: self)
+        childViewController.didMove(toParent: self)
     }
 }

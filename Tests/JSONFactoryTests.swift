@@ -46,7 +46,7 @@ class JSONFactoryTests: QuickSpec {
             } else {
                 navigation = UINavigationController()
             }
-            return Component.wrapper(viewBuilder: { _ in navigation }, child: child, meta: meta)
+            return Component.wrapper(viewBuilder: { _, _ in navigation }, child: child, meta: meta)
         }
         let stackBuilder: JSONFactory.ClusterBuilder = ClusterLayout.stack
         let trueRuleBuilder: JSONFactory.RuleBuilder = { true }
@@ -128,7 +128,7 @@ class JSONFactoryTests: QuickSpec {
                     let firstChild = component!.children()[0]
                     let secondChild = component!.children()[1]
                     let thirdChild = component!.children()[2]
-                    let childViewControllers = component!.viewController()!.childViewControllers
+                    let childViewControllers = component!.viewController()!.children
                     
                     expect(firstChild.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
                     expect(firstChild.meta!["title"] as? String).to(equal("history_title"))
@@ -142,9 +142,9 @@ class JSONFactoryTests: QuickSpec {
                     expect(secondChild.children()[1].viewController()).to(beAKindOf(StackViewController.self))
                     
                     expect(childViewControllers.count).to(equal(3))
-                    expect(childViewControllers[0].childViewControllers.count).to(equal(1))
-                    expect(childViewControllers[1].childViewControllers.count).to(equal(3))
-                    expect(childViewControllers[2].childViewControllers.count).to(equal(1))
+                    expect(childViewControllers[0].children.count).to(equal(1))
+                    expect(childViewControllers[1].children.count).to(equal(3))
+                    expect(childViewControllers[2].children.count).to(equal(1))
                 }
                 
                 it("does not handle registered wrapper builders with no children") {
@@ -179,7 +179,7 @@ class JSONFactoryTests: QuickSpec {
                     let firstChild = component!.children()[0]
                     let secondChild = component!.children()[1]
                     let thirdChild = component!.children()[2]
-                    let childViewControllers = component!.viewController()!.childViewControllers
+                    let childViewControllers = component!.viewController()!.children
                     
                     expect(firstChild.meta!["icon_name"] as? String).to(equal("history_tab_icon"))
                     expect(firstChild.meta!["title"] as? String).to(equal("history_title"))
@@ -193,8 +193,8 @@ class JSONFactoryTests: QuickSpec {
                     expect(secondChild.children()[1].viewController()).to(beAKindOf(StackViewController.self))
                     
                     expect(childViewControllers.count).to(equal(2))
-                    expect(childViewControllers[0].childViewControllers.count).to(equal(2))
-                    expect(childViewControllers[1].childViewControllers.count).to(equal(1))
+                    expect(childViewControllers[0].children.count).to(equal(2))
+                    expect(childViewControllers[1].children.count).to(equal(1))
                 }
                 
                 it("returns a component with no rule when the JSON object has a rule with invalid JSON") {

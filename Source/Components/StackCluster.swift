@@ -19,7 +19,7 @@ extension ClusterLayout {
         /// The axis of the stack view, by default is vertical.
         /// A stack with a horizontal axis is a row of arrangedSubviews,
         /// and a stack with a vertical axis is a column of arrangedSubviews.
-        public let axis: UILayoutConstraintAxis
+        public let axis: NSLayoutConstraint.Axis
         /// Defines if the arranged subviews should preserve the parent width
         /// or their own intrinsicContentSize. Default false.
         public let preserveParentWidth: Bool
@@ -35,7 +35,7 @@ extension ClusterLayout {
             let title = meta["title"] as? String
             let spacing = (meta["spacing"] as? NSNumber)?.floatValue
             let preserveParentWidth = meta["preserve_parent_width"] as? Bool
-            var axis = UILayoutConstraintAxis.vertical
+            var axis = NSLayoutConstraint.Axis.vertical
             if let orientationRawValue = meta["orientation"] as? String,
                 let orientation = Orientation(rawValue: orientationRawValue) {
                 axis = orientation.layoutConstraintAxis
@@ -63,7 +63,7 @@ extension ClusterLayout {
         ///   - backgroundColor: The backgroundColor of the stackView, Default is white.
         public init(title: String? = nil,
                     spacing: CGFloat? = nil,
-                    axis: UILayoutConstraintAxis? = nil,
+                    axis: NSLayoutConstraint.Axis? = nil,
                     preserveParentWidth: Bool? = nil,
                     backgroundColor: UIColor? = nil) {
             self.title = title
@@ -98,7 +98,7 @@ extension ClusterLayout {
 fileprivate enum Orientation: String {
     case horizontal
     case vertical
-    var layoutConstraintAxis: UILayoutConstraintAxis {
+    var layoutConstraintAxis: NSLayoutConstraint.Axis {
         switch self {
         case .horizontal: return .horizontal
         case .vertical: return .vertical
